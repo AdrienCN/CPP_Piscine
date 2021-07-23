@@ -1,6 +1,5 @@
 SRCS = main.cpp \
 	   Karen.cpp \
-	   Karen.hpp
 
 OBJ = $(SRCS:.cpp=.o)
 
