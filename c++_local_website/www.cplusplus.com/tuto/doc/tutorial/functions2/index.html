@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.cplusplus.com/doc/tutorial/functions2/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jul 2021 12:46:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Overloads and templates - C++ Tutorials</title>
+<link rel="canonical" href="index.html">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.cplusplus.com/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://www.cplusplus.com/v322/main.css">
+<script src="https://www.cplusplus.com/v322/main.js" type="text/javascript"></script>
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/147246189/cplusplus.com_728x90_leaderboard_1', [728, 90], 'div-gpt-ad-1593433023017-0').addService(googletag.pubads());
+    googletag.defineSlot('/147246189/cplusplus.com_234x120_sidebar_1', [234, 60], 'cplusplus.com_234x120_sidebar_1').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().disableInitialLoad();
+    googletag.enableServices();
+  });
+</script>
+<script src="https://cloud.setupad.com/hb/cpluspluscom.js" async></script>
+<script src="https://c.aaxads.com/aax.js?pub=AAX5H4CNQ&amp;hst=www.cplusplus.com&amp;ver=1.2" async></script></head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="https://www.cplusplus.com/" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="https://www.cplusplus.com/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="https://www.cplusplus.com/doc/">Tutorials</a></li>
+<li><a href="../index.html">C++ Language</a></li>
+<li class="here">Overloads and templates</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1593433023017-0' style='width: 728px; height: 90px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1593433023017-0'); });
+  </script>
+</div>
+</div><div id="I_content">
+<div class="C_doc">
+<h1>Overloads and templates</h1>
+<section id="overload">
+<h3>Overloaded functions</h3>
+In C++, two different functions can have the same name if their parameters are different; either because they have a different number of parameters, or because any of their parameters are of a different type. For example: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br></code></pre></td>
+<td class="source"><pre><code><cite>// overloading functions</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> operate (<var>int</var> a, <var>int</var> b)
+{
+  <var>return</var> (a*b);
+}
+
+<var>double</var> operate (<var>double</var> a, <var>double</var> b)
+{
+  <var>return</var> (a/b);
+}
+
+<var>int</var> main ()
+{
+  <var>int</var> x=5,y=2;
+  <var>double</var> n=5.0,m=2.0;
+  cout &lt;&lt; operate (x,y) &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; operate (n,m) &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>10
+2.5</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this example, there are two functions called <code>operate</code>, but one of them has two parameters of type <code>int</code>, while the other has them of type <code>double</code>. The compiler knows which one to call in each case by examining the types passed as arguments when the function is called. If it is called with two <code>int</code> arguments, it calls to the function that has two <code>int</code> parameters, and if it is called with two <code>double</code>s, it calls the one with two <code>double</code>s.<br>
+<br>
+In this example, both functions have quite different behaviors, the <code>int</code> version multiplies its arguments, while the <code>double</code> version divides them. This is generally not a good idea. Two functions with the same name are generally expected to have -at least- a similar behavior, but this example demonstrates that is entirely possible for them not to. Two overloaded functions (i.e., two functions with the same name) have entirely different definitions; they are, for all purposes, different functions, that only happen to have the same name.<br>
+<br>
+Note that a function cannot be overloaded only by its return type. At least one of its parameters must have a different type.<br>
+</section>
+<br>
+<section id="templates">
+<h3>Function templates</h3>
+Overloaded functions may have the same definition. For example:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br></code></pre></td>
+<td class="source"><pre><code><cite>// overloaded functions</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> sum (<var>int</var> a, <var>int</var> b)
+{
+  <var>return</var> a+b;
+}
+
+<var>double</var> sum (<var>double</var> a, <var>double</var> b)
+{
+  <var>return</var> a+b;
+}
+
+<var>int</var> main ()
+{
+  cout &lt;&lt; sum (10,20) &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; sum (1.0,1.5) &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>30
+2.5</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Here, <code>sum</code> is overloaded with different parameter types, but with the exact same body.<br>
+<br>
+The function <code>sum</code> could be overloaded for a lot of types, and it could make sense for all of them to have the same body. For cases such as this, C++ has the ability to define functions with generic types, known as <i>function templates</i>. Defining a function template follows the same syntax as a regular function, except that it is preceded by the <code>template</code> keyword and a series of template parameters enclosed in angle-brackets &lt;&gt;:<br>
+<br>
+<code>template &lt;template-parameters&gt; function-declaration</code>
+<br>
+The template parameters are a series of parameters separated by commas. These parameters can be generic template types by specifying either the <code>class</code> or <code>typename</code> keyword followed by an identifier. This identifier can then be used in the function declaration as if it was a regular type. For example, a generic <code>sum</code> function could be defined as:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br></code></pre></td>
+<td class="source"><pre><code><var>template</var> &lt;<var>class</var> SomeType&gt;
+SomeType sum (SomeType a, SomeType b)
+{
+  <var>return</var> a+b;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+It makes no difference whether the generic type is specified with keyword <code>class</code> or keyword <code>typename</code> in the template argument list (they are 100% synonyms in template declarations).<br>
+<br>
+In the code above, declaring <code>SomeType</code> (a generic type within the template parameters enclosed in angle-brackets) allows <code>SomeType</code> to be used anywhere in the function definition, just as any other type; it can be used as the type for parameters, as return type, or to declare new variables of this type. In all cases, it represents a generic type that will be determined on the moment the template is instantiated.<br>
+<br>
+Instantiating  a template is applying the template to create a function using particular types or values for its template parameters. This is done by calling the <i>function template</i>, with the same syntax as calling a regular function, but specifying the template arguments enclosed in angle brackets:<br>
+<br>
+<code>name &lt;template-arguments&gt; (function-arguments)</code>
+<br>
+For example, the <code>sum</code> function template defined above can be called with:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>x = sum&lt;<var>int</var>&gt;(10,20);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The function <code>sum&lt;int&gt;</code> is just one of the possible instantiations of function template <code>sum</code>. In this case, by using <code>int</code> as template argument in the call, the compiler automatically instantiates a version of <code>sum</code> where each occurrence of <code>SomeType</code> is replaced by <code>int</code>, as if it was defined as:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> sum (<var>int</var> a, <var>int</var> b)
+{
+  <var>return</var> a+b;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Let's see an actual example:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br></code></pre></td>
+<td class="source"><pre><code><cite>// function template</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>template</var> &lt;<var>class</var> T&gt;
+T sum (T a, T b)
+{
+  T result;
+  result = a + b;
+  <var>return</var> result;
+}
+
+<var>int</var> main () {
+  <var>int</var> i=5, j=6, k;
+  <var>double</var> f=2.0, g=0.5, h;
+  k=sum&lt;<var>int</var>&gt;(i,j);
+  h=sum&lt;<var>double</var>&gt;(f,g);
+  cout &lt;&lt; k &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; h &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>11
+2.5</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this case, we have used <code>T</code> as the template parameter name, instead of <code>SomeType</code>. It makes no difference, and <code>T</code> is actually a quite common template parameter name for generic types. <br>
+<br>
+In the example above, we used the function template <code>sum</code> twice. The first time with arguments of type <code>int</code>, and the second one with arguments of type <code>double</code>. The compiler has instantiated and then called each time the appropriate version of the function.<br>
+<br>
+Note also how <code>T</code> is also used to declare a local variable of that (generic) type within <code>sum</code>:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>T result;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Therefore, result will be a variable of the same type as the parameters <code>a</code> and <code>b</code>, and as the type returned by the function.<br>
+In this specific case where the generic type <code>T</code> is used as a parameter for <code>sum</code>, the compiler is even able to deduce the data type automatically without having to explicitly specify it within angle brackets. Therefore, instead of explicitly specifying the template arguments with:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>k = sum&lt;<var>int</var>&gt; (i,j);
+h = sum&lt;<var>double</var>&gt; (f,g);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+It is possible to instead simply write:<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>k = sum (i,j);
+h = sum (f,g);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+without the type enclosed in angle brackets. Naturally, for that, the type shall be unambiguous. If <code>sum</code> is called with arguments of different types, the compiler may not be able to deduce the type of <code>T</code> automatically.<br>
+<br>
+Templates are a powerful and versatile feature. They can have multiple template parameters, and the function can still use regular non-templated types. For example:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br></code></pre></td>
+<td class="source"><pre><code><cite>// function templates</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>template</var> &lt;<var>class</var> T, <var>class</var> U&gt;
+<var>bool</var> are_equal (T a, U b)
+{
+  <var>return</var> (a==b);
+}
+
+<var>int</var> main ()
+{
+  <var>if</var> (are_equal(10,10.0))
+    cout &lt;&lt; <kbd>"x and y are equal\n"</kbd>;
+  <var>else</var>
+    cout &lt;&lt; <kbd>"x and y are not equal\n"</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>x and y are equal</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Note that this example uses automatic template parameter deduction in the call to <code>are_equal</code>:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>are_equal(10,10.0)</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Is equivalent to:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>are_equal&lt;<var>int</var>,<var>double</var>&gt;(10,10.0)</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+There is no ambiguity possible because numerical literals are always of a specific type: Unless otherwise specified with a suffix, integer literals always produce values of type <code>int</code>, and floating-point literals always produce values of type <code>double</code>. Therefore <code>10</code> has always type <code>int</code> and <code>10.0</code> has always type <code>double</code>.<br>
+</section>
+<br>
+<section id="nontype">
+<h3>Non-type template arguments</h3>
+The template parameters can not only include types introduced by <code>class</code> or <code>typename</code>, but can also include expressions of a particular type:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br></code></pre></td>
+<td class="source"><pre><code><cite>// template arguments</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>template</var> &lt;<var>class</var> T, <var>int</var> N&gt;
+T fixed_multiply (T val)
+{
+  <var>return</var> val * N;
+}
+
+<var>int</var> main() {
+  std::cout &lt;&lt; fixed_multiply&lt;<var>int</var>,2&gt;(10) &lt;&lt; <kbd>'\n'</kbd>;
+  std::cout &lt;&lt; fixed_multiply&lt;<var>int</var>,3&gt;(10) &lt;&lt; <kbd>'\n'</kbd>;
+}</code></pre></td>
+<td class="output"><pre><samp>20
+30</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The second argument of the <code>fixed_multiply</code> function template is of type <code>int</code>. It just looks like a regular function parameter, and can actually be used just like one.<br>
+<br>
+But there exists a major difference: the value of template parameters is determined on compile-time to generate a different instantiation of the function <code>fixed_multiply</code>, and thus the value of that argument is never passed during runtime: The two calls to <code>fixed_multiply</code> in <code>main</code> essentially call two versions of the function: one that always multiplies by two, and one that always multiplies by three. For that same reason, the second template argument needs to be a constant expression (it cannot be passed a variable).<br>
+</section>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../functions/index.html" rel="prev"><img src="https://www.cplusplus.com/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Functions</b></a></td><td class="index"><a href="../index.html" rel="index"><img src="https://www.cplusplus.com/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../namespaces/index.html" rel="next"><img src="https://www.cplusplus.com/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Name visibility</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<div class="C_support">
+<div id='div-gpt-ad-1593433023017-0' style='width: 728px; height: 90px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1593433023017-0'); });
+  </script>
+</div>
+</div></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="https://www.cplusplus.com/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="https://www.cplusplus.com/info/">Information</a></li>
+<li class="folder selected doc"><a href="https://www.cplusplus.com/doc/">Tutorials</a></li>
+<li class="folder reference"><a href="https://www.cplusplus.com/reference/">Reference</a></li>
+<li class="folder articles"><a href="https://www.cplusplus.com/articles/">Articles</a></li>
+<li class="folder forum"><a href="https://www.cplusplus.com/forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="https://www.cplusplus.com/doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 selected folder"><a href="../index.html"><span>C++ Language</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect cpp98 cpp11" id="tutorial_box">
+<h3><b><a href="../index.html">C++ Language</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li class="folder"><a href="../introduction/index.html"><span>Compilers</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../program_structure/index.html"><span>Structure of a program</span></a></li>
+<li><a href="../variables/index.html"><span>Variables and types</span></a></li>
+<li><a href="../constants/index.html"><span>Constants</span></a></li>
+<li><a href="../operators/index.html"><span>Operators</span></a></li>
+<li><a href="../basic_io/index.html"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Program structure:</h4><ul>
+<li><a href="../control/index.html"><span>Statements and flow control</span></a></li>
+<li><a href="../functions/index.html"><span>Functions</span></a></li>
+<li class="selected"><a href="index.html"><span>Overloads and templates</span></a></li>
+<li><a href="../namespaces/index.html"><span>Name visibility</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound data types:</h4><ul>
+<li><a href="../arrays/index.html"><span>Arrays</span></a></li>
+<li><a href="../ntcs/index.html"><span>Character sequences</span></a></li>
+<li><a href="../pointers/index.html"><span>Pointers</span></a></li>
+<li><a href="../dynamic/index.html"><span>Dynamic memory</span></a></li>
+<li><a href="../structures/index.html"><span>Data structures</span></a></li>
+<li><a href="../other_data_types/index.html"><span>Other data types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Classes:</h4><ul>
+<li><a href="../classes/index.html"><span>Classes (I)</span></a></li>
+<li><a href="../templates/index.html"><span>Classes (II)</span></a></li>
+<li><a href="../classes2/index.html"><span>Special members</span></a></li>
+<li><a href="../inheritance/index.html"><span>Friendship and inheritance</span></a></li>
+<li><a href="../polymorphism/index.html"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Other language features:</h4><ul>
+<li><a href="../typecasting/index.html"><span>Type conversions</span></a></li>
+<li><a href="../exceptions/index.html"><span>Exceptions</span></a></li>
+<li><a href="../preprocessor/index.html"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Standard library:</h4><ul>
+<li><a href="../files/index.html"><span>Input/output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<p>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="https://www.cplusplus.com/">Home page</a> | <a href="https://www.cplusplus.com/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2021 - All rights reserved - <i>v3.2</i><br><a href="https://www.cplusplus.com/contact.do?referrer=www.cplusplus.com%2Fdoc%2Ftutorial%2Ffunctions2%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','https://www.cplusplus.com/doc/edit.cgi?a=tutorial+functions2'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='https://www.cplusplus.com/doc/delete.cgi?a=tutorial+functions2'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+
+<!-- Mirrored from www.cplusplus.com/doc/tutorial/functions2/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jul 2021 12:46:35 GMT -->
+</html>

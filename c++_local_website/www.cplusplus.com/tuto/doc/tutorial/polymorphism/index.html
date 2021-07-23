@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.cplusplus.com/doc/tutorial/polymorphism/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jul 2021 12:46:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Polymorphism - C++ Tutorials</title>
+<link rel="canonical" href="index.html">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.cplusplus.com/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://www.cplusplus.com/v322/main.css">
+<script src="https://www.cplusplus.com/v322/main.js" type="text/javascript"></script>
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/147246189/cplusplus.com_728x90_leaderboard_1', [728, 90], 'div-gpt-ad-1593433023017-0').addService(googletag.pubads());
+    googletag.defineSlot('/147246189/cplusplus.com_234x120_sidebar_1', [234, 60], 'cplusplus.com_234x120_sidebar_1').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().disableInitialLoad();
+    googletag.enableServices();
+  });
+</script>
+<script src="https://cloud.setupad.com/hb/cpluspluscom.js" async></script>
+<script src="https://c.aaxads.com/aax.js?pub=AAX5H4CNQ&amp;hst=www.cplusplus.com&amp;ver=1.2" async></script></head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="https://www.cplusplus.com/" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="https://www.cplusplus.com/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="https://www.cplusplus.com/doc/">Tutorials</a></li>
+<li><a href="../index.html">C++ Language</a></li>
+<li class="here">Polymorphism</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1593433023017-0' style='width: 728px; height: 90px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1593433023017-0'); });
+  </script>
+</div>
+</div><div id="I_content">
+<div class="C_doc">
+<h1>Polymorphism</h1>
+<section id="requirements">
+Before getting any deeper into this chapter, you should have a proper understanding of pointers and class inheritance. If you are not really sure of the meaning of any of the following expressions, you should review the indicated sections:<br>
+<br>
+<table class="boxed">
+<tr><th>Statement:</th><th>Explained in:</th></tr>
+<tr><td><code>int A::b(int c) { }</code></td><td><a href="../classes/index.html">Classes</a></td></tr>
+<tr><td><code>a-&gt;b</code></td><td><a href="../structures/index.html">Data structures</a></td></tr>
+<tr><td><code>class A: public B {};</code></td><td><a href="../inheritance/index.html">Friendship and inheritance</a></td></tr>
+</table>
+</section>
+<br>
+<section id="pointers_to_base_class">
+<h3>Pointers to base class</h3>
+One of the key features of class inheritance is that a pointer to a derived class is type-compatible with a pointer to its base class. <i>Polymorphism</i> is the art of taking advantage of this simple but powerful and versatile feature.<br>
+<br>
+The example about the rectangle and triangle classes can be rewritten using pointers taking this feature into account:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br></code></pre></td>
+<td class="source"><pre><code><cite>// pointers to base class</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> Polygon {
+  <var>protected</var>:
+    <var>int</var> width, height;
+  <var>public</var>:
+    <var>void</var> set_values (<var>int</var> a, <var>int</var> b)
+      { width=a; height=b; }
+};
+
+<var>class</var> Rectangle: <var>public</var> Polygon {
+  <var>public</var>:
+    <var>int</var> area()
+      { <var>return</var> width*height; }
+};
+
+<var>class</var> Triangle: <var>public</var> Polygon {
+  <var>public</var>:
+    <var>int</var> area()
+      { <var>return</var> width*height/2; }
+};
+
+<var>int</var> main () {
+  Rectangle rect;
+  Triangle trgl;
+  Polygon * ppoly1 = &amp;rect;
+  Polygon * ppoly2 = &amp;trgl;
+  ppoly1-&gt;set_values (4,5);
+  ppoly2-&gt;set_values (4,5);
+  cout &lt;&lt; rect.area() &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; trgl.area() &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>20
+10</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Function <code>main</code> declares two pointers to <code>Polygon</code> (named <code>ppoly1</code> and <code>ppoly2</code>). These are assigned the addresses of <code>rect</code> and <code>trgl</code>, respectively, which are objects of type <code>Rectangle</code> and <code>Triangle</code>. Such assignments are valid, since both <code>Rectangle</code> and <code>Triangle</code> are classes derived from <code>Polygon</code>.<br>
+<br>
+Dereferencing <code>ppoly1</code> and <code>ppoly2</code> (with <code>ppoly1-&gt;</code> and <code>ppoly2-&gt;</code>) is valid and allows us to access the members of their pointed objects. For example, the following two statements would be equivalent in the previous example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>ppoly1-&gt;set_values (4,5);
+rect.set_values (4,5);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+But because the type of both <code>ppoly1</code> and <code>ppoly2</code> is pointer to <code>Polygon</code> (and not pointer to <code>Rectangle</code> nor pointer to <code>Triangle</code>), only the members inherited from <code>Polygon</code> can be accessed, and not those of the derived classes <code>Rectangle</code> and <code>Triangle</code>. That is why the program above accesses the <code>area</code> members of both objects using <code>rect</code> and <code>trgl</code> directly, instead of the pointers; the pointers to the base class cannot access the <code>area</code> members.<br>
+<br>
+Member <code>area</code> could have been accessed with the pointers to <code>Polygon</code> if <code>area</code> were a member of <code>Polygon</code> instead of a member of its derived classes, but the problem is that <code>Rectangle</code> and <code>Triangle</code> implement different versions of <code>area</code>, therefore there is not a single common version that could be implemented in the base class. <br>
+</section>
+<br>
+<section id="virtual_members">
+<h3>Virtual members</h3>
+A virtual member is a member function that can be redefined in a derived class, while preserving its calling properties through references. The syntax for a function to become virtual is to precede its declaration with the <code>virtual</code> keyword:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br></code></pre></td>
+<td class="source"><pre><code><cite>// virtual members</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> Polygon {
+  <var>protected</var>:
+    <var>int</var> width, height;
+  <var>public</var>:
+    <var>void</var> set_values (<var>int</var> a, <var>int</var> b)
+      { width=a; height=b; }
+    <var>virtual</var> <var>int</var> area ()
+      { <var>return</var> 0; }
+};
+
+<var>class</var> Rectangle: <var>public</var> Polygon {
+  <var>public</var>:
+    <var>int</var> area ()
+      { <var>return</var> width * height; }
+};
+
+<var>class</var> Triangle: <var>public</var> Polygon {
+  <var>public</var>:
+    <var>int</var> area ()
+      { <var>return</var> (width * height / 2); }
+};
+
+<var>int</var> main () {
+  Rectangle rect;
+  Triangle trgl;
+  Polygon poly;
+  Polygon * ppoly1 = &amp;rect;
+  Polygon * ppoly2 = &amp;trgl;
+  Polygon * ppoly3 = &amp;poly;
+  ppoly1-&gt;set_values (4,5);
+  ppoly2-&gt;set_values (4,5);
+  ppoly3-&gt;set_values (4,5);
+  cout &lt;&lt; ppoly1-&gt;area() &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; ppoly2-&gt;area() &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; ppoly3-&gt;area() &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>20
+10
+0</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this example, all three classes (<code>Polygon</code>, <code>Rectangle</code> and <code>Triangle</code>) have the same members: <code>width</code>, <code>height</code>, and functions <code>set_values</code> and <code>area</code>.<br>
+<br>
+The member function <code>area</code> has been declared as <code>virtual</code> in the base class because it is later redefined in each of the derived classes. Non-virtual members can also be redefined in derived classes, but non-virtual members of derived classes cannot be accessed through a reference of the base class: i.e., if <code>virtual</code> is removed from the declaration of <code>area</code> in the example above, all three calls to <code>area</code> would return zero, because in all cases, the version of the base class would have been called instead.<br>
+<br>
+Therefore, essentially, what the <code>virtual</code> keyword does is to allow a member of a derived class with the same name as one in the base class to be appropriately called from a pointer, and more precisely when the type of the pointer is a pointer to the base class that is pointing to an object of the derived class, as in the above example.<br>
+<br>
+A class that declares or inherits a virtual function is called a <i>polymorphic class</i>.<br>
+<br>
+Note that despite of the virtuality of one of its members, <code>Polygon</code> was a regular class, of which even an object was instantiated (<code>poly</code>), with its own definition of member <code>area</code> that always returns 0.<br>
+</section>
+<br>
+<section id="abstract_base_classes">
+<h3>Abstract base classes</h3>
+Abstract base classes are something very similar to the <code>Polygon</code> class in the previous example. They are classes that can only be used as base classes, and thus are allowed to have virtual member functions without definition (known as pure virtual functions). The syntax is to replace their definition by <code>=0</code> (an equal sign and a zero):<br>
+<br>
+An abstract base <code>Polygon</code> class could look like this:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br></code></pre></td>
+<td class="source"><pre><code><cite>// abstract class CPolygon</cite>
+<var>class</var> Polygon {
+  <var>protected</var>:
+    <var>int</var> width, height;
+  <var>public</var>:
+    <var>void</var> set_values (<var>int</var> a, <var>int</var> b)
+      { width=a; height=b; }
+    <var>virtual</var> <var>int</var> area () =0;
+};</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Notice that <code>area</code> has no definition; this has been replaced by <code>=0</code>, which makes it a <i>pure virtual function</i>. Classes that contain at least one <i>pure virtual function</i> are  known as <i>abstract base classes</i>.<br>
+<br>
+Abstract base classes cannot be used to instantiate objects. Therefore, this last abstract base class version of <code>Polygon</code> could not be used to declare objects like:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>Polygon mypolygon;   <cite>// not working if Polygon is abstract base class </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+But an <i>abstract base class</i> is not totally useless. It can be used to create pointers to it, and take advantage of all its polymorphic abilities. For example, the following pointer declarations would be valid:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>Polygon * ppoly1;
+Polygon * ppoly2;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+And can actually be dereferenced when pointing to objects of derived (non-abstract) classes. Here is the entire example:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br></code></pre></td>
+<td class="source"><pre><code><cite>// abstract base class</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> Polygon {
+  <var>protected</var>:
+    <var>int</var> width, height;
+  <var>public</var>:
+    <var>void</var> set_values (<var>int</var> a, <var>int</var> b)
+      { width=a; height=b; }
+    <var>virtual</var> <var>int</var> area (<var>void</var>) =0;
+};
+
+<var>class</var> Rectangle: <var>public</var> Polygon {
+  <var>public</var>:
+    <var>int</var> area (<var>void</var>)
+      { <var>return</var> (width * height); }
+};
+
+<var>class</var> Triangle: <var>public</var> Polygon {
+  <var>public</var>:
+    <var>int</var> area (<var>void</var>)
+      { <var>return</var> (width * height / 2); }
+};
+
+<var>int</var> main () {
+  Rectangle rect;
+  Triangle trgl;
+  Polygon * ppoly1 = &amp;rect;
+  Polygon * ppoly2 = &amp;trgl;
+  ppoly1-&gt;set_values (4,5);
+  ppoly2-&gt;set_values (4,5);
+  cout &lt;&lt; ppoly1-&gt;area() &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; ppoly2-&gt;area() &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>20
+10</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this example, objects of different but related types are referred to using a unique type of pointer (<code>Polygon*</code>) and the proper member function is called every time, just because they are virtual. This can be really useful in some circumstances. For example, it is even possible for a member of the abstract base class <code>Polygon</code> to use the special pointer <code>this</code> to access the proper virtual members, even though <code>Polygon</code> itself has no implementation for this function:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br></code></pre></td>
+<td class="source"><pre><code><cite>// pure virtual members can be called</cite>
+<cite>// from the abstract base class</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> Polygon {
+  <var>protected</var>:
+    <var>int</var> width, height;
+  <var>public</var>:
+    <var>void</var> set_values (<var>int</var> a, <var>int</var> b)
+      { width=a; height=b; }
+    <var>virtual</var> <var>int</var> area() =0;
+    <var>void</var> printarea()
+      { cout &lt;&lt; <var>this</var>-&gt;area() &lt;&lt; <kbd>'\n'</kbd>; }
+};
+
+<var>class</var> Rectangle: <var>public</var> Polygon {
+  <var>public</var>:
+    <var>int</var> area (<var>void</var>)
+      { <var>return</var> (width * height); }
+};
+
+<var>class</var> Triangle: <var>public</var> Polygon {
+  <var>public</var>:
+    <var>int</var> area (<var>void</var>)
+      { <var>return</var> (width * height / 2); }
+};
+
+<var>int</var> main () {
+  Rectangle rect;
+  Triangle trgl;
+  Polygon * ppoly1 = &amp;rect;
+  Polygon * ppoly2 = &amp;trgl;
+  ppoly1-&gt;set_values (4,5);
+  ppoly2-&gt;set_values (4,5);
+  ppoly1-&gt;printarea();
+  ppoly2-&gt;printarea();
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>20
+10</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Virtual members and abstract classes grant C++ polymorphic characteristics, most useful for object-oriented projects. Of course, the examples above are very simple use cases, but these features can be applied to arrays of objects or dynamically allocated objects.<br>
+<br>
+Here is an example that combines some of the features in the latest chapters, such as dynamic memory, constructor initializers and polymorphism:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br></code></pre></td>
+<td class="source"><pre><code><cite>// dynamic allocation and polymorphism</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> Polygon {
+  <var>protected</var>:
+    <var>int</var> width, height;
+  <var>public</var>:
+    Polygon (<var>int</var> a, <var>int</var> b) : width(a), height(b) {}
+    <var>virtual</var> <var>int</var> area (<var>void</var>) =0;
+    <var>void</var> printarea()
+      { cout &lt;&lt; <var>this</var>-&gt;area() &lt;&lt; <kbd>'\n'</kbd>; }
+};
+
+<var>class</var> Rectangle: <var>public</var> Polygon {
+  <var>public</var>:
+    Rectangle(<var>int</var> a,<var>int</var> b) : Polygon(a,b) {}
+    <var>int</var> area()
+      { <var>return</var> width*height; }
+};
+
+<var>class</var> Triangle: <var>public</var> Polygon {
+  <var>public</var>:
+    Triangle(<var>int</var> a,<var>int</var> b) : Polygon(a,b) {}
+    <var>int</var> area()
+      { <var>return</var> width*height/2; }
+};
+
+<var>int</var> main () {
+  Polygon * ppoly1 = <var>new</var> Rectangle (4,5);
+  Polygon * ppoly2 = <var>new</var> Triangle (4,5);
+  ppoly1-&gt;printarea();
+  ppoly2-&gt;printarea();
+  <var>delete</var> ppoly1;
+  <var>delete</var> ppoly2;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>20
+10</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Notice that the <code>ppoly</code> pointers:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>Polygon * ppoly1 = <var>new</var> Rectangle (4,5);
+Polygon * ppoly2 = <var>new</var> Triangle (4,5);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+are declared being of type "pointer to <code>Polygon</code>", but the objects allocated have been declared having the derived class type directly (<code>Rectangle</code> and <code>Triangle</code>).<br>
+</section><table class="C_docPrevNext"><tr><td class="prev"><a href="../inheritance/index.html" rel="prev"><img src="https://www.cplusplus.com/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Friendship and inheritance</b></a></td><td class="index"><a href="../index.html" rel="index"><img src="https://www.cplusplus.com/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../typecasting/index.html" rel="next"><img src="https://www.cplusplus.com/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Type conversions</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<div class="C_support">
+<div id='div-gpt-ad-1593433023017-0' style='width: 728px; height: 90px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1593433023017-0'); });
+  </script>
+</div>
+</div></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="https://www.cplusplus.com/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="https://www.cplusplus.com/info/">Information</a></li>
+<li class="folder selected doc"><a href="https://www.cplusplus.com/doc/">Tutorials</a></li>
+<li class="folder reference"><a href="https://www.cplusplus.com/reference/">Reference</a></li>
+<li class="folder articles"><a href="https://www.cplusplus.com/articles/">Articles</a></li>
+<li class="folder forum"><a href="https://www.cplusplus.com/forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="https://www.cplusplus.com/doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 selected folder"><a href="../index.html"><span>C++ Language</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect cpp98 cpp11" id="tutorial_box">
+<h3><b><a href="../index.html">C++ Language</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li class="folder"><a href="../introduction/index.html"><span>Compilers</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../program_structure/index.html"><span>Structure of a program</span></a></li>
+<li><a href="../variables/index.html"><span>Variables and types</span></a></li>
+<li><a href="../constants/index.html"><span>Constants</span></a></li>
+<li><a href="../operators/index.html"><span>Operators</span></a></li>
+<li><a href="../basic_io/index.html"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Program structure:</h4><ul>
+<li><a href="../control/index.html"><span>Statements and flow control</span></a></li>
+<li><a href="../functions/index.html"><span>Functions</span></a></li>
+<li><a href="../functions2/index.html"><span>Overloads and templates</span></a></li>
+<li><a href="../namespaces/index.html"><span>Name visibility</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound data types:</h4><ul>
+<li><a href="../arrays/index.html"><span>Arrays</span></a></li>
+<li><a href="../ntcs/index.html"><span>Character sequences</span></a></li>
+<li><a href="../pointers/index.html"><span>Pointers</span></a></li>
+<li><a href="../dynamic/index.html"><span>Dynamic memory</span></a></li>
+<li><a href="../structures/index.html"><span>Data structures</span></a></li>
+<li><a href="../other_data_types/index.html"><span>Other data types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Classes:</h4><ul>
+<li><a href="../classes/index.html"><span>Classes (I)</span></a></li>
+<li><a href="../templates/index.html"><span>Classes (II)</span></a></li>
+<li><a href="../classes2/index.html"><span>Special members</span></a></li>
+<li><a href="../inheritance/index.html"><span>Friendship and inheritance</span></a></li>
+<li class="selected"><a href="index.html"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Other language features:</h4><ul>
+<li><a href="../typecasting/index.html"><span>Type conversions</span></a></li>
+<li><a href="../exceptions/index.html"><span>Exceptions</span></a></li>
+<li><a href="../preprocessor/index.html"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Standard library:</h4><ul>
+<li><a href="../files/index.html"><span>Input/output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<p>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="https://www.cplusplus.com/">Home page</a> | <a href="https://www.cplusplus.com/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2021 - All rights reserved - <i>v3.2</i><br><a href="https://www.cplusplus.com/contact.do?referrer=www.cplusplus.com%2Fdoc%2Ftutorial%2Fpolymorphism%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','https://www.cplusplus.com/doc/edit.cgi?a=tutorial+polymorphism'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='https://www.cplusplus.com/doc/delete.cgi?a=tutorial+polymorphism'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+
+<!-- Mirrored from www.cplusplus.com/doc/tutorial/polymorphism/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jul 2021 12:46:53 GMT -->
+</html>

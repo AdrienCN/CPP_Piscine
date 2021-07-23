@@ -1,0 +1,28 @@
+SRCS = main.cpp \
+	   Karen.cpp \
+	   Karen.hpp
+
+OBJ = $(SRCS:.cpp=.o)
+
+CXX = clang++
+
+CXXFLAGS = -Wall -Werror -Wextra
+
+%.o:%.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+NAME = manager
+
+$(NAME): $(OBJ)
+	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	@echo hello you
+
+all : $(NAME)
+
+clean: 
+	rm -rf $(OBJ)
+
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean  all

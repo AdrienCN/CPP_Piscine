@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.cplusplus.com/doc/tutorial/pointers/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jul 2021 12:46:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Pointers - C++ Tutorials</title>
+<link rel="canonical" href="index.html">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.cplusplus.com/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://www.cplusplus.com/v322/main.css">
+<script src="https://www.cplusplus.com/v322/main.js" type="text/javascript"></script>
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/147246189/cplusplus.com_728x90_leaderboard_1', [728, 90], 'div-gpt-ad-1593433023017-0').addService(googletag.pubads());
+    googletag.defineSlot('/147246189/cplusplus.com_234x120_sidebar_1', [234, 60], 'cplusplus.com_234x120_sidebar_1').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().disableInitialLoad();
+    googletag.enableServices();
+  });
+</script>
+<script src="https://cloud.setupad.com/hb/cpluspluscom.js" async></script>
+<script src="https://c.aaxads.com/aax.js?pub=AAX5H4CNQ&amp;hst=www.cplusplus.com&amp;ver=1.2" async></script></head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="https://www.cplusplus.com/" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="https://www.cplusplus.com/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="https://www.cplusplus.com/doc/">Tutorials</a></li>
+<li><a href="../index.html">C++ Language</a></li>
+<li class="here">Pointers</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1593433023017-0' style='width: 728px; height: 90px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1593433023017-0'); });
+  </script>
+</div>
+</div><div id="I_content">
+<div class="C_doc">
+<h1>Pointers</h1>
+<section id="description">
+In earlier chapters, variables have been explained as locations in the computer's memory which can be accessed by their identifier (their name). This way, the program does not need to care about the physical address of the data in memory; it simply uses the identifier whenever it needs to refer to the variable.<br>
+<br>
+For a C++ program, the memory of a computer is like a succession of memory cells, each one byte in size, and each with a unique address. These single-byte memory cells are ordered in a way that allows data representations larger than one byte to occupy memory cells that have consecutive addresses.<br>
+<br>
+This way, each cell can be easily located in the memory by means of its unique address. For example, the memory cell with the address <code>1776</code> always follows immediately after the cell with address <code>1775</code> and precedes the one with <code>1777</code>, and is exactly one thousand cells after <code>776</code> and exactly one thousand cells before <code>2776</code>.<br>
+<br>
+When a variable is declared, the memory needed to store its value is assigned a specific location in memory (its memory address). Generally, C++ programs do not actively decide the exact memory addresses where its variables are stored. Fortunately, that task is left to the environment where the program is run - generally, an operating system that decides the particular memory locations on runtime. However, it may be useful for a program to be able to obtain the address of a variable during runtime in order to access data cells that are at a certain position relative to it.<br>
+</section>
+<br>
+<section id="reference">
+<h3>Address-of operator (&)</h3>
+The address of a variable can be obtained by preceding the name of a variable with an ampersand sign (<code>&</code>), known as <i>address-of operator</i>. For example: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>foo = &amp;myvar;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This would assign the address of variable <code>myvar</code> to <code>foo</code>; by preceding the name of the variable <code>myvar</code> with the <i>address-of operator</i> (<code>&</code>), we are no longer assigning the content of the variable itself to <code>foo</code>, but its address.<br>
+<br>
+The actual address of a variable in memory cannot be known before runtime, but let's assume, in order to help clarify some concepts, that <code>myvar</code> is placed during runtime in the memory address <code>1776</code>.<br>
+ <br>
+In this case, consider the following code fragment:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code>myvar = 25;
+foo = &amp;myvar;
+bar = myvar;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The values contained in each variable after the execution of this are shown in the following diagram: <br>
+<br>
+<img src="reference_operator.png" alt=""> <br>
+<br>
+First, we have assigned the value <code>25</code> to <code>myvar</code> (a variable whose address in memory we assumed to be <code>1776</code>).<br>
+<br>
+The second statement assigns <code>foo</code> the address of <code>myvar</code>, which we have assumed to be <code>1776</code>.<br>
+<br>
+Finally, the third statement, assigns the value contained in <code>myvar</code> to <code>bar</code>. This is a standard assignment operation, as already done many times in earlier chapters.<br>
+<br>
+The main difference between the second and third statements is the appearance of the <i>address-of operator</i> (<code>&</code>).<br>
+<br>
+The variable that stores the address of another variable (like <code>foo</code> in the previous example) is what in C++ is called a <i>pointer</i>. Pointers are a very powerful feature of the language that has many uses in lower level programming. A bit later, we will see how to declare and use pointers.<br>
+</section>
+<br>
+<section id="dereference">
+<h3>Dereference operator (*)</h3>
+As just seen, a variable which stores the address of another variable is called a <i>pointer</i>. Pointers are said to "point to" the variable whose address they store.<br>
+<br>
+An interesting property of pointers is that they can be used to access the variable they point to directly. This is done by preceding the pointer name with the <i>dereference operator</i> (<code>*</code>). The operator itself can be read as "value pointed to by".<br>
+<br>
+Therefore, following with the values of the previous example, the following statement: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>baz = *foo;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This could be read as: "<code>baz</code> equal to value pointed to by <code>foo</code>", and the statement would actually assign the value <code>25</code> to <code>baz</code>, since <code>foo</code> is <code>1776</code>, and the value pointed to by <code>1776</code> (following the example above) would be <code>25</code>.<br>
+<br>
+<img src="dereference_operator.png" alt="">
+<br>
+It is important to clearly differentiate that <code>foo</code> refers to the value <code>1776</code>, while <code>*foo</code> (with an asterisk <code>*</code> preceding the identifier) refers to the value stored at address <code>1776</code>, which in this case is <code>25</code>. Notice the difference of including or not including the <i>dereference operator</i> (I have added an explanatory comment of how each of these two expressions could be read): <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>baz = foo;   <cite>// baz equal to foo (1776)</cite>
+baz = *foo;  <cite>// baz equal to value pointed to by foo (25)  </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The reference and dereference operators are thus complementary:<br>
+<ul>
+<li><code>&</code> is the <i>address-of operator</i>, and can be read simply as "address of"</li>
+<li><code>*</code> is the <i>dereference operator</i>, and can be read as "value pointed to by"</li>
+</ul>
+<br>
+Thus, they have sort of opposite meanings: An address obtained with <code>&</code> can be dereferenced with <code>*</code>.<br>
+<br>
+Earlier, we performed the following two assignment operations:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>myvar = 25;
+foo = &amp;myvar;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Right after these two statements, all of the following expressions would give true as result:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code>myvar == 25
+&amp;myvar == 1776
+foo == 1776
+*foo == 25</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The first expression is quite clear, considering that the assignment operation performed on <code>myvar</code> was <code>myvar=25</code>. The second one uses the address-of operator (<code>&</code>), which returns the address of <code>myvar</code>, which we assumed it to have a value of <code>1776</code>. The third one is somewhat obvious, since the second expression was true and the assignment operation performed on <code>foo</code> was <code>foo=&myvar</code>. The fourth expression uses the <i>dereference operator</i> (<code>*</code>) that can be read as "value pointed to by", and the value pointed to by <code>foo</code> is indeed <code>25</code>.<br>
+<br>
+So, after all that, you may also infer that for as long as the address pointed to by <code>foo</code> remains unchanged, the following expression will also be true: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>*foo == myvar</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+</section>
+<br>
+<section id="declaration">
+<h3>Declaring pointers</h3>
+Due to the ability of a pointer to directly refer to the value that it points to, a pointer has different properties when it points to a <code>char</code> than when it points to an <code>int</code> or a <code>float</code>. Once dereferenced, the type needs to be known. And for that, the declaration of a pointer needs to include the data type the pointer is going to point to.<br>
+<br>
+The declaration of pointers follows this syntax:<br>
+<br>
+<code>type * name;</code> <br>
+<br>
+where <code>type</code> is the data type pointed to by the pointer. This type is not the type of the pointer itself, but the type of the data the pointer points to. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> * number;
+<var>char</var> * character;
+<var>double</var> * decimals;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+These are three declarations of pointers. Each one is intended to point to a different data type, but, in fact, all of them are pointers and all of them are likely going to occupy the same amount of space in memory (the size in memory of a pointer depends on the platform where the program runs). Nevertheless, the data to which they point to do not occupy the same amount of space nor are of the same type: the first one points to an <code>int</code>, the second one to a <code>char</code>, and the last one to a <code>double</code>. Therefore, although these three example variables are all of them pointers, they actually have different types: <code>int*</code>, <code>char*</code>, and <code>double*</code> respectively, depending on the type they point to.<br>
+<br>
+Note that the asterisk (<code>*</code>) used when declaring a pointer only means that it is a pointer (it is part of its type compound specifier), and should not be confused with the <i>dereference operator</i> seen a bit earlier, but which is also written with an asterisk (<code>*</code>). They are simply two different things represented with the same sign.<br>
+<br>
+Let's see an example on pointers:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br></code></pre></td>
+<td class="source"><pre><code><cite>// my first pointer</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  <var>int</var> firstvalue, secondvalue;
+  <var>int</var> * mypointer;
+
+  mypointer = &amp;firstvalue;
+  *mypointer = 10;
+  mypointer = &amp;secondvalue;
+  *mypointer = 20;
+  cout &lt;&lt; <kbd>"firstvalue is "</kbd> &lt;&lt; firstvalue &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; <kbd>"secondvalue is "</kbd> &lt;&lt; secondvalue &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>firstvalue is 10
+secondvalue is 20</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Notice that even though neither <code>firstvalue</code> nor <code>secondvalue</code> are directly set any value in the program, both end up with a value set indirectly through the use of <code>mypointer</code>. This is how it happens:<br>
+<br>
+First, <code>mypointer</code> is assigned the address of firstvalue using the address-of operator (<code>&</code>). Then, the value pointed to by <code>mypointer</code> is assigned a value of <code>10</code>. Because, at this moment, <code>mypointer</code> is pointing to the memory location of <code>firstvalue</code>, this in fact modifies the value of <code>firstvalue</code>.<br>
+<br>
+In order to demonstrate that a pointer may point to different variables during its lifetime in a program, the example repeats the process with <code>secondvalue</code> and that same pointer, <code>mypointer</code>.<br>
+<br>
+Here is an example a little bit more elaborated:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br></code></pre></td>
+<td class="source"><pre><code><cite>// more pointers</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  <var>int</var> firstvalue = 5, secondvalue = 15;
+  <var>int</var> * p1, * p2;
+
+  p1 = &amp;firstvalue;  <cite>// p1 = address of firstvalue</cite>
+  p2 = &amp;secondvalue; <cite>// p2 = address of secondvalue</cite>
+  *p1 = 10;          <cite>// value pointed to by p1 = 10</cite>
+  *p2 = *p1;         <cite>// value pointed to by p2 = value pointed to by p1</cite>
+  p1 = p2;           <cite>// p1 = p2 (value of pointer is copied)</cite>
+  *p1 = 20;          <cite>// value pointed to by p1 = 20</cite>
+  
+  cout &lt;&lt; <kbd>"firstvalue is "</kbd> &lt;&lt; firstvalue &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; <kbd>"secondvalue is "</kbd> &lt;&lt; secondvalue &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>firstvalue is 10
+secondvalue is 20</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Each assignment operation includes a comment on how each line could be read: i.e., replacing ampersands (<code>&</code>) by "address of", and asterisks (<code>*</code>) by "value pointed to by".<br>
+<br>
+Notice that there are expressions with pointers <code>p1</code> and <code>p2</code>, both with and without the <i>dereference operator</i> (<code>*</code>). The meaning of an expression using the <i>dereference operator</i> (*) is very different from one that does not. When this operator precedes the pointer name, the expression refers to the value being pointed, while when a pointer name appears without this operator, it refers to the value of the pointer itself (i.e., the address of what the pointer is pointing to).<br>
+<br>
+Another thing that may call your attention is the line: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> * p1, * p2;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This declares the two pointers used in the previous example. But notice that there is an asterisk (<code>*</code>) for each pointer, in order for both to have type <code>int*</code> (pointer to <code>int</code>). This is required due to the precedence rules. Note that if, instead, the code was:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> * p1, p2;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<code>p1</code> would indeed be of type <code>int*</code>, but <code>p2</code> would be of type <code>int</code>. Spaces do not matter at all for this purpose. But anyway, simply remembering to put one asterisk per pointer is enough for most pointer users interested in declaring multiple pointers per statement. Or even better: use a different statement for each variable.<br>
+</section>
+<br>
+<section id="arrays">
+<h3>Pointers and arrays</h3>
+The concept of arrays is related to that of pointers. In fact, arrays work very much like pointers to their first elements, and, actually, an array can always be implicitly converted to the pointer of the proper type. For example, consider these two declarations:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> myarray [20];
+<var>int</var> * mypointer;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The following assignment operation would be valid: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>mypointer = myarray;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+After that, <code>mypointer</code> and <code>myarray</code> would be equivalent and would have very similar properties. The main difference being that <code>mypointer</code> can be assigned a different address, whereas <code>myarray</code> can never be assigned anything, and will always represent the same block of 20 elements of type <code>int</code>. Therefore, the following assignment would not be valid:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>myarray = mypointer;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Let's see an example that mixes arrays and pointers:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br></code></pre></td>
+<td class="source"><pre><code><cite>// more pointers</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  <var>int</var> numbers[5];
+  <var>int</var> * p;
+  p = numbers;  *p = 10;
+  p++;  *p = 20;
+  p = &amp;numbers[2];  *p = 30;
+  p = numbers + 3;  *p = 40;
+  p = numbers;  *(p+4) = 50;
+  <var>for</var> (<var>int</var> n=0; n&lt;5; n++)
+    cout &lt;&lt; numbers[n] &lt;&lt; <kbd>", "</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>10, 20, 30, 40, 50, </samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Pointers and arrays support the same set of operations, with the same meaning for both. The main difference being that pointers can be assigned new addresses, while arrays cannot.<br>
+<br>
+In the chapter about arrays, brackets (<code>[]</code>) were explained as specifying the index of an element of the array. Well, in fact these brackets are a dereferencing operator known as <i>offset operator</i>. They dereference the variable they follow just as <code>*</code> does, but they also add the number between brackets to the address being dereferenced. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>a[5] = 0;       <cite>// a [offset of 5] = 0</cite>
+*(a+5) = 0;     <cite>// pointed to by (a+5) = 0  </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+These two expressions are equivalent and valid, not only if <code>a</code> is a pointer, but also if <code>a</code> is an array. Remember that if an array, its name can be used just like a pointer to its first element.<br>
+</section>
+<br>
+<section id="initialization">
+<h3>Pointer initialization</h3>
+Pointers can be initialized to point to specific locations at the very moment they are defined:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> myvar;
+<var>int</var> * myptr = &amp;myvar;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The resulting state of variables after this code is the same as after:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> myvar;
+<var>int</var> * myptr;
+myptr = &amp;myvar;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+When pointers are initialized, what is initialized is the address they point to (i.e., <code>myptr</code>), never the value being pointed (i.e., <code>*myptr</code>). Therefore, the code above shall not be confused with: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> myvar;
+<var>int</var> * myptr;
+*myptr = &amp;myvar;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Which anyway would not make much sense (and is not valid code).<br>
+<br>
+The asterisk (<code>*</code>) in the pointer declaration (line 2) only indicates that it is a pointer, it is not the dereference operator (as in line 3). Both things just happen to use the same sign: <code>*</code>. As always, spaces are not relevant, and never change the meaning of an expression.<br>
+<br>
+Pointers can be initialized either to the address of a variable (such as in the case above), or to the value of another pointer (or array):<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> myvar;
+<var>int</var> *foo = &amp;myvar;
+<var>int</var> *bar = foo;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+</section>
+<br>
+<section id="arithmetics">
+<h3>Pointer arithmetics</h3>
+To conduct arithmetical operations on pointers is a little different than to conduct them on regular integer types. To begin with, only addition and subtraction operations are allowed; the others make no sense in the world of pointers. But both addition and subtraction have a slightly different behavior with pointers, according to the size of the data type to which they point.<br>
+<br>
+When fundamental data types were introduced, we saw that types have different sizes. For example: <code>char</code> always has a size of 1 byte, <code>short</code> is generally larger than that, and <code>int</code> and <code>long</code> are even larger; the exact size of these being dependent on the system. For example, let's imagine that in a given system, <code>char</code> takes 1 byte, <code>short</code> takes 2 bytes, and <code>long</code> takes 4.<br>
+<br>
+Suppose now that we define three pointers in this compiler: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code><var>char</var> *mychar;
+<var>short</var> *myshort;
+<var>long</var> *mylong;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+and that we know that they point to the memory locations <code>1000</code>, <code>2000</code>, and <code>3000</code>, respectively. <br>
+<br>
+Therefore, if we write:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code>++mychar;
+++myshort;
+++mylong;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<code>mychar</code>, as one would expect, would contain the value 1001. But not so obviously, <code>myshort</code> would contain the value 2002, and <code>mylong</code> would contain 3004, even though they have each been incremented only once. The reason is that, when adding one to a pointer, the pointer is made to point to the following element of the same type, and, therefore, the size in bytes of the type it points to is added to the pointer.<br>
+<br>
+<img src="pointer_arithmetics.png" alt="">
+<br>
+This is applicable both when adding and subtracting any number to a pointer. It would happen exactly the same if we wrote: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code>mychar = mychar + 1;
+myshort = myshort + 1;
+mylong = mylong + 1;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Regarding the increment (<code>++</code>) and decrement (<code>--</code>) operators, they both can be used as either prefix or suffix of an expression, with a slight difference in behavior: as a prefix, the increment happens before the expression is evaluated, and as a suffix, the increment happens after the expression is evaluated. This also applies to expressions incrementing and decrementing pointers, which can become part of more complicated expressions that also include dereference operators (<code>*</code>). Remembering operator precedence rules, we can recall that postfix operators, such as increment and decrement, have higher precedence than prefix operators, such as the dereference operator (<code>*</code>). Therefore, the following expression:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>*p++</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+is equivalent to <code>*(p++)</code>. And what it does is to increase the value of <code>p</code> (so it now points to the next element), but because <code>++</code> is used as postfix, the whole expression is evaluated as the value pointed originally by the pointer (the address it pointed to before being incremented).<br>
+<br>
+Essentially, these are the four possible combinations of the dereference operator with both the prefix and suffix versions of the increment operator (the same being applicable also to the decrement operator):<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code>*p++   <cite>// same as *(p++): increment pointer, and dereference unincremented address</cite>
+*++p   <cite>// same as *(++p): increment pointer, and dereference incremented address</cite>
+++*p   <cite>// same as ++(*p): dereference pointer, and increment the value it points to</cite>
+(*p)++ <cite>// dereference pointer, and post-increment the value it points to </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+A typical -but not so simple- statement involving these operators is:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>*p++ = *q++;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Because <code>++</code> has a higher precedence than <code>*</code>, both <code>p</code> and <code>q</code> are incremented, but because both increment operators (<code>++</code>) are used as postfix and not prefix, the value assigned to <code>*p</code> is <code>*q</code> before both <code>p</code> and <code>q</code> are incremented. And then both are incremented. It would be roughly equivalent to:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code>*p = *q;
+++p;
+++q;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Like always, parentheses reduce confusion by adding legibility to expressions.<br>
+</section>
+<br>
+<section id="const">
+<h3>Pointers and const</h3>
+Pointers can be used to access a variable by its address, and this access may include modifying the value pointed. But it is also possible to declare pointers that can access the pointed value to read it, but not to modify it. For this, it is enough with qualifying the type pointed to by the pointer as <code>const</code>. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> x;
+<var>int</var> y = 10;
+<var>const</var> <var>int</var> * p = &amp;y;
+x = *p;          <cite>// ok: reading p</cite>
+*p = x;          <cite>// error: modifying p, which is const-qualified </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Here <code>p</code> points to a variable, but points to it in a <code>const</code>-qualified manner, meaning that it can read the value pointed, but it cannot modify it. Note also, that the expression <code>&y</code> is of type <code>int*</code>, but this is assigned to a pointer of type <code>const int*</code>. This is allowed: a pointer to non-const can be implicitly converted to a pointer to const. But not the other way around! As a safety feature, pointers to <code>const</code> are not implicitly convertible to pointers to non-<code>const</code>.<br>
+<br>
+One of the use cases of pointers to <code>const</code> elements is as function parameters: a function that takes a pointer to non-<code>const</code> as parameter can modify the value passed as argument, while a function that takes a pointer to <code>const</code> as parameter cannot.<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br></code></pre></td>
+<td class="source"><pre><code><cite>// pointers as arguments:</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>void</var> increment_all (<var>int</var>* start, <var>int</var>* stop)
+{
+  <var>int</var> * current = start;
+  <var>while</var> (current != stop) {
+    ++(*current);  <cite>// increment value pointed</cite>
+    ++current;     <cite>// increment pointer</cite>
+  }
+}
+
+<var>void</var> print_all (<var>const</var> <var>int</var>* start, <var>const</var> <var>int</var>* stop)
+{
+  <var>const</var> <var>int</var> * current = start;
+  <var>while</var> (current != stop) {
+    cout &lt;&lt; *current &lt;&lt; <kbd>'\n'</kbd>;
+    ++current;     <cite>// increment pointer</cite>
+  }
+}
+
+<var>int</var> main ()
+{
+  <var>int</var> numbers[] = {10,20,30};
+  increment_all (numbers,numbers+3);
+  print_all (numbers,numbers+3);
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>11
+21
+31</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Note that <code>print_all</code> uses pointers that point to constant elements. These pointers point to constant content they cannot modify, but they are not constant themselves: i.e., the pointers can still be incremented or assigned different addresses, although they cannot modify the content they point to.<br>
+<br>
+And this is where a second dimension to constness is added to pointers: Pointers can also be themselves const. And this is specified by appending const to the pointed type (after the asterisk):<br>
+ <br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> x;
+      <var>int</var> *       p1 = &amp;x;  <cite>// non-const pointer to non-const int</cite>
+<var>const</var> <var>int</var> *       p2 = &amp;x;  <cite>// non-const pointer to const int</cite>
+      <var>int</var> * <var>const</var> p3 = &amp;x;  <cite>// const pointer to non-const int</cite>
+<var>const</var> <var>int</var> * <var>const</var> p4 = &amp;x;  <cite>// const pointer to const int </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The syntax with <code>const</code> and pointers is definitely tricky, and recognizing the cases that best suit each use tends to require some experience. In any case, it is important to get constness with pointers (and references) right sooner rather than later, but you should not worry too much about grasping everything if this is the first time you are exposed to the mix of <code>const</code> and pointers. More use cases will show up in coming chapters.<br>
+<br>
+To add a little bit more confusion to the syntax of <code>const</code> with pointers, the <code>const</code> qualifier can either precede or follow the pointed type, with the exact same meaning:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>const</var> <var>int</var> * p2a = &amp;x;  <cite>//      non-const pointer to const int</cite>
+<var>int</var> <var>const</var> * p2b = &amp;x;  <cite>// also non-const pointer to const int </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+As with the spaces surrounding the asterisk, the order of const in this case is simply a matter of style. This chapter uses a prefix <code>const</code>, as for historical reasons this seems to be more extended, but both are exactly equivalent. The merits of each style are still intensely debated on the internet.<br>
+</section>
+<br>
+<section id="stringliterals">
+<h3>Pointers and string literals</h3>
+As pointed earlier, <i>string literals</i> are arrays containing null-terminated character sequences. In earlier sections, string literals have been used to be directly inserted into <code>cout</code>, to initialize strings and to initialize arrays of characters.<br>
+<br>
+But they can also be accessed directly. String literals are arrays of the proper array type to contain all its characters plus the terminating null-character, with each of the elements being of type <code>const char</code> (as literals, they can never be modified). For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>const</var> <var>char</var> * foo = <kbd>"hello"</kbd>; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This declares an array with the literal representation for <code>"hello"</code>, and then a pointer to its first element is assigned to <code>foo</code>. If we imagine that <code>"hello"</code> is stored at the memory locations that start at address 1702, we can represent the previous declaration as:<br>
+<br>
+<img src="pointer_assignment.png" alt="">
+  <br>
+Note that here <code>foo</code> is a pointer and contains the value 1702, and not <code>'h'</code>, nor <code>"hello"</code>, although 1702 indeed is the address of both of these.<br>
+<br>
+The pointer <code>foo</code> points to a sequence of characters. And because pointers and arrays behave essentially in the same way in expressions, <code>foo</code> can be used to access the characters in the same way arrays of null-terminated character sequences are. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>*(foo+4)
+foo[4]</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Both expressions have a value of <code>'o'</code> (the fifth element of the array).<br>
+</section>
+<br>
+<section id="pointerstopointers">
+<h3>Pointers to pointers</h3>
+C++ allows the use of pointers that point to pointers, that these, in its turn, point to data (or even to other pointers). The syntax simply requires an asterisk (<code>*</code>) for each level of indirection in the declaration of the pointer:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br></code></pre></td>
+<td class="source"><pre><code><var>char</var> a;
+<var>char</var> * b;
+<var>char</var> ** c;
+a = <kbd>'z'</kbd>;
+b = &amp;a;
+c = &amp;b;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This, assuming the randomly chosen memory locations for each variable of <code>7230</code>, <code>8092</code>, and <code>10502</code>, could be represented as:<br>
+<br>
+<img src="pointer_to_pointer.png" alt="">
+  <br>
+With the value of each variable represented inside its corresponding cell, and their respective addresses in memory represented by the value under them.<br>
+ <br>
+The new thing in this example is variable <code>c</code>, which is a pointer to a pointer, and can be used in three different levels of indirection, each one of them would correspond to a different value:<br>
+<br>
+<ul>
+<li><code>c</code> is of type <code>char**</code> and a value of <code>8092</code></li>
+<li><code>*c</code> is of type <code>char*</code> and a value of <code>7230</code></li>
+<li><code>**c</code> is of type <code>char</code> and a value of <code>'z'</code></li>
+</ul>
+</section>
+<br>
+<section id="void">
+<h3>void pointers</h3>
+The <code>void</code> type of pointer is a special type of pointer. In C++, <code>void</code> represents the absence of type. Therefore, <code>void</code> pointers are pointers that point to a value that has no type (and thus also an undetermined length and undetermined dereferencing properties).<br>
+<br>
+This gives <code>void</code> pointers a great flexibility, by being able to point to any data type, from an integer value or a float to a string of characters. In exchange, they have a great limitation: the data pointed to by them cannot be directly dereferenced (which is logical, since we have no type to dereference to), and for that reason, any address in a <code>void</code> pointer needs to be transformed into some other pointer type that points to a concrete data type before being dereferenced.<br>
+<br>
+One of its possible uses may be to pass generic parameters to a function. For example: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br></code></pre></td>
+<td class="source"><pre><code><cite>// increaser</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>void</var> increase (<var>void</var>* data, <var>int</var> psize)
+{
+  <var>if</var> ( psize == <var>sizeof</var>(<var>char</var>) )
+  { <var>char</var>* pchar; pchar=(<var>char</var>*)data; ++(*pchar); }
+  <var>else</var> <var>if</var> (psize == <var>sizeof</var>(<var>int</var>) )
+  { <var>int</var>* pint; pint=(<var>int</var>*)data; ++(*pint); }
+}
+
+<var>int</var> main ()
+{
+  <var>char</var> a = <kbd>'x'</kbd>;
+  <var>int</var> b = 1602;
+  increase (&amp;a,<var>sizeof</var>(a));
+  increase (&amp;b,<var>sizeof</var>(b));
+  cout &lt;&lt; a &lt;&lt; <kbd>", "</kbd> &lt;&lt; b &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>y, 1603</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<code>sizeof</code> is an operator integrated in the C++ language that returns the size in bytes of its argument. For non-dynamic data types, this value is a constant. Therefore, for example, <code>sizeof(char)</code> is 1, because <code>char</code> has always a size of one byte. <br>
+</section>
+<br>
+<section id="null">
+<h3>Invalid pointers and null pointers</h3>
+In principle, pointers are meant to point to valid addresses, such as the address of a variable or the address of an element in an array. But pointers can actually point to any address, including addresses that do not refer to any valid element. Typical examples of this are <i>uninitialized pointers</i> and pointers to nonexistent elements of an array:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> * p;               <cite>// uninitialized pointer (local variable)</cite>
+
+<var>int</var> myarray[10];
+<var>int</var> * q = myarray+20;  <cite>// element out of bounds </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Neither <code>p</code> nor <code>q</Code> point to addresses known to contain a value, but none of the above statements causes an error. In C++, pointers are allowed to take any address value, no matter whether there actually is something at that address or not. What can cause an error is to dereference such a pointer (i.e., actually accessing the value they point to). Accessing such a pointer causes undefined behavior, ranging from an error during runtime to accessing some random value.<br>
+<br>
+But, sometimes, a pointer really needs to explicitly point to nowhere, and not just an invalid address. For such cases, there exists a special value that any pointer type can take: the <i>null pointer value</i>. This value can be expressed in C++ in two ways: either with an integer value of zero, or with the <code>nullptr</code> keyword:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> * p = 0;
+<var>int</var> * q = <var>nullptr</var>;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Here, both <code>p</code> and <code>q</code> are <i>null pointers</i>, meaning that they explicitly point to nowhere, and they both actually compare equal: all <i>null pointers</i> compare equal to other <i>null pointers</i>. It is also quite usual to see the defined constant <code>NULL</code> be used in older code to refer to the <i>null pointer</i> value:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> * r = NULL;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<code>NULL</code> is defined in several headers of the standard library, and is defined as an alias of some <i>null pointer</i> constant value (such as <code>0</code> or <code>nullptr</code>).<br>
+<br>
+Do not confuse <i>null pointers</i> with <code>void</code> pointers! A <i>null pointer</i> is a value that any pointer can take to represent that it is pointing to "nowhere", while a <code>void</code> pointer is a type of pointer that can point to somewhere without a specific type. One refers to the value stored in the pointer, and the other to the type of data it points to.<br>
+</section>
+<br>
+<section id="pointerstofunctions">
+<h3>Pointers to functions</h3>
+C++ allows operations with pointers to functions. The typical use of this is for passing a function as an argument to another function. Pointers to functions are declared with the same syntax as a regular function declaration, except that the name of the function is enclosed between parentheses () and an asterisk (<code>*</code>) is inserted before the name:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br></code></pre></td>
+<td class="source"><pre><code><cite>// pointer to functions</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> addition (<var>int</var> a, <var>int</var> b)
+{ <var>return</var> (a+b); }
+
+<var>int</var> subtraction (<var>int</var> a, <var>int</var> b)
+{ <var>return</var> (a-b); }
+
+<var>int</var> operation (<var>int</var> x, <var>int</var> y, <var>int</var> (*functocall)(<var>int</var>,<var>int</var>))
+{
+  <var>int</var> g;
+  g = (*functocall)(x,y);
+  <var>return</var> (g);
+}
+
+<var>int</var> main ()
+{
+  <var>int</var> m,n;
+  <var>int</var> (*minus)(<var>int</var>,<var>int</var>) = subtraction;
+
+  m = operation (7, 5, addition);
+  n = operation (20, m, minus);
+  cout &lt;&lt;n;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>8</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In the example above, <code>minus</code> is a pointer to a function that has two parameters of type <code>int</code>. It is directly initialized to point to the function <code>subtraction</code>:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> (* minus)(<var>int</var>,<var>int</var>) = subtraction;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+</section><table class="C_docPrevNext"><tr><td class="prev"><a href="../ntcs/index.html" rel="prev"><img src="https://www.cplusplus.com/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Character sequences</b></a></td><td class="index"><a href="../index.html" rel="index"><img src="https://www.cplusplus.com/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../dynamic/index.html" rel="next"><img src="https://www.cplusplus.com/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Dynamic memory</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<div class="C_support">
+<div id='div-gpt-ad-1593433023017-0' style='width: 728px; height: 90px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1593433023017-0'); });
+  </script>
+</div>
+</div></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="https://www.cplusplus.com/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="https://www.cplusplus.com/info/">Information</a></li>
+<li class="folder selected doc"><a href="https://www.cplusplus.com/doc/">Tutorials</a></li>
+<li class="folder reference"><a href="https://www.cplusplus.com/reference/">Reference</a></li>
+<li class="folder articles"><a href="https://www.cplusplus.com/articles/">Articles</a></li>
+<li class="folder forum"><a href="https://www.cplusplus.com/forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="https://www.cplusplus.com/doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 selected folder"><a href="../index.html"><span>C++ Language</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect cpp98 cpp11" id="tutorial_box">
+<h3><b><a href="../index.html">C++ Language</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li class="folder"><a href="../introduction/index.html"><span>Compilers</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../program_structure/index.html"><span>Structure of a program</span></a></li>
+<li><a href="../variables/index.html"><span>Variables and types</span></a></li>
+<li><a href="../constants/index.html"><span>Constants</span></a></li>
+<li><a href="../operators/index.html"><span>Operators</span></a></li>
+<li><a href="../basic_io/index.html"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Program structure:</h4><ul>
+<li><a href="../control/index.html"><span>Statements and flow control</span></a></li>
+<li><a href="../functions/index.html"><span>Functions</span></a></li>
+<li><a href="../functions2/index.html"><span>Overloads and templates</span></a></li>
+<li><a href="../namespaces/index.html"><span>Name visibility</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound data types:</h4><ul>
+<li><a href="../arrays/index.html"><span>Arrays</span></a></li>
+<li><a href="../ntcs/index.html"><span>Character sequences</span></a></li>
+<li class="selected"><a href="index.html"><span>Pointers</span></a></li>
+<li><a href="../dynamic/index.html"><span>Dynamic memory</span></a></li>
+<li><a href="../structures/index.html"><span>Data structures</span></a></li>
+<li><a href="../other_data_types/index.html"><span>Other data types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Classes:</h4><ul>
+<li><a href="../classes/index.html"><span>Classes (I)</span></a></li>
+<li><a href="../templates/index.html"><span>Classes (II)</span></a></li>
+<li><a href="../classes2/index.html"><span>Special members</span></a></li>
+<li><a href="../inheritance/index.html"><span>Friendship and inheritance</span></a></li>
+<li><a href="../polymorphism/index.html"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Other language features:</h4><ul>
+<li><a href="../typecasting/index.html"><span>Type conversions</span></a></li>
+<li><a href="../exceptions/index.html"><span>Exceptions</span></a></li>
+<li><a href="../preprocessor/index.html"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Standard library:</h4><ul>
+<li><a href="../files/index.html"><span>Input/output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<p>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="https://www.cplusplus.com/">Home page</a> | <a href="https://www.cplusplus.com/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2021 - All rights reserved - <i>v3.2</i><br><a href="https://www.cplusplus.com/contact.do?referrer=www.cplusplus.com%2Fdoc%2Ftutorial%2Fpointers%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','https://www.cplusplus.com/doc/edit.cgi?a=tutorial+pointers'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='https://www.cplusplus.com/doc/delete.cgi?a=tutorial+pointers'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+
+<!-- Mirrored from www.cplusplus.com/doc/tutorial/pointers/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jul 2021 12:46:50 GMT -->
+</html>

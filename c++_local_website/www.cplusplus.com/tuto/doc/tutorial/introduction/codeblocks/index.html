@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.cplusplus.com/doc/tutorial/introduction/codeblocks/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jul 2021 12:46:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Code::Blocks - C++ Tutorials</title>
+<link rel="canonical" href="index.html">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.cplusplus.com/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://www.cplusplus.com/v322/main.css">
+<script src="https://www.cplusplus.com/v322/main.js" type="text/javascript"></script>
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/147246189/cplusplus.com_728x90_leaderboard_1', [728, 90], 'div-gpt-ad-1593433023017-0').addService(googletag.pubads());
+    googletag.defineSlot('/147246189/cplusplus.com_234x120_sidebar_1', [234, 60], 'cplusplus.com_234x120_sidebar_1').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().disableInitialLoad();
+    googletag.enableServices();
+  });
+</script>
+<script src="https://cloud.setupad.com/hb/cpluspluscom.js" async></script>
+<script src="https://c.aaxads.com/aax.js?pub=AAX5H4CNQ&amp;hst=www.cplusplus.com&amp;ver=1.2" async></script></head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="https://www.cplusplus.com/" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="https://www.cplusplus.com/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="https://www.cplusplus.com/doc/">Tutorials</a></li>
+<li><a href="../../index.html">C++ Language</a></li>
+<li><a href="../index.html">Compilers</a></li>
+<li class="here">Code::Blocks</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1593433023017-0' style='width: 728px; height: 90px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1593433023017-0'); });
+  </script>
+</div>
+</div><div id="I_content">
+<div class="C_doc">
+<h1>Code::Blocks</h1>
+<section id="download">
+<i>Code::Blocks</i> is a cross-platform IDE that supports compiling and running multiple programming languages.<br>
+<br>
+It is available for download from:<br>
+<br>
+<code><a href="http://www.codeblocks.org/">http://www.codeblocks.org/</a></code> <br>
+<br>
+Code::Blocks can work with a variety of compilers.<br>
+<br>
+For Windows, it is offered optionally with the MingW compiler. This version that includes MingW is sufficient to follow these tutorials, letting you compile the examples right away. If unsure, download the one named "<code>codeblocks-XX.XX-mingw-setup.exe</code>".<br>
+<br>
+For Linux and Mac users, download the version corresponding to your distribution.<br>
+</section>
+<br>
+<section id="install">
+<h3>Installation</h3>
+On Windows, run the downloaded executable file, and follow its instructions. The default options are fine.<br>
+</section>
+<br>
+<section id="cpp11">
+<h3>Support for C++11</h3>
+If you have a version of GCC as compiler (such as MingW for Windows), chances are it will come with support for the most recent version of C++ disabled by default. This can be explicitly enabled by going to:<br>
+<br>
+<code>Settings -&gt; Compiler...</code> <br>
+<img src="codeblocks1.png" alt=""> <br>
+<br>
+And here, within "Global compiler settings", in "Compiler settings" tab, check the box <i>"Have g++ follow the C++11 ISO C++ language standard [-std=c++11]"</i>: <br>
+<img src="codeblocks2.png" alt="">
+</section>
+<br>
+<section id="console">
+<h3>Console Application</h3>
+To compile and run simple console applications such as those used as examples in these tutorials it is enough with opening the file with Code::blocks and hit <code>F9</code>.<br>
+<br>
+As an example, try:<br>
+<br>
+<code>File -&gt; New -&gt; Empty File</code> <br>
+<br>
+There write the following:<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br></code></pre></td>
+<td class="source"><pre><code><dfn>#include &lt;iostream&gt;</dfn>
+<var>int</var> main()
+{
+  <var>auto</var> x = R<kbd>"(Hello world!)"</kbd>;
+  std::cout &lt;&lt; x;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Then:<br>
+<br>
+<code>File -&gt; Save file as...</code> <br>
+<br>
+And save it with some file name with a <code>.cpp</code> extension, such as <code>example.cpp</code>.<br>
+<br>
+Now, hitting <code>F9</code> should compile and run the program.<br>
+<br>
+If you get an error on the type of <code>x</code>, the compiler does not understand the new meaning given to <code>auto</code> since C++11. Please, make sure you have a recent compiler and that you enabled the compiler options to compile C++11 as <a href="#cpp11">described above</a>.<br>
+</section>
+<br>
+<section id="tutorial">
+<h3>Tutorial</h3>
+You are now ready to begin the language tutorial: <a href="../../index.html"><b>click here!</b></a>.<br>
+</section></div><div id="CH_bb"></div></div>
+</div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="https://www.cplusplus.com/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="https://www.cplusplus.com/info/">Information</a></li>
+<li class="folder selected doc"><a href="https://www.cplusplus.com/doc/">Tutorials</a></li>
+<li class="folder reference"><a href="https://www.cplusplus.com/reference/">Reference</a></li>
+<li class="folder articles"><a href="https://www.cplusplus.com/articles/">Articles</a></li>
+<li class="folder forum"><a href="https://www.cplusplus.com/forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="https://www.cplusplus.com/doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 selected folder"><a href="../../index.html"><span>C++ Language</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect cpp98 cpp11" id="tutorial_box">
+<h3><b><a href="../../index.html">C++ Language</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li class="selected folder"><a href="../index.html"><span>Compilers</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../../program_structure/index.html"><span>Structure of a program</span></a></li>
+<li><a href="../../variables/index.html"><span>Variables and types</span></a></li>
+<li><a href="../../constants/index.html"><span>Constants</span></a></li>
+<li><a href="../../operators/index.html"><span>Operators</span></a></li>
+<li><a href="../../basic_io/index.html"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Program structure:</h4><ul>
+<li><a href="../../control/index.html"><span>Statements and flow control</span></a></li>
+<li><a href="../../functions/index.html"><span>Functions</span></a></li>
+<li><a href="../../functions2/index.html"><span>Overloads and templates</span></a></li>
+<li><a href="../../namespaces/index.html"><span>Name visibility</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound data types:</h4><ul>
+<li><a href="../../arrays/index.html"><span>Arrays</span></a></li>
+<li><a href="../../ntcs/index.html"><span>Character sequences</span></a></li>
+<li><a href="../../pointers/index.html"><span>Pointers</span></a></li>
+<li><a href="../../dynamic/index.html"><span>Dynamic memory</span></a></li>
+<li><a href="../../structures/index.html"><span>Data structures</span></a></li>
+<li><a href="../../other_data_types/index.html"><span>Other data types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Classes:</h4><ul>
+<li><a href="../../classes/index.html"><span>Classes (I)</span></a></li>
+<li><a href="../../templates/index.html"><span>Classes (II)</span></a></li>
+<li><a href="../../classes2/index.html"><span>Special members</span></a></li>
+<li><a href="../../inheritance/index.html"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../polymorphism/index.html"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Other language features:</h4><ul>
+<li><a href="../../typecasting/index.html"><span>Type conversions</span></a></li>
+<li><a href="../../exceptions/index.html"><span>Exceptions</span></a></li>
+<li><a href="../../preprocessor/index.html"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Standard library:</h4><ul>
+<li><a href="../../files/index.html"><span>Input/output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="introduction_box">
+<h3><b><a href="../index.html">Compilers</a></b></h3>
+<ul>
+<li class="selected"><a href="index.html"><span>Code::Blocks</span></a></li>
+<li><a href="../devcpp/index.html"><span>Dev-C++</span></a></li>
+<li><a href="../visualstudio/index.html"><span>Visual Studio Express</span></a></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<p>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="https://www.cplusplus.com/">Home page</a> | <a href="https://www.cplusplus.com/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2021 - All rights reserved - <i>v3.2</i><br><a href="https://www.cplusplus.com/contact.do?referrer=www.cplusplus.com%2Fdoc%2Ftutorial%2Fintroduction%2Fcodeblocks%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','https://www.cplusplus.com/doc/edit.cgi?a=tutorial+introduction+codeblocks'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='https://www.cplusplus.com/doc/delete.cgi?a=tutorial+introduction+codeblocks'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+
+<!-- Mirrored from www.cplusplus.com/doc/tutorial/introduction/codeblocks/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jul 2021 12:46:55 GMT -->
+</html>

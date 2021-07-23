@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.cplusplus.com/doc/tutorial/templates/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jul 2021 12:46:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Classes (II) - C++ Tutorials</title>
+<link rel="canonical" href="index.html">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.cplusplus.com/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://www.cplusplus.com/v322/main.css">
+<script src="https://www.cplusplus.com/v322/main.js" type="text/javascript"></script>
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/147246189/cplusplus.com_728x90_leaderboard_1', [728, 90], 'div-gpt-ad-1593433023017-0').addService(googletag.pubads());
+    googletag.defineSlot('/147246189/cplusplus.com_234x120_sidebar_1', [234, 60], 'cplusplus.com_234x120_sidebar_1').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().disableInitialLoad();
+    googletag.enableServices();
+  });
+</script>
+<script src="https://cloud.setupad.com/hb/cpluspluscom.js" async></script>
+<script src="https://c.aaxads.com/aax.js?pub=AAX5H4CNQ&amp;hst=www.cplusplus.com&amp;ver=1.2" async></script></head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="https://www.cplusplus.com/" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="https://www.cplusplus.com/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="https://www.cplusplus.com/doc/">Tutorials</a></li>
+<li><a href="../index.html">C++ Language</a></li>
+<li class="here">Classes </li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1593433023017-0' style='width: 728px; height: 90px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1593433023017-0'); });
+  </script>
+</div>
+</div><div id="I_content">
+<div class="C_doc">
+<h1>Classes (II)</h1>
+<section id="overloading_operators">
+<h3>Overloading operators</h3>
+Classes, essentially, define new types to be used in C++ code. And types in C++ not only interact with code by means of constructions and assignments. They also interact by means of operators. For example, take the following operation on fundamental types:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> a, b, c;
+a = b + c;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Here, different variables of a fundamental type (<code>int</code>) are applied the addition operator, and then the assignment operator. For a fundamental arithmetic type, the meaning of such operations is generally obvious and unambiguous, but it may not be so for certain class types. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br></code></pre></td>
+<td class="source"><pre><code><var>struct</var> myclass {
+  string product;
+  <var>float</var> price;
+} a, b, c;
+a = b + c;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Here, it is not obvious what the result of the addition operation on <code>b</code> and <code>c</code> does. In fact, this code alone would cause a compilation error, since the type <code>myclass</code> has no defined behavior for additions. However, C++ allows most operators to be overloaded so that their behavior can be defined for just about any type, including classes. Here is a list of all the operators that can be overloaded:<br>
+<br>
+<table class="boxed">
+<tr><th>Overloadable operators</th></tr>
+<tr><td><code><pre >+    -    *    /    =    &lt;    &gt;    +=   -=   *=   /=   &lt;&lt;   &gt;&gt;
+&lt;&lt;=  &gt;&gt;=  ==   !=   &lt;=   &gt;=   ++   --   %    &    ^    !    |
+~    &=   ^=   |=   &&   ||   %=   []   ()   ,    -&gt;*  -&gt;   new 
+delete    new[]     delete[]</pre></code></td></tr>
+</table>
+<br>
+Operators are overloaded by means of <code>operator</Code> functions, which are regular functions with special names: their name begins by the <code>operator</code> keyword followed by the <i>operator sign</i> that is overloaded. The syntax is:<br>
+<br>
+<code>type operator sign (parameters) { /*... body ...*/ }</code>
+<br>
+For example, <i>cartesian vectors</i> are sets of two coordinates: <code>x</code> and <code>y</code>. The addition operation of two <i>cartesian vectors</i> is defined as the addition both <code>x</code> coordinates together, and both <code>y</code> coordinates together. For example, adding the <i>cartesian vectors</i> <code>(3,1)</code> and <code>(1,2)</code> together would result in <code>(3+1,1+2) = (4,3)</code>. This could be implemented in C++ with the following code:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br></code></pre></td>
+<td class="source"><pre><code><cite>// overloading operators example</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> CVector {
+  <var>public</var>:
+    <var>int</var> x,y;
+    CVector () {};
+    CVector (<var>int</var> a,<var>int</var> b) : x(a), y(b) {}
+    CVector <var>operator</var> + (<var>const</var> CVector&amp;);
+};
+
+CVector CVector::<var>operator</var>+ (<var>const</var> CVector&amp; param) {
+  CVector temp;
+  temp.x = x + param.x;
+  temp.y = y + param.y;
+  <var>return</var> temp;
+}
+
+<var>int</var> main () {
+  CVector foo (3,1);
+  CVector bar (1,2);
+  CVector result;
+  result = foo + bar;
+  cout &lt;&lt; result.x &lt;&lt; <kbd>','</kbd> &lt;&lt; result.y &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>4,3</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+If confused about so many appearances of <code>CVector</code>, consider that some of them refer to the class name (i.e., the type) <code>CVector</code> and some others are functions with that name (i.e., constructors, which must have the same name as the class). For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>CVector (<var>int</var>, <var>int</var>) : x(a), y(b) {}  <cite>// function name CVector (constructor)</cite>
+CVector <var>operator</var>+ (<var>const</var> CVector&amp;); <cite>// function that returns a CVector  </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The function <code>operator+</code> of class <code>CVector</code> overloads the addition operator (<code>+</code>) for that type. Once declared, this function can be called either implicitly using the operator, or explicitly using its functional name:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>c = a + b;
+c = a.<var>operator</var>+ (b);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Both expressions are equivalent.<br>
+<br>
+The operator overloads are just regular functions which can have any behavior; there is actually no requirement that the operation performed by that overload bears a relation to the mathematical or usual meaning of the operator, although it is strongly recommended. For example, a class that overloads <code>operator+</code> to actually subtract or that overloads <code>operator==</code> to fill the object with zeros, is perfectly valid, although using such a class could be challenging.<br>
+<br>
+The parameter expected for a member function overload for operations such as <code>operator+</code> is naturally the operand to the right hand side of the operator. This is common to all binary operators (those with an operand to its left and one operand to its right). But operators can come in diverse forms. Here you have a table with a summary of the parameters needed for each of the different operators than can be overloaded (please, replace <code>@</code> by the operator in each case):<br>
+<br>
+<table class="boxed">
+<tr><th>Expression</th><th>Operator</th><th>Member function</th><th>Non-member function</th></tr>
+<tr><td><code>@a</code></td><td><code>+ - * & ! ~ ++ --</code></td><td><code>A::operator@()</code></td><td><code>operator@(A)</code></td></tr>
+<tr><td><code>a@</code></td><td><code>++ --</code></td><td><code>A::operator@(int)</code></td><td><code>operator@(A,int)</code></td></tr>
+<tr><td><code>a@b</code></td><td><code>+ - * / % ^ & | &lt; &gt; == != &lt;= &gt;= &lt;&lt; &gt;&gt; && || ,</code></td><td><code>A::operator@(B)</code></td><td><code>operator@(A,B)</code></td></tr>
+<tr><td><code>a@b</code></td><td><code>= += -= *= /= %= ^= &= |= &lt;&lt;= &gt;&gt;= []</code></td><td><code>A::operator@(B)</code></td><td>-</td></tr>
+<tr><td><code>a(b,c...)</code></td><td><code>()</code></td><td><code>A::operator()(B,C...)</code></td><td>-</td></tr>
+<tr><td><code>a-&gt;b</code></td><td><code>-&gt;</code></td><td><code>A::operator-&gt;()</code></td><td>-</td></tr>
+<tr><td><code>(TYPE) a</code></td><td><code>TYPE</code></td><td><code>A::operator TYPE()</code></td><td>-</td></tr>
+</table>
+Where <code>a</code> is an object of class <code>A</code>, <code>b</code> is an object of class <code>B</code> and <code>c</code> is an object of class <code>C</code>. <code>TYPE</code> is just any type (that operators overloads the conversion to type <code>TYPE</code>).<br>
+<br>
+Notice that some operators may be overloaded in two forms: either as a member function or as a non-member function: The first case has been used in the example above for <code>operator+</code>. But some operators can also be overloaded as non-member functions; In this case, the operator function takes an object of the proper class as first argument.<br>
+<br>
+For example:<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br></code></pre></td>
+<td class="source"><pre><code><cite>// non-member operator overloads</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> CVector {
+  <var>public</var>:
+    <var>int</var> x,y;
+    CVector () {}
+    CVector (<var>int</var> a, <var>int</var> b) : x(a), y(b) {}
+};
+
+
+CVector <var>operator</var>+ (<var>const</var> CVector&amp; lhs, <var>const</var> CVector&amp; rhs) {
+  CVector temp;
+  temp.x = lhs.x + rhs.x;
+  temp.y = lhs.y + rhs.y;
+  <var>return</var> temp;
+}
+
+<var>int</var> main () {
+  CVector foo (3,1);
+  CVector bar (1,2);
+  CVector result;
+  result = foo + bar;
+  cout &lt;&lt; result.x &lt;&lt; <kbd>','</kbd> &lt;&lt; result.y &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>4,3</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+</section>
+<br>
+<section id="this">
+<h3>The keyword this</h3>
+The keyword <code>this</Code> represents a pointer to the object whose member function is being executed. It is used within a class's member function to refer to the object itself.<br>
+<br>
+One of its uses can be to check if a parameter passed to a member function is the object itself. For example:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br></code></pre></td>
+<td class="source"><pre><code><cite>// example on this</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> Dummy {
+  <var>public</var>:
+    <var>bool</var> isitme (Dummy&amp; param);
+};
+
+<var>bool</var> Dummy::isitme (Dummy&amp; param)
+{
+  <var>if</var> (&amp;param == <var>this</var>) <var>return</var> <var>true</var>;
+  <var>else</var> <var>return</var> <var>false</var>;
+}
+
+<var>int</var> main () {
+  Dummy a;
+  Dummy* b = &amp;a;
+  <var>if</var> ( b-&gt;isitme(a) )
+    cout &lt;&lt; <kbd>"yes, &amp;a is b\n"</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>yes, &amp;a is b</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+It is also frequently used in <code>operator=</code> member functions that return objects by reference. Following with the examples on <i>cartesian vector</i> seen before, its <code>operator=</code> function could have been defined as:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br></code></pre></td>
+<td class="source"><pre><code>CVector&amp; CVector::<var>operator</var>= (<var>const</var> CVector&amp; param)
+{
+  x=param.x;
+  y=param.y;
+  <var>return</var> *<var>this</var>;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In fact, this function is very similar to the code that the compiler generates implicitly for this class for <code>operator=</code>.<br>
+</section>
+<br>
+<section id="static_members">
+<h3>Static members</h3>
+A class can contain static members, either data or functions.<br>
+<br>
+A static data member of a class is also known as a "class variable", because there is only one common variable for all the objects of that same class, sharing the same value: i.e., its value is not different from one object of this class to another.<br>
+<br>
+For example, it may be used for a variable within a class that can contain a counter with the number of objects of that class that are currently allocated, as in the following example:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br></code></pre></td>
+<td class="source"><pre><code><cite>// static members in classes</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> Dummy {
+  <var>public</var>:
+    <var>static</var> <var>int</var> n;
+    Dummy () { n++; };
+};
+
+<var>int</var> Dummy::n=0;
+
+<var>int</var> main () {
+  Dummy a;
+  Dummy b[5];
+  cout &lt;&lt; a.n &lt;&lt; <kbd>'\n'</kbd>;
+  Dummy * c = <var>new</var> Dummy;
+  cout &lt;&lt; Dummy::n &lt;&lt; <kbd>'\n'</kbd>;
+  <var>delete</var> c;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>6
+7</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In fact, static members have the same properties as non-member variables but they enjoy class scope. For that reason, and to avoid them to be declared several times, they cannot be initialized directly in the class, but need to be initialized somewhere outside it. As in the previous example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> Dummy::n=0;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Because it is a common variable value for all the objects of the same class, it can be referred to as a member of any object of that class or even directly by the class name (of course this is only valid for static members):<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>cout &lt;&lt; a.n;
+cout &lt;&lt; Dummy::n;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+These two calls above are referring to the same variable: the static variable <code>n</Code> within class <code>Dummy</code> shared by all objects of this class.<br>
+<br>
+Again, it is just like a non-member variable, but with a name that requires to be accessed like a member of a class (or an object).<br>
+<br>
+Classes can also have static member functions. These represent the same: members of a class that are common to all object of that class, acting exactly as non-member functions but being accessed like members of the class. Because they are like non-member functions, they cannot access non-static members of the class (neither member variables nor member functions). They neither can use the keyword <code>this</code>.<br>
+</section>
+<br>
+<section id="const_member_functions">
+<h3>Const member functions</h3>
+When an object of a class is qualified as a <code>const</code> object:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>const</var> MyClass myobject;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The access to its data members from outside the class is restricted to read-only, as if all its data members were <code>const</code> for those accessing them from outside the class. Note though, that the constructor is still called and is allowed to initialize and modify these data members:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br></code></pre></td>
+<td class="source"><pre><code><cite>// constructor on const object</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> MyClass {
+  <var>public</var>:
+    <var>int</var> x;
+    MyClass(<var>int</var> val) : x(val) {}
+    <var>int</var> get() {<var>return</var> x;}
+};
+
+<var>int</var> main() {
+  <var>const</var> MyClass foo(10);
+<cite>// foo.x = 20;            // not valid: x cannot be modified</cite>
+  cout &lt;&lt; foo.x &lt;&lt; <kbd>'\n'</kbd>;  <cite>// ok: data member x can be read</cite>
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>10</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The member functions of a <code>const</code> object can only be called if they are themselves specified as <code>const</code> members; in the example above, member <code>get</code> (which is not specified as <code>const</code>) cannot be called from <code>foo</code>. To specify that a member is a <code>const</code> member, the <code>const</code> keyword shall follow the function prototype, after the closing parenthesis for its parameters:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> get() <var>const</var> {<var>return</var> x;}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Note that <code>const</code> can be used to qualify the type returned by a member function. This <code>const</code> is not the same as the one which specifies a member as <code>const</code>. Both are independent and are located at different places in the function prototype:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> get() <var>const</var> {<var>return</var> x;}        <cite>// const member function</cite>
+<var>const</var> <var>int</var>&amp; get() {<var>return</var> x;}       <cite>// member function returning a const&amp;</cite>
+<var>const</var> <var>int</var>&amp; get() <var>const</var> {<var>return</var> x;} <cite>// const member function returning a const&amp; </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Member functions specified to be <code>const</code> cannot modify non-static data members nor call other non-<code>const</code> member functions. In essence, <code>const</code> members shall not modify the state of an object.<br>
+<br>
+<code>const</code> objects are limited to access only member functions marked as <code>const</code>, but non-<code>const</code> objects are not restricted and thus can access both <code>const</code> and non-<code>const</code> member functions alike.<br>
+<br>
+You may think that anyway you are seldom going to declare <code>const</code> objects, and thus marking all members that don't modify the object as const is not worth the effort, but const objects are actually very common. Most functions taking classes as parameters actually take them by <code>const</code> reference, and thus, these functions can only access their <code>const</code> members:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br></code></pre></td>
+<td class="source"><pre><code><cite>// const objects</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> MyClass {
+    <var>int</var> x;
+  <var>public</var>:
+    MyClass(<var>int</var> val) : x(val) {}
+    <var>const</var> <var>int</var>&amp; get() <var>const</var> {<var>return</var> x;}
+};
+
+<var>void</var> print (<var>const</var> MyClass&amp; arg) {
+  cout &lt;&lt; arg.get() &lt;&lt; <kbd>'\n'</kbd>;
+}
+
+<var>int</var> main() {
+  MyClass foo (10);
+  print(foo);
+
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>10</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+If in this example, <code>get</code> was not specified as a <code>const</code> member, the call to <code>arg.get()</code> in the <code>print</code> function would not be possible, because <code>const</code> objects only have access to <code>const</code> member functions.<br>
+<br>
+Member functions can be overloaded on their constness: i.e., a class may have two member functions with identical signatures except that one is <code>const</code> and the other is not: in this case, the <code>const</code> version is called only when the object is itself const, and the non-<code>const</code> version is called when the object is itself non-<code>const</code>.<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br></code></pre></td>
+<td class="source"><pre><code><cite>// overloading members on constness</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> MyClass {
+    <var>int</var> x;
+  <var>public</var>:
+    MyClass(<var>int</var> val) : x(val) {}
+    <var>const</var> <var>int</var>&amp; get() <var>const</var> {<var>return</var> x;}
+    <var>int</var>&amp; get() {<var>return</var> x;}
+};
+
+<var>int</var> main() {
+  MyClass foo (10);
+  <var>const</var> MyClass bar (20);
+  foo.get() = 15;         <cite>// ok: get() returns int&amp;</cite>
+<cite>// bar.get() = 25;        // not valid: get() returns const int&amp;</cite>
+  cout &lt;&lt; foo.get() &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; bar.get() &lt;&lt; <kbd>'\n'</kbd>;
+
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>15
+20</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+</section>
+<br>
+<section id="class_templates">
+<h3>Class templates</h3>
+Just like we can create function templates, we can also create class templates, allowing classes to have members that use template parameters as types. For example: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br></code></pre></td>
+<td class="source"><pre><code><var>template</var> &lt;<var>class</var> T&gt;
+<var>class</var> mypair {
+    T values [2];
+  <var>public</var>:
+    mypair (T first, T second)
+    {
+      values[0]=first; values[1]=second;
+    }
+};</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The class that we have just defined serves to store two elements of any valid type. For example, if we wanted to declare an object of this class to store two integer values of type <code>int</code> with the values 115 and 36 we would write:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>mypair&lt;<var>int</var>&gt; myobject (115, 36);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This same class could also be used to create an object to store any other type, such as:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>mypair&lt;<var>double</var>&gt; myfloats (3.0, 2.18); </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The constructor is the only member function in the previous class template and it has been defined inline within the class definition itself. In case that a member function is defined outside the defintion of the class template, it shall be preceded with the <code>template &lt;...&gt;</code> prefix:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br></code></pre></td>
+<td class="source"><pre><code><cite>// class templates</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>template</var> &lt;<var>class</var> T&gt;
+<var>class</var> mypair {
+    T a, b;
+  <var>public</var>:
+    mypair (T first, T second)
+      {a=first; b=second;}
+    T getmax ();
+};
+
+<var>template</var> &lt;<var>class</var> T&gt;
+T mypair&lt;T&gt;::getmax ()
+{
+  T retval;
+  retval = a&gt;b? a : b;
+  <var>return</var> retval;
+}
+
+<var>int</var> main () {
+  mypair &lt;<var>int</var>&gt; myobject (100, 75);
+  cout &lt;&lt; myobject.getmax();
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>100</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Notice the syntax of the definition of member function <code>getmax</code>:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>template</var> &lt;<var>class</var> T&gt;
+T mypair&lt;T&gt;::getmax () </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Confused by so many <code>T</code>'s? There are three <code>T</code>'s in this declaration: The first one is the template parameter. The second <code>T</code> refers to the type returned by the function. And the third <code>T</code> (the one between angle brackets) is also a requirement: It specifies that this function's template parameter is also the class template parameter.<br>
+</section>
+<br>
+<section id="template_specialization">
+<h3>Template specialization</h3>
+It is possible to define a different implementation for a template when a specific type is passed as template argument. This is called a <i>template specialization</i>.<br>
+<br>
+For example, let's suppose that we have a very simple class called <code>mycontainer</code> that can store one element of any type and that has just one member function called <code>increase</code>, which increases its value. But we find that when it stores an element of type <code>char</code> it would be more convenient to have a completely different implementation with a function member <code>uppercase</code>, so we decide to declare a class template specialization for that type:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br></code></pre></td>
+<td class="source"><pre><code><cite>// template specialization</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<cite>// class template:</cite>
+<var>template</var> &lt;<var>class</var> T&gt;
+<var>class</var> mycontainer {
+    T element;
+  <var>public</var>:
+    mycontainer (T arg) {element=arg;}
+    T increase () {<var>return</var> ++element;}
+};
+
+<cite>// class template specialization:</cite>
+<var>template</var> &lt;&gt;
+<var>class</var> mycontainer &lt;<var>char</var>&gt; {
+    <var>char</var> element;
+  <var>public</var>:
+    mycontainer (<var>char</var> arg) {element=arg;}
+    <var>char</var> uppercase ()
+    {
+      <var>if</var> ((element&gt;=<kbd>'a'</kbd>)&amp;&amp;(element&lt;=<kbd>'z'</kbd>))
+      element+=<kbd>'A'</kbd>-<kbd>'a'</kbd>;
+      <var>return</var> element;
+    }
+};
+
+<var>int</var> main () {
+  mycontainer&lt;<var>int</var>&gt; myint (7);
+  mycontainer&lt;<var>char</var>&gt; mychar (<kbd>'j'</kbd>);
+  cout &lt;&lt; myint.increase() &lt;&lt; endl;
+  cout &lt;&lt; mychar.uppercase() &lt;&lt; endl;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>8
+J</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This is the syntax used for the class template specialization:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>template</var> &lt;&gt; <var>class</var> mycontainer &lt;<var>char</var>&gt; { ... };</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+First of all, notice that we precede the class name with <code>template&lt;&gt;</code> , including an empty parameter list. This is because all types are known and no template arguments are required for this specialization, but still, it is the specialization of a class template, and thus it requires to be noted as such.<br>
+<br>
+But more important than this prefix, is the <code>&lt;char&gt;</code> specialization parameter after the class template name. This specialization parameter itself identifies the type for which the template class is being specialized (<code>char</code>). Notice the differences between the generic class template and the specialization:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>template</var> &lt;<var>class</var> T&gt; <var>class</var> mycontainer { ... };
+<var>template</var> &lt;&gt; <var>class</var> mycontainer &lt;<var>char</var>&gt; { ... };</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The first line is the generic template, and the second one is the specialization.<br>
+<br>
+When we declare specializations for a template class, we must also define all its members, even those identical to the generic template class, because there is no "inheritance" of members from the generic template to the specialization.<br>
+</section><table class="C_docPrevNext"><tr><td class="prev"><a href="../classes/index.html" rel="prev"><img src="https://www.cplusplus.com/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Classes (I)</b></a></td><td class="index"><a href="../index.html" rel="index"><img src="https://www.cplusplus.com/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../classes2/index.html" rel="next"><img src="https://www.cplusplus.com/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Special members</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<div class="C_support">
+<div id='div-gpt-ad-1593433023017-0' style='width: 728px; height: 90px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1593433023017-0'); });
+  </script>
+</div>
+</div></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="https://www.cplusplus.com/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="https://www.cplusplus.com/info/">Information</a></li>
+<li class="folder selected doc"><a href="https://www.cplusplus.com/doc/">Tutorials</a></li>
+<li class="folder reference"><a href="https://www.cplusplus.com/reference/">Reference</a></li>
+<li class="folder articles"><a href="https://www.cplusplus.com/articles/">Articles</a></li>
+<li class="folder forum"><a href="https://www.cplusplus.com/forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="https://www.cplusplus.com/doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 selected folder"><a href="../index.html"><span>C++ Language</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="https://www.cplusplus.com/doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect cpp98 cpp11" id="tutorial_box">
+<h3><b><a href="../index.html">C++ Language</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li class="folder"><a href="../introduction/index.html"><span>Compilers</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../program_structure/index.html"><span>Structure of a program</span></a></li>
+<li><a href="../variables/index.html"><span>Variables and types</span></a></li>
+<li><a href="../constants/index.html"><span>Constants</span></a></li>
+<li><a href="../operators/index.html"><span>Operators</span></a></li>
+<li><a href="../basic_io/index.html"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Program structure:</h4><ul>
+<li><a href="../control/index.html"><span>Statements and flow control</span></a></li>
+<li><a href="../functions/index.html"><span>Functions</span></a></li>
+<li><a href="../functions2/index.html"><span>Overloads and templates</span></a></li>
+<li><a href="../namespaces/index.html"><span>Name visibility</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound data types:</h4><ul>
+<li><a href="../arrays/index.html"><span>Arrays</span></a></li>
+<li><a href="../ntcs/index.html"><span>Character sequences</span></a></li>
+<li><a href="../pointers/index.html"><span>Pointers</span></a></li>
+<li><a href="../dynamic/index.html"><span>Dynamic memory</span></a></li>
+<li><a href="../structures/index.html"><span>Data structures</span></a></li>
+<li><a href="../other_data_types/index.html"><span>Other data types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Classes:</h4><ul>
+<li><a href="../classes/index.html"><span>Classes (I)</span></a></li>
+<li class="selected"><a href="index.html"><span>Classes (II)</span></a></li>
+<li><a href="../classes2/index.html"><span>Special members</span></a></li>
+<li><a href="../inheritance/index.html"><span>Friendship and inheritance</span></a></li>
+<li><a href="../polymorphism/index.html"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Other language features:</h4><ul>
+<li><a href="../typecasting/index.html"><span>Type conversions</span></a></li>
+<li><a href="../exceptions/index.html"><span>Exceptions</span></a></li>
+<li><a href="../preprocessor/index.html"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Standard library:</h4><ul>
+<li><a href="../files/index.html"><span>Input/output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<p>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="https://www.cplusplus.com/">Home page</a> | <a href="https://www.cplusplus.com/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2021 - All rights reserved - <i>v3.2</i><br><a href="https://www.cplusplus.com/contact.do?referrer=www.cplusplus.com%2Fdoc%2Ftutorial%2Ftemplates%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','https://www.cplusplus.com/doc/edit.cgi?a=tutorial+templates'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='https://www.cplusplus.com/doc/delete.cgi?a=tutorial+templates'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+
+<!-- Mirrored from www.cplusplus.com/doc/tutorial/templates/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jul 2021 12:46:52 GMT -->
+</html>
