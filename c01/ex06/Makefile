@@ -1,4 +1,5 @@
-SRCS = main.cpp 
+SRCS = main.cpp \
+	   Karen.cpp \
 
 OBJ = $(SRCS:.cpp=.o)
 
@@ -9,10 +10,10 @@ CXXFLAGS = -Wall -Werror -Wextra
 %.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-NAME = a.out
+NAME = karenFilter
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 all : $(NAME)
 

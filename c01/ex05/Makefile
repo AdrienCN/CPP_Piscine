@@ -14,7 +14,6 @@ NAME = manager
 
 $(NAME): $(OBJ)
 	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
-	@echo hello you
 
 all : $(NAME)
 

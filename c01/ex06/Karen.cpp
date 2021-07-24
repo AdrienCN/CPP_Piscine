@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 11:24:31 by calao             #+#    #+#             */
-/*   Updated: 2021/07/23 18:41:10 by calao            ###   ########.fr       */
+/*   Updated: 2021/07/24 09:46:26 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@
 
 Karen::Karen(void)
 {
-	std::string debug("DEBUG");
-	std::string warning("WARNING");
-	std::string error("ERROR");
-	std::string info("INFO");
-	this->ft_list[debug] = &Karen::_debug;
-	this->ft_list[warning] = &Karen::_warning;
-	this->ft_list[error] = &Karen::_error;
-	this->ft_list[info] = &Karen::_info;
-
 	return ;
 }
 
@@ -35,33 +26,58 @@ Karen::~Karen(void)
 
 void	Karen::complain(std::string level)
 {
-	if (ft_list[level])
-		(this->*ft_list[level])();
-	else
-		std::cout << "No one understands me!! I want to speak to manager!" << std::endl;
+	int i;
+	std::string tab[4] {"DEBUG", "INFO", "WARNING", "ERROR"};
+	
+	for (i = -1; i < 4; i++)
+	{
+		if (tab[i] == level)
+			break;
+	}
+	std::cout << "i = " << i << std::endl;
+	switch (i)
+	{
+		case 0:
+			_debug();
+		case 1:
+			_info();
+		case 2:
+			_warning();
+		case 3:
+		{
+			_error();
+			break ;
+		}
+		default:
+			std::cout << "No one understands me!! I want to speak to manager!" << std::endl;
+	}
 	return ;
 }
 
 void		Karen::_debug(void) const
 {
+	std::cout << "[DEBUG]" << std::endl;
 	std::cout << "I am a KAAAAAAREEEENNNNNNNNNNNNNNNNNNNNNN" << std::endl;
 	return ;
 }
 
 void		Karen::_info(void) const
 {
+	std::cout << "[INFO]" << std::endl;
 	std::cout << "America's number ONE! Mmmmmmmerica! Usa! Usa! USA!" << std::endl;
 	return ;
 }
 
 void		Karen::_warning(void) const
 {
+	std::cout << "[WARNING]" << std::endl;
 	std::cout << "If you don't treat me as special customer I will start to behave like a child!" << std::endl; 
 	return ;
 }
 
 void		Karen::_error(void) const
 {
+	std::cout << "[ERROR]" << std::endl;
 	std::cout << "You are treating me like a REGULAR customer, there must be an ERROR!!!" << std::endl;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 11:20:31 by calao             #+#    #+#             */
-/*   Updated: 2021/07/23 18:40:12 by calao            ###   ########.fr       */
+/*   Updated: 2021/07/23 18:44:32 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <string>
 #include <iostream>
-#include <map>
+//#include <map>
 
 class Karen {
 
@@ -26,7 +26,7 @@ class Karen {
 		void	complain( std::string level);
 
 	private:
-		std::map	<std::string, void(Karen::*)(void) const> ft_list;
+//		std::map	<std::string, void(Karen::*)(void) const> ft_list;
 		void		_debug(void) const;
 		void		_info(void) const;
 		void		_warning(void) const;
