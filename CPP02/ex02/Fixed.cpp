@@ -60,7 +60,7 @@ Fixed	Fixed::operator/(Fixed const & src)
 	return (res);
 }
 
-bool 	Fixed::operator<(Fixed const & src)
+bool 	Fixed::operator<(Fixed const & src) const
 {
 	if (this->_n < src.getRawBits())
 		return (true);
@@ -68,7 +68,7 @@ bool 	Fixed::operator<(Fixed const & src)
 		return (false);
 }
 
-bool 	Fixed::operator<=(Fixed const & src)
+bool 	Fixed::operator<=(Fixed const & src) const
 {
 	if (this->_n <= src.getRawBits())
 		return (true);
@@ -76,7 +76,7 @@ bool 	Fixed::operator<=(Fixed const & src)
 		return (false);
 }
 
-bool 	Fixed::operator>(Fixed const & src)
+bool 	Fixed::operator>(Fixed const & src) const
 {
 	if (this->_n > src.getRawBits())
 		return (true);
@@ -84,7 +84,7 @@ bool 	Fixed::operator>(Fixed const & src)
 		return (false);
 }
 
-bool 	Fixed::operator>=(Fixed const & src)
+bool 	Fixed::operator>=(Fixed const & src) const
 {
 	if (this->_n >= src.getRawBits())
 		return (true);
@@ -92,7 +92,7 @@ bool 	Fixed::operator>=(Fixed const & src)
 		return (false);
 }
 
-bool 	Fixed::operator==(Fixed const & src)
+bool 	Fixed::operator==(Fixed const & src) const
 {
 	if (this->_n == src.getRawBits())
 		return (true);
@@ -100,7 +100,7 @@ bool 	Fixed::operator==(Fixed const & src)
 		return (false);
 }
 
-bool 	Fixed::operator!=(Fixed const & src)
+bool 	Fixed::operator!=(Fixed const & src) const
 {
 	if (this->_n != src.getRawBits())
 		return (true);
@@ -152,4 +152,20 @@ std::ostream & operator<<(std::ostream & o, Fixed const & src)
 {
 	o << src.toFloat();
 	return o;
+}
+
+Fixed const & Fixed::max(Fixed const & a, Fixed const & b)
+{
+	if (a >= b)
+		return (a);
+	else 
+		return (b);
+}
+
+Fixed const & Fixed::min(Fixed const & a, Fixed const & b)
+{
+	if (a <= b)
+		return (a);
+	else
+		return (b);
 }
