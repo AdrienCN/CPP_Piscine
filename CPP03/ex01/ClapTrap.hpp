@@ -6,15 +6,18 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 10:56:22 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 00:02:20 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/28 00:29:04 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
 
-#include <iostream>
-#include <string>
+# include <iostream>
+# include <string>
+
+# define BGREEN "\033[1m\033[32m"
+# define RESET "\033[0m"
 
 class ClapTrap
 {
@@ -30,8 +33,9 @@ class ClapTrap
 	void			attack(std::string const & target) const;
 	void			takeDamage(unsigned int amount);
 	void			beRepaired(unsigned int amount);
+	void			status();
 
-	private:
+	protected:
 		std::string Name;
 		unsigned int hit_point = 10;
 		unsigned int energy_point = 10;
