@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 10:56:22 by calao             #+#    #+#             */
-/*   Updated: 2021/08/07 11:23:01 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/27 18:13:48 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -21,8 +21,11 @@ class ClapTrap
 	ClapTrap &		operator=(ClapTrap const & src);
 					~ClapTrap();
 
-	std::string &	get_name() const;
+	std::string  	get_name() const;
 	void			set_name(std::string const & src_name);
+	void			attack(std::string const & target) const;
+	void			takeDamage(unsigned int amount);
+	void			beRepaired(unsigned int amount);
 
 	private:
 		std::string Name;
