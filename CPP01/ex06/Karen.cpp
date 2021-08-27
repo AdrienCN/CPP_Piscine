@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 11:24:31 by calao             #+#    #+#             */
-/*   Updated: 2021/07/24 09:46:26 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/27 17:13:52 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	Karen::complain(std::string level)
 		if (tab[i] == level)
 			break;
 	}
-	std::cout << "i = " << i << std::endl;
 	switch (i)
 	{
 		case 0:
