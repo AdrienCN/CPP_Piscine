@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 18:32:32 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 09:57:30 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/28 10:27:10 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@
 # include <iostream>
 # include <string>
 
-# define BYLW "\033[1m\033[33m"
+# define BBLE "\033[1m\033[34m"
 # define RESET "\033[0m"
 
-class ScavTrap: public ClapTrap {
+class FragTrap: public ClapTrap {
 
 
 	public:
 	
-				ScavTrap();
-				ScavTrap(std::string const & src);
-				ScavTrap(ScavTrap const & src);
-	ScavTrap &	operator=(ScavTrap const & src);
+				FragTrap();
+				FragTrap(std::string const & src);
+				FragTrap(FragTrap const & src);
+	FragTrap &	operator=(FragTrap const & src);
 
-				~ScavTrap();
+				~FragTrap();
 		
-		void	Scav_status();
-		void	set_ScavTrap_val();
-		void	guardGate();
+		void	Frag_status() const;
+		void	set_FragTrap_val();
+		void	highFivesGuys() const;
 
 	private:
 
