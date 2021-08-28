@@ -1,7 +1,8 @@
 SRCS = main.cpp \
 	   ClapTrap.cpp \
 	   FragTrap.cpp \
-	   ScavTrap.cpp
+	   ScavTrap.cpp \
+	   DiamondTrap.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 

@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 23:47:24 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 10:28:43 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/28 10:53:25 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@ FragTrap::FragTrap(std::string const & src)
 {
 	this->Name = src;
 	(*this).set_FragTrap_val();
+	(*this).Frag_status();
 }
 
 FragTrap::FragTrap(FragTrap const & src)
 {
 	this->Name = src.get_name();
-	(*this).set_FragTrap_val();
+	hit_point = src.get_HP();
+	energy_point = src.get_EP();
+	attack_damage = src.get_AD();
+	(*this).Frag_status();
 }
 
 FragTrap & FragTrap::operator=(FragTrap const & src)
@@ -37,6 +41,7 @@ FragTrap & FragTrap::operator=(FragTrap const & src)
 	hit_point = src.get_HP();
 	energy_point = src.get_EP();
 	attack_damage = src.get_AD();
+	(*this).Frag_status();
 	return *this;
 }
 
@@ -45,7 +50,6 @@ void	FragTrap::set_FragTrap_val(void)
 	hit_point = 100;
 	energy_point = 100;
 	attack_damage = 30;
-	(*this).Frag_status();
 }
 
 void	FragTrap::Frag_status(void) const

@@ -6,13 +6,13 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 18:32:32 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 10:27:10 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/28 10:48:50 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
+#ifndef FRAGTRAP_HPP
 
-#define SCAVTRAP_HPP
+#define FRAGTRAP_HPP
 
 # include "ClapTrap.hpp"
 # include <iostream>
