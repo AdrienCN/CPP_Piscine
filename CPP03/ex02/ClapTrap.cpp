@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:03:44 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 10:29:40 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 19:53:29 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,32 @@
 
 ClapTrap::ClapTrap(void)
 {
-	std::cout << BGREEN << "*_* ClapTrap constructor(default) called *_*" << RESET << std::endl;
+	std::cout << BGREEN << "ClapTrap constructor (default)" << RESET << std::endl;
 	this->Name = "nameless";
-	(*this).status();
 }
 
 ClapTrap::ClapTrap(ClapTrap const & src)
 {
-	std::cout <<  BGREEN << "*_* ClapTrap constructor(copy) called" << RESET << std::endl;
+	std::cout << BGREEN << "ClapTrap constructor (copy)" << RESET << std::endl;
 	*this = src;
-	(*this).status();
 }
 
 ClapTrap::ClapTrap(std::string const & src_name)
 {
 	this->Name = src_name;
-	std::cout << BGREEN << "*_* ClapTrap constructor(string) called| " << RESET << std::endl;
-	(*this).status();
+	std::cout << BGREEN << "ClapTrap constructor (string)" << RESET << std::endl;
 }
 
 ClapTrap & ClapTrap::operator=(ClapTrap const & src)
 {
 	this->Name = src.get_name();
-	std::cout << BGREEN << "|*_* ClapTrap constructor(operator) called" << RESET << std::endl;
+	std::cout << BGREEN << "ClapTrap constructor (operator)" << RESET << std::endl;
 	return *this;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "[ClapTrap] Destructor called"<< std::endl;
+	std::cout << BGREEN << "[ClapTrap] Destructor called" <<  RESET << std::endl;
 }
 
 std::string  ClapTrap::get_name(void) const
@@ -71,12 +68,12 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	std::cout << "ClapTrap " << this->Name << " has been repaired of " << amount <<  " points.. feeling better already!" << std::endl;
 }
 
-void	ClapTrap::status(void)
+void	ClapTrap::status(void) const
 {
-	std::cout << "name = " << this->Name << std::endl;
-	std::cout << "hit_point = "<< this->hit_point << std::endl;
-	std::cout << "attack_damage = "<< this->attack_damage << std::endl;
-	std::cout << "energy_point = "<< this->energy_point << std::endl;
+	std::cout << UNDERLINE << "ClapTrap [" << this->Name + "] status:" << RESET << std::endl;
+	std::cout << "\thit_point = "<< this->hit_point << std::endl;
+	std::cout << "\tattack_damage = "<< this->attack_damage << std::endl;
+	std::cout << "\tenergy_point = "<< this->energy_point << std::endl;
 }
 
 unsigned int ClapTrap::get_EP(void) const

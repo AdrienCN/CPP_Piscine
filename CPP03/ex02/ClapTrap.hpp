@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 10:56:22 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 10:03:38 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 19:43:23 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # define BGREEN "\033[1m\033[32m"
 # define RESET "\033[0m"
+# define UNDERLINE "\033[4m"
 
 class ClapTrap
 {
@@ -37,7 +38,7 @@ class ClapTrap
 	void			set_name(std::string const & src_name);
 	void			takeDamage(unsigned int amount);
 	void			beRepaired(unsigned int amount);
-	void			status();
+	void			status() const;
 
 	protected:
 		std::string Name;

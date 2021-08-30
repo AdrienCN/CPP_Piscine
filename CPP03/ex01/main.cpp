@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:18:25 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 00:21:50 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 19:51:30 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int	main(void)
 {
 	ScavTrap r2d2("rd2d2");
 	ScavTrap c3p0("888_" + r2d2.get_name() + "_8888");
+	r2d2.status();
+	r2d2.s_status();
 	r2d2.guardGate();
+	c3p0.status();
 	return (0);
 }

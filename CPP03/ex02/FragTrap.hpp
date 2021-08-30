@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 18:32:32 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 10:48:50 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 19:55:13 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class FragTrap: public ClapTrap {
 
 				~FragTrap();
 		
-		void	Frag_status() const;
+		void	f_status() const;
 		void	set_FragTrap_val();
 		void	highFivesGuys() const;
 

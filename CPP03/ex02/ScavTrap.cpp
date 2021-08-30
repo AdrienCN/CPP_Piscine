@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 23:47:24 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 10:05:17 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 19:51:22 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,22 @@
 
 ScavTrap::ScavTrap()
 {
-	Name = "Oo_Nameless_oO";
+	std::cout << BYLW << "\tScavTrap Constructor (default)" <<  RESET << std::endl;
+	Name = "Nameless";
 	(*this).set_ScavTrap_val();
 }
 
 ScavTrap::ScavTrap(std::string const & src)
 {
+	std::cout << BYLW << "\tScavTrap Constructor (string)" <<  RESET << std::endl;
 	this->Name = src;
 	(*this).set_ScavTrap_val();
 }
 
 ScavTrap::ScavTrap(ScavTrap const & src)
 {
-	this->Name = src.get_name();
-	(*this).set_ScavTrap_val();
+	std::cout << BYLW << "\tScavTrap Constructor (copy)" <<  RESET << std::endl;
+	*this = src;
 }
 
 ScavTrap & ScavTrap::operator=(ScavTrap const & src)
@@ -42,16 +44,14 @@ ScavTrap & ScavTrap::operator=(ScavTrap const & src)
 
 void	ScavTrap::set_ScavTrap_val(void)
 {
-	hit_point = 100;
+	hit_point = 100; //ClapTrap::hit_point ou this->hit_point
 	energy_point = 50;
 	attack_damage = 20;
-	(*this).Scav_status();
 }
 
-void	ScavTrap::Scav_status(void)
+void	ScavTrap::s_status(void) const
 {
-	std::cout << BYLW << "\t - - ScavTrap Constructor - - " <<  RESET << std::endl;
-	std::cout << "ScavTrap name [" << this->Name << "]" << std::endl;
+	std::cout << UNDERLINE << "ScavTrap [" << this->Name << "] status :" << RESET << std::endl;
 	std::cout << "ScavTrap hit_point [" << this->hit_point << "]" << std::endl;
 	std::cout << "ScavTrap energy_point [" << this->energy_point << "]" << std::endl;
 	std::cout << "ScavTrap attack_damage [" << this->attack_damage << "]" << std::endl;
