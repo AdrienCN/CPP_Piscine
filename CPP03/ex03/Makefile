@@ -8,7 +8,7 @@ OBJ = $(SRCS:.cpp=.o)
 
 CXX = clang++
 
-CXXFLAGS = -Wall -Werror -Wextra -Wshadow
+CXXFLAGS = -Wall -Werror -Wextra
 
 NAME = a.out
 
