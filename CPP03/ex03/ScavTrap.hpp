@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 18:32:32 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 11:00:04 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 12:05:35 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class ScavTrap: public virtual ClapTrap {
 
 				~ScavTrap();
 		
-		void	Scav_status();
+		void	status();
 		void	set_ScavTrap_val();
 		void	guardGate();
 

@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 10:54:34 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 11:49:43 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 12:01:17 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ DiamondTrap::DiamondTrap(DiamondTrap const & src)
 {
 	std::cout << BRED << " \t\tO_::_O DiamondTrap constructor (copy) O_::_O" << RESET << std::endl;
 	*this = src;
+	(*this).whoAmI();
 }
 
 DiamondTrap & DiamondTrap::operator=(DiamondTrap const & src)
 {
-	std::cout << BRED << " \t\tO_::_O DiamondTrap constructor (assignation) O_::_O" << RESET << std::endl;
 	ClapTrap::Name = src.get_name();
 	this->Name = src.get_d_name();
 	hit_point = src.get_HP();
