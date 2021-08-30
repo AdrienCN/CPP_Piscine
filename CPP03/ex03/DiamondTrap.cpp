@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 10:54:34 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 13:53:47 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 22:06:37 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ std::string	DiamondTrap::get_d_name() const
 
 void	DiamondTrap::whoAmI() const
 {
-	std::cout  << BMAG << this->Name << RESET;
-	std::cout << "  <==>  " << BYLW << FragTrap::Name  << RESET << std::endl;
+	std::cout << BMAG << UNDERLINE << "Who am I ? :" << std::endl;
+	std::cout << RESET << BMAG << "\t[" << this->Name + "]" << RESET;
+	std::cout << "  also known as " << BYLW << "[" << ClapTrap::Name + "]"  << RESET << std::endl;
 }

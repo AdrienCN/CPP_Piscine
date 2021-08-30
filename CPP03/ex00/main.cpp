@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:18:25 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 19:34:46 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 21:54:31 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 
 int	main(void)
 {
-	ClapTrap empty;
-	ClapTrap string("Carapuce");
-	ClapTrap copy = string;
+	ClapTrap pikachu("Pikachu");
+	ClapTrap carapuce("Carapuce");
 
-	empty.status();
-	copy.takeDamage(42);
-	string.attack("Pikachu");
-	string.beRepaired(100);
+	pikachu.status();
+	carapuce.attack("Pikachu");
+	pikachu.takeDamage(42);
+	carapuce.beRepaired(100);
 	return (0);
 }
