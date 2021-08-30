@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 23:47:24 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 10:53:25 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 10:44:27 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ FragTrap::FragTrap()
 {
 	Name = "Oo_Nameless_oO";
 	(*this).set_FragTrap_val();
+	(*this).Frag_status();
 }
 
 FragTrap::FragTrap(std::string const & src)
