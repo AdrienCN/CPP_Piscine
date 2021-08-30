@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 23:47:24 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 12:06:55 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 13:48:00 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 FragTrap::FragTrap()
 {
+	std::cout << BBLE << "\t FragTrap Constructor (default) " <<  RESET << std::endl;
 	Name = "FragTrap_Nameless";
 	(*this).set_FragTrap_val();
 	(*this).status();
@@ -22,6 +23,7 @@ FragTrap::FragTrap()
 
 FragTrap::FragTrap(std::string const & src)
 {
+	std::cout << BBLE << "\t FragTrap Constructor (string) " <<  RESET << std::endl;
 	this->Name = src;
 	(*this).set_FragTrap_val();
 	(*this).status();
@@ -29,6 +31,7 @@ FragTrap::FragTrap(std::string const & src)
 
 FragTrap::FragTrap(FragTrap const & src)
 {
+	std::cout << BBLE << "\t FragTrap Constructor (copy) " <<  RESET << std::endl;
 	*this = src;
 	(*this).status();
 }
@@ -63,7 +66,7 @@ void	FragTrap::status(void) const
 
 FragTrap::~FragTrap()
 {
-	std::cout << BBLE << "\t (ᵔᴥᵔ) FragTrap Destruction (ᵔᴥᵔ) " <<  RESET << std::endl;
+	std::cout << BBLE << "\t FragTrap Destruction " <<  RESET << std::endl;
 }
 
 void	FragTrap::highFivesGuys() const

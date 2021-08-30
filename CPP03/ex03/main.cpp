@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:18:25 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 11:55:46 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 13:54:48 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,18 @@ int	main(void)
 	FragTrap c3p0("888_" + r2d2.get_name() + "_8888");
 	r2d2.highFivesGuys();
 	*/
-	DiamondTrap diamond;
+	DiamondTrap nameless;
+/*	DiamondTrap diamond("diamond");
 	DiamondTrap	square("square");
 	DiamondTrap copy(square);
-	DiamondTrap assignation = square;
+	DiamondTrap assignation = diamond;
 
-	//diamond.status();
-
-	return (0);
+	nameless.whoAmI();
+	diamond.whoAmI();
+	square.whoAmI();
+	copy.whoAmI();
+	assignation.whoAmI();
+	nameless = diamond;
+	nameless.whoAmI();
+*/	return (0);
 }

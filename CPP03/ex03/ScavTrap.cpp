@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 23:47:24 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 12:06:33 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 13:51:27 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 ScavTrap::ScavTrap()
 {
+	std::cout << BYLW << "\t ScavTrap constructor (default)" <<  RESET << std::endl;
 	Name = "ScavTrap_Nameless";
 	(*this).set_ScavTrap_val();
 	(*this).status();
@@ -22,6 +23,7 @@ ScavTrap::ScavTrap()
 
 ScavTrap::ScavTrap(std::string const & src)
 {
+	std::cout << BYLW << "\t ScavTrap constructor (string)" <<  RESET << std::endl;
 	this->Name = src;
 	(*this).set_ScavTrap_val();
 	(*this).status();
@@ -29,6 +31,7 @@ ScavTrap::ScavTrap(std::string const & src)
 
 ScavTrap::ScavTrap(ScavTrap const & src)
 {
+	std::cout << BYLW << "\t ScavTrap constructor (copy)" <<  RESET << std::endl;
 	*this = src;
 	(*this).status();
 }
@@ -62,7 +65,7 @@ void	ScavTrap::status(void)
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << BYLW << "\t - - ScavTrap Destruction - -" <<  RESET << std::endl;
+	std::cout << BYLW << "\t ScavTrap destructor" <<  RESET << std::endl;
 }
 
 void	ScavTrap::guardGate()

@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:03:44 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 12:08:16 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 13:49:56 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 ClapTrap::ClapTrap(void)
 {
-	std::cout << BGREEN << "*_* ClapTrap constructor(default) called *_*" << RESET << std::endl;
+	std::cout << BGREEN << " ClapTrap constructor (default)" << RESET << std::endl;
 	this->Name = "nameless";
 	(*this).status();
 }
 
 ClapTrap::ClapTrap(ClapTrap const & src)
 {
-	std::cout <<  BGREEN << "*_* ClapTrap constructor(copy) called" << RESET << std::endl;
+	std::cout <<  BGREEN << " ClapTrap constructor (copy)" << RESET << std::endl;
 	*this = src;
 	(*this).status();
 }
@@ -29,20 +29,19 @@ ClapTrap::ClapTrap(ClapTrap const & src)
 ClapTrap::ClapTrap(std::string const & src_name)
 {
 	this->Name = src_name;
-	std::cout << BGREEN << "*_* ClapTrap constructor(string) called| " << RESET << std::endl;
+	std::cout << BGREEN << " ClapTrap constructor (string)" << RESET << std::endl;
 	(*this).status();
 }
 
 ClapTrap & ClapTrap::operator=(ClapTrap const & src)
 {
 	this->Name = src.get_name();
-	std::cout << BGREEN << "|*_* ClapTrap constructor(operator) called" << RESET << std::endl;
 	return *this;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "[ClapTrap] Destructor called"<< std::endl;
+	std::cout << BGREEN << "ClapTrap destructor"<< std::endl;
 }
 
 std::string  ClapTrap::get_name(void) const
