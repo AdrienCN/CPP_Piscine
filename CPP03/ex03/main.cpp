@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:18:25 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 10:38:01 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 11:16:14 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(void)
 	r2d2.highFivesGuys();
 	*/
 	DiamondTrap diamond;
+	diamond.status();
 
 	return (0);
 }

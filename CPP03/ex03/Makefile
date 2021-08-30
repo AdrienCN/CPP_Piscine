@@ -12,10 +12,15 @@ CXXFLAGS = -Wall -Werror -Wextra -Wshadow
 
 NAME = a.out
 
+INCLUDE = ClapTrap.hpp \
+		  FragTrap.hpp \
+		  ScavTrap.hpp \
+		  DiamondTrap.hpp
+
 %.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(INCLUDE)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:03:44 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 10:29:40 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 11:28:31 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	ClapTrap::status(void)
 {
 	std::cout << "name = " << this->Name << std::endl;
 	std::cout << "hit_point = "<< this->hit_point << std::endl;
-	std::cout << "attack_damage = "<< this->attack_damage << std::endl;
 	std::cout << "energy_point = "<< this->energy_point << std::endl;
+	std::cout << "attack_damage = "<< this->attack_damage << std::endl;
 }
 
 unsigned int ClapTrap::get_EP(void) const

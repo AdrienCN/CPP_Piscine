@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 10:47:51 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 10:42:15 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 11:46:19 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,22 @@
 #define BMAG "\33[1m\33[35m"
 #define BRED "\33[1m\33[31m"
 
-class DiamondTrap: public ScavTrap , public FragTrap 
+class DiamondTrap: public FragTrap, public ScavTrap
 {
 
 	public:
 
 		DiamondTrap();
-	/*	DiamondTrap(std::string const & src);
+		DiamondTrap(std::string const & src);
 		DiamondTrap(DiamondTrap const & src);
 		DiamondTrap & operator=(DiamondTrap const & src);
-*/
+
 		~DiamondTrap();
 		
-		void announce() const;
-		void whoAmI() const;
-
+		std::string get_d_name() const;
+		void		whoAmI() const;
+		void		set_diamond_val();
+	
 	private:
 		std::string Name;
 };

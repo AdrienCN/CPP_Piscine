@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 18:32:32 by calao             #+#    #+#             */
-/*   Updated: 2021/08/28 09:57:30 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 11:00:04 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define BYLW "\033[1m\033[33m"
 # define RESET "\033[0m"
 
-class ScavTrap: public ClapTrap {
+class ScavTrap: public virtual ClapTrap {
 
 
 	public:
