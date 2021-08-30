@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:18:25 by calao             #+#    #+#             */
-/*   Updated: 2021/08/27 18:24:54 by calao            ###   ########.fr       */
+/*   Updated: 2021/08/30 19:34:46 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@
 
 int	main(void)
 {
-	std::string str("string");
-	ClapTrap chaine(str);
-	ClapTrap harry("harry");
-	ClapTrap sansnom;
-	ClapTrap harry_twin(harry);
+	ClapTrap empty;
+	ClapTrap string("Carapuce");
+	ClapTrap copy = string;
 
-	sansnom.beRepaired(42);
-	harry.attack("Roberto Alagna");
-	chaine.takeDamage(13);
+	empty.status();
+	copy.takeDamage(42);
+	string.attack("Pikachu");
+	string.beRepaired(100);
 	return (0);
 }
