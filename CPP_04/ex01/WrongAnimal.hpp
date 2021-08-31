@@ -1,18 +1,18 @@
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
 
 #include <iostream>
 #define RESET "\33[0m"
 #define BRED "\33[1m\33[31m"
 
-class Animal
+class WrongAnimal
 {
 	public:
-		Animal();
-		Animal(Animal const & src);
-		Animal(std::string const & src);
-		Animal & operator=(Animal const & src);
-		virtual ~Animal();
+		WrongAnimal();
+		WrongAnimal(WrongAnimal const & src);
+		WrongAnimal(std::string const & src);
+		WrongAnimal & operator=(WrongAnimal const & src);
+		virtual ~WrongAnimal();
 		std::string  	getType(void) const;
 		void			setType(std::string type);
 
