@@ -23,9 +23,9 @@ Animal::~Animal(void)
 	std::cout << "🧬  An Animal has gone extinct 🧬 " << std::endl;
 }
 
-void Animal::makeSound(void)
+void Animal::makeSound(void) const
 {
-	std::cout << BRED << "what noise should I make I have NO TYPE ?!?!?!\" " << RESET << std::endl;
+	std::cout << BRED << "Animal says: \t Wtf have you done Darwin?  I have NO type ?!?!?!\" " << RESET << std::endl;
 }
 
 void	Animal::setType(std::string src)

@@ -23,7 +23,7 @@ WrongAnimal::~WrongAnimal(void)
 	std::cout << "... A  WRONG_Animal died ..." << std::endl;
 }
 
-void WrongAnimal::makeSound(void)
+void WrongAnimal::makeSound(void) const
 {
 	std::cout << BRED << "I am a Wrong_Animal...." << RESET << std::endl;
 }
