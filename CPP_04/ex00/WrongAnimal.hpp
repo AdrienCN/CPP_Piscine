@@ -4,6 +4,7 @@
 #include <iostream>
 #define RESET "\33[0m"
 #define BRED "\33[1m\33[31m"
+
 class WrongAnimal
 {
 	public:
