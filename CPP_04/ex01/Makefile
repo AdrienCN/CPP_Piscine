@@ -3,7 +3,8 @@ SRCS = 	main.cpp \
 	   	Dog.cpp \
 	   	Cat.cpp \
 		WrongAnimal.cpp  \
-		WrongCat.cpp
+		WrongCat.cpp	\
+		Brain.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 
@@ -17,7 +18,8 @@ INCLUDE = Animal.hpp \
 	   	Dog.hpp \
 	   	Cat.hpp \
 		WrongAnimal.hpp  \
-		WrongCat.hpp
+		WrongCat.hpp	\
+		Brain.hpp
 
 %.o:%.cpp 
 	$(CXX) $(CXXFLAGS) -c $< -o $@

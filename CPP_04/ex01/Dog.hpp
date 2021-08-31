@@ -2,6 +2,8 @@
 #define DOG_HPP
 
 #include "Animal.hpp"
+#include "Brain.hpp"
+
 #define DOG "\U0001F436"
 class Dog : public Animal
 {
@@ -14,6 +16,7 @@ class Dog : public Animal
 		virtual void	makeSound() const;
 
 	private:
+		Brain *_brain;
 
 	protected:
 

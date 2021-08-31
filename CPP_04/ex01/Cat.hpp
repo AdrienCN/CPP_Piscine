@@ -2,6 +2,7 @@
 #define CAT_HPP
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 #define CAT "\U0001F63A" 
 class Cat : public Animal
@@ -13,7 +14,9 @@ class Cat : public Animal
 		~Cat();
 
 		virtual void makeSound(void) const;
+	
 	private:
+		Brain *_brain;
 
 	protected:
 
