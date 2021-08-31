@@ -6,8 +6,18 @@
 
 int main(void)
 {
-	Animal 	animal;
-	Dog		dog;
+	Animal 	*animal = new Dog();
+	WrongAnimal *wronganimal = new WrongCat();
+
+	animal->makeSound();
+	animal->getType();
+	wronganimal->makeSound();
+	wronganimal->getType();
+	delete animal;
+	animal = new Cat();
+	animal->getType();
+	animal->makeSound();
+	/*Dog		dog;
 	Cat		cat;
 
 	WrongAnimal wronganimal;
@@ -23,6 +33,6 @@ int main(void)
 	wronganimal.makeSound();
 	std::cout << wrongcat.getType() << std::endl;
 	wrongcat.makeSound();
-
+*/
 	return (0);
 }
