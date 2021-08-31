@@ -10,6 +10,7 @@ class WrongAnimal
 	public:
 		WrongAnimal();
 		WrongAnimal(WrongAnimal const & src);
+		WrongAnimal(std::string const & src);
 		WrongAnimal & operator=(WrongAnimal const & src);
 		virtual ~WrongAnimal();
 		std::string  	getType(void) const;
@@ -19,6 +20,6 @@ class WrongAnimal
 	private:
 
 	protected:
-		std::string type;
+		std::string _type;
 };
 #endif

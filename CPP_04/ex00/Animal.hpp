@@ -9,6 +9,7 @@ class Animal
 	public:
 		Animal();
 		Animal(Animal const & src);
+		Animal(std::string const & src);
 		Animal & operator=(Animal const & src);
 		virtual ~Animal();
 		std::string  	getType(void) const;
@@ -18,6 +19,6 @@ class Animal
 	private:
 
 	protected:
-		std::string type;
+		std::string _type;
 };
 #endif

@@ -1,21 +1,19 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
 
-Dog::Dog()
+Dog::Dog() : Animal("Dog")
 {
-	std::cout << DOG << "A new Doggydoggo is among us" << DOG << std::endl;
-	this->type = "Dog";
+	std::cout << DOG << " (Default) A new Doggydoggo is among us" << DOG << std::endl;
 }
 
-Dog::Dog(Dog const & src)
+Dog::Dog(Dog const & src) : Animal(src)
 {
-	std::cout << DOG << "A new Doggydoggo is among us" << DOG << std::endl;
-	*this = src;
+	std::cout << DOG << "(Copy) A new Doggydoggo is among us" << DOG << std::endl;
 }
 
 Dog & Dog::operator=(Dog const & src)
 {
-	this->type = src.getType();
+	this->_type = src.getType();
 	return *this;
 }
 

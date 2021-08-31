@@ -1,21 +1,20 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
-WrongCat::WrongCat()
+WrongCat::WrongCat() : WrongAnimal("WrongCat")
 {
 	std::cout << WRONG << "A WRONG_CAT is here " << WRONG << std::endl;
-	this->type = "WrongCat";
 }
 
-WrongCat::WrongCat(WrongCat const & src)
+WrongCat::WrongCat(WrongCat const & src) : WrongAnimal(src)
 {
 	std::cout << WRONG << "A WRONG_CAT is here" << WRONG << std::endl;
-	*this = src;
+	//*this = src;
 }
 
 WrongCat & WrongCat::operator=(WrongCat const & src)
 {
-	this->type = src.getType();
+	this->_type = src.getType();
 	return *this;
 }
 
