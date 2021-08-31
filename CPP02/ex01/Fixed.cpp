@@ -31,7 +31,7 @@ Fixed::Fixed(const float src)
 
 Fixed & Fixed::operator=(Fixed const & src)
 {
-	std::cout << "Assignation constructor called" << std::endl;
+	std::cout << "Assignation operator called" << std::endl;
 	this->_n = src.getRawBits();
 	return *this;
 }
