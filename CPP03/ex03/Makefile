@@ -8,7 +8,7 @@ OBJ = $(SRCS:.cpp=.o)
 
 CXX = clang++
 
-CXXFLAGS = -Wall -Werror -Wextra
+CXXFLAGS = -Wall -Werror -Wextra -Wshadow -Wno-shadow -std=c++98
 
 NAME = a.out
 
@@ -17,7 +17,7 @@ INCLUDE = ClapTrap.hpp \
 		  ScavTrap.hpp \
 		  DiamondTrap.hpp
 
-%.o:%.cpp
+%.o:%.cpp $(INCLUDE)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(INCLUDE)

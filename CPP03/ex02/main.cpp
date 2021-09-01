@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:18:25 by calao             #+#    #+#             */
-/*   Updated: 2021/09/01 17:26:15 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 21:44:23 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	main(void)
 	std::cout << std::endl;
 	clap.status();
 	clap.attack("a PANDA");
+	clap.beRepaired(10);
+	clap.takeDamage(42);
 	std::cout << std::endl;
 
 	std::cout << std::endl;

@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 23:47:24 by calao             #+#    #+#             */
-/*   Updated: 2021/09/01 17:27:13 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 20:55:41 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ScavTrap::ScavTrap() : ClapTrap("Nameless_ScavTrap")
 {
 	std::cout << BYLW << "\t[" << this->_Name + "]" << BOLDOFF;
-	std::cout << BYLW << "  ScavTrap Constructor (DEFAULT)" <<  RESET << std::endl;
+	std::cout << "  ScavTrap Constructor (DEFAULT)" <<  RESET << std::endl;
 	(*this).set_ScavTrap_val();
 }
 

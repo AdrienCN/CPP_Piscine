@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 10:56:22 by calao             #+#    #+#             */
-/*   Updated: 2021/09/01 16:33:24 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 21:40:48 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ class ClapTrap
 
 	protected:
 		std::string _Name;
-		unsigned int hit_point = 10;
-		unsigned int energy_point = 10;
-		unsigned int attack_damage = 0;
+		unsigned int hit_point;
+		unsigned int energy_point;
+		unsigned int attack_damage;
 };
 #endif

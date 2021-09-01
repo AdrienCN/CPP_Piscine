@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 23:47:24 by calao             #+#    #+#             */
-/*   Updated: 2021/09/01 17:27:55 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 20:56:21 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@
 FragTrap::FragTrap() : ClapTrap("Nameless_FragTrap")
 {
 	std::cout << BBLE  << "\t[" << this->_Name + "]" << BOLDOFF; 
-	std::cout << "\t  FragTrap constructor (DEFAULT)" <<  RESET << std::endl;
+	std::cout << "  FragTrap constructor (DEFAULT)" <<  RESET << std::endl;
 	(*this).set_FragTrap_val();
 }
 
 FragTrap::FragTrap(std::string const & src) : ClapTrap(src)
 {
 	std::cout << BBLE  << "\t[" << this->_Name + "]" << BOLDOFF; 
-	std::cout << "\t  FragTrap constructor (STRING)" <<  RESET << std::endl;
+	std::cout << "  FragTrap constructor (STRING)" <<  RESET << std::endl;
 	(*this).set_FragTrap_val();
 }
 
 FragTrap::FragTrap(FragTrap const & src) : ClapTrap(src.get_name())
 {
 	std::cout << BBLE  << "\t[" << this->_Name + "]" << BOLDOFF; 
-	std::cout << "\t  FragTrap constructor (COPY)" <<  RESET << std::endl;
+	std::cout << "  FragTrap constructor (COPY)" <<  RESET << std::endl;
 }
 
 FragTrap & FragTrap::operator=(FragTrap const & src)

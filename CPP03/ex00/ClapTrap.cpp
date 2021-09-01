@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:03:44 by calao             #+#    #+#             */
-/*   Updated: 2021/09/01 17:28:23 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 21:47:51 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,30 @@
 
 ClapTrap::ClapTrap(void): Name("nameless")
 {
+	hit_point = 10;
+	energy_point = 10;
+	attack_damage = 0;
+
 	std::cout << "[" << this->Name << "] ";
 	std::cout << "ClapTrap constructor (default)" << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap const & src) : Name(src.get_name())
 {
+	hit_point = 10;
+	energy_point = 10;
+	attack_damage = 0;
+	
 	std::cout << "[" << this->Name << "] ";
 	std::cout << "ClapTrap constructor (copy)" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string const & src_name) : Name(src_name)
 {
+	hit_point = 10;
+	energy_point = 10;
+	attack_damage = 0;
+
 	std::cout << "[" << this->Name << "] ";
 	std::cout << "ClapTrap constructor (string)" << std::endl;
 }
@@ -34,6 +46,9 @@ ClapTrap & ClapTrap::operator=(ClapTrap const & src)
 {
 	std::cout << "Assignement operator called " << std::endl;
 	this->Name = src.get_name();
+	hit_point = src.hit_point;
+	attack_damage = src.attack_damage;
+	energy_point = src.energy_point;
 	return *this;
 }
 

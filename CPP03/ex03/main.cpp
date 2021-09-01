@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:18:25 by calao             #+#    #+#             */
-/*   Updated: 2021/09/01 20:05:15 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 21:38:34 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,34 @@
 
 int	main(void)
 {
-	DiamondTrap	test;
-	/*DiamondTrap carbon("Rondoudou");
+	DiamondTrap a("LOCKLASS");
+	DiamondTrap b(a);
+	DiamondTrap c = b;
+	DiamondTrap d;
 
-	carbon.whoAmI();
+	d = a;
+
+	a.whoAmI();
+	b.whoAmI();
+	c.whoAmI();
+	d.whoAmI();
+	d.attack("A Panda");
+/*	DiamondTrap c = b;
+	DiamondTrap d;
+
+	d = a;
+	d.whoAmI();
+	
+	DiamondTrap	*test = new DiamondTrap();
+	test->whoAmI();
 	std::cout << std::endl;
-	carbon.attack("an innocent random guy");
-	carbon.guardGate();
-	carbon.highFivesGuys();
-*/
+	delete test;
+
+	std::cout << std::endl << "\t\t**************Other Test**********" << std::endl << std::endl;
+	DiamondTrap pokemon("Rondoudou");
+	pokemon.whoAmI();
+	pokemon.attack("Sacha et ses mauvais gouts vestimentaire");
+	std::cout << std::endl;
+	*/
 	return (0);
 }
