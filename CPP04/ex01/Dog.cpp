@@ -17,10 +17,15 @@ Dog & Dog::operator=(Dog const & src)
 	return *this;
 }
 
-Dog::~Dog()
+Dog::~Dog() 
 {
-	delete _brain;
+	delete this->_brain;
 	std::cout << DOG << "Bye Bye Doggo, I always prefered cats anyway.." << DOG << std::endl;
+}
+
+void	Dog::printBrain() const
+{
+	std::cout << this->_type << " says: my Brain is :" << this->_brain << std::endl;
 }
 
 void	Dog::makeSound() const

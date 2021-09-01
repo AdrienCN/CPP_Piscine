@@ -17,8 +17,11 @@ Brain & Brain::operator=(Brain const & src)
 
 	std::cout << BRAIN << "Assignation brain called" << BRAIN << std::endl;
 	if (&src == this)
+	{
+		std::cout << "trying to clone yourself ?" << std::endl;
 		return *this;
-	std::cout << "iiiiiiii" << std::endl;
+	}
+	std::cout << "\tCloning ideas processing..." << std::endl;
 	for (i = 0; i < 100; i++)
 		this->_ideas[i] = src._ideas[i];
 	return *this;

@@ -13,7 +13,8 @@ class Cat : public Animal
 		Cat &  operator=(Cat const & src);
 		~Cat();
 
-		virtual void makeSound(void) const;
+		void	makeSound(void) const;
+		void	printBrain(void) const;		
 	
 	private:
 		Brain *_brain;

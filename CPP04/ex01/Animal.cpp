@@ -1,4 +1,5 @@
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 Animal::Animal(void) : _type("none")
 {
@@ -35,6 +36,11 @@ void Animal::makeSound(void) const
 void	Animal::setType(std::string src)
 {
 	this->_type = src;
+}
+
+void	Animal::printBrain() const
+{
+	std::cout << "This is never meant to be printed" << std::endl;
 }
 
 std::string	Animal::getType(void) const

@@ -4,6 +4,7 @@
 #include <iostream>
 #define RESET "\33[0m"
 #define BRED "\33[1m\33[31m"
+#include "Brain.hpp"
 
 class Animal
 {
@@ -17,6 +18,7 @@ class Animal
 		void			setType(std::string type);
 
 		virtual void	makeSound() const;
+		virtual void	printBrain() const;
 	private:
 
 	protected:
