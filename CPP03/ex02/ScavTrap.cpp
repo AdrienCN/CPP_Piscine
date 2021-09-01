@@ -6,36 +6,38 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 23:47:24 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 19:51:22 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 17:27:13 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap("Nameless_ScavTrap")
 {
-	std::cout << BYLW << "\tScavTrap Constructor (default)" <<  RESET << std::endl;
-	Name = "Nameless";
+	std::cout << BYLW << "\t[" << this->_Name + "]" << BOLDOFF;
+	std::cout << BYLW << "  ScavTrap Constructor (DEFAULT)" <<  RESET << std::endl;
 	(*this).set_ScavTrap_val();
 }
 
-ScavTrap::ScavTrap(std::string const & src)
+ScavTrap::ScavTrap(std::string const & src): ClapTrap(src)
 {
-	std::cout << BYLW << "\tScavTrap Constructor (string)" <<  RESET << std::endl;
-	this->Name = src;
+	std::cout << BYLW << "\t[" << this->_Name + "]" << BOLDOFF;
+	std::cout << "  ScavTrap Constructor (STRING)" <<  RESET << std::endl;
+
 	(*this).set_ScavTrap_val();
 }
 
-ScavTrap::ScavTrap(ScavTrap const & src)
+ScavTrap::ScavTrap(ScavTrap const & src) : ClapTrap(src.get_name())
 {
-	std::cout << BYLW << "\tScavTrap Constructor (copy)" <<  RESET << std::endl;
-	*this = src;
+	std::cout << BYLW << "\t[" << this->_Name + "]" << BOLDOFF;
+	std::cout << BYLW << "  ScavTrap Constructor (COPY)" <<  RESET << std::endl;
 }
 
 ScavTrap & ScavTrap::operator=(ScavTrap const & src)
 {
-	Name = src.get_name();
+	std::cout << BYLW <<  BOLDOFF << "ScavTrap Assignation operator called" << std::endl;
+	_Name = src.get_name();
 	hit_point = src.get_HP();
 	energy_point = src.get_EP();
 	attack_damage = src.get_AD();
@@ -49,20 +51,26 @@ void	ScavTrap::set_ScavTrap_val(void)
 	attack_damage = 20;
 }
 
-void	ScavTrap::s_status(void) const
+void	ScavTrap::status(void) const
 {
-	std::cout << UNDERLINE << "ScavTrap [" << this->Name << "] status :" << RESET << std::endl;
-	std::cout << "ScavTrap hit_point [" << this->hit_point << "]" << std::endl;
-	std::cout << "ScavTrap energy_point [" << this->energy_point << "]" << std::endl;
-	std::cout << "ScavTrap attack_damage [" << this->attack_damage << "]" << std::endl;
+	std::cout << std::endl << BYLW  << UNDERLINE << BOLDOFF << "ScavTrap [" << this->_Name << "] status :" << RESET << std::endl;
+	std::cout << "\t_S_: hit_point [" << this->hit_point << "]" << std::endl;
+	std::cout << "\t_S_: energy_point [" << this->energy_point << "]" << std::endl;
+	std::cout << "\t_S_: attack_damage [" << this->attack_damage << "]" << std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << BYLW << "\t - - ScavTrap Destruction - -" <<  RESET << std::endl;
+	std::cout << BYLW << "\t[" << this->_Name + "]" << BOLDOFF;
+	std::cout << "  - - ScavTrap Destruction - -" <<  RESET << std::endl;
 }
 
 void	ScavTrap::guardGate()
 {
-	std::cout << "ScavTrap model [ " << this->Name << " ] Holds the DOOR" << std::endl;
+	std::cout << BYLW <<  BOLDOFF << "ScavTrap :  [" << this->_Name << "] Holds the DOOR" << RESET << std::endl;
+}
+
+void	ScavTrap::attack(std::string const & target)
+{
+	std::cout << BYLW << BOLDOFF << "Scavtrap :  [" << this->_Name << "] smash smash [" << target << "]" << RESET << std::endl;
 }

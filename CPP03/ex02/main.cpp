@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:18:25 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 21:57:35 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 17:26:15 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,28 @@
 
 int	main(void)
 {
-	FragTrap r2d2("rd2d2");
-	r2d2.f_status();
-	r2d2.highFivesGuys();
+	ClapTrap	clap("Robot_Clap");
+	ScavTrap	scav("Droid_Scav");
+	FragTrap	frag("Cyborg_Frag");
+	
+	std::cout << std::endl;
+	clap.status();
+	clap.attack("a PANDA");
+	std::cout << std::endl;
+
+	std::cout << std::endl;
+	scav.status();
+	scav.attack("no one");
+	scav.guardGate();
+	std::cout << std::endl;
+
+	std::cout << std::endl;
+	frag.status();
+	frag.highFivesGuys();
+	std::cout << std::endl;
+	
+	
+
+
 	return (0);
 }

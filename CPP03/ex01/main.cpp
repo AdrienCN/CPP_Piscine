@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:18:25 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 21:56:17 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 17:29:43 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,21 @@
 
 int	main(void)
 {
-	ScavTrap r2d2("rd2d2");
-	ScavTrap c3p0("888_" + r2d2.get_name() + "_8888");
-	r2d2.s_status();
-	r2d2.guardGate();
+	ClapTrap clap("Robot_Clap");
+	ScavTrap droid("Droid_Scav");
+	ScavTrap box("Box_Scav");
+	ScavTrap empty;
+	ScavTrap copy_box = box;
+
+	std::cout << std::endl;
+	droid.status();
+	droid.attack("innocent guy in the street");
+	droid.guardGate();
+	std::cout << std::endl;
+
+	std::cout << std::endl;
+	clap.status();
+	clap.attack("a giant panda in the woods");
+	std::cout << std::endl;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 10:56:22 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 22:05:10 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 17:34:28 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # define BGREEN "\033[1m\033[32m"
 # define RESET "\033[0m"
+# define BOLDOFF "\033[22m"
 # define UNDERLINE "\033[4m"
 
 class ClapTrap
@@ -30,7 +31,7 @@ class ClapTrap
 					~ClapTrap();
 
 	std::string  	get_name() const;
-	void			attack(std::string const & target) const;
+	virtual void			attack(std::string const & target) const;
 	unsigned int	get_HP() const;
 	unsigned int	get_EP() const;
 	unsigned int	get_AD() const;
@@ -38,10 +39,10 @@ class ClapTrap
 	void			set_name(std::string const & src_name);
 	void			takeDamage(unsigned int amount);
 	void			beRepaired(unsigned int amount);
-	void			status();
+	void			status() const;
 
 	protected:
-		std::string Name;
+		std::string _Name;
 		unsigned int hit_point = 10;
 		unsigned int energy_point = 10;
 		unsigned int attack_damage = 0;

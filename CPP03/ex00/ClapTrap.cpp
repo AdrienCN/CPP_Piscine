@@ -6,38 +6,40 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 11:03:44 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 19:39:00 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 17:28:23 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(void)
+ClapTrap::ClapTrap(void): Name("nameless")
 {
-	std::cout << "[ClapTrap] constructor (default)" << std::endl;
-		this->Name = "nameless";
+	std::cout << "[" << this->Name << "] ";
+	std::cout << "ClapTrap constructor (default)" << std::endl;
 }
 
-ClapTrap::ClapTrap(ClapTrap const & src)
+ClapTrap::ClapTrap(ClapTrap const & src) : Name(src.get_name())
 {
-	*this = src;
-	std::cout << "[ClapTrap] constructor (copy)" << std::endl;
+	std::cout << "[" << this->Name << "] ";
+	std::cout << "ClapTrap constructor (copy)" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string const & src_name)
+ClapTrap::ClapTrap(std::string const & src_name) : Name(src_name)
 {
-	this->Name = src_name;
-	std::cout << "[ClapTrap] constructor (string)" << std::endl;
+	std::cout << "[" << this->Name << "] ";
+	std::cout << "ClapTrap constructor (string)" << std::endl;
 }
 
 ClapTrap & ClapTrap::operator=(ClapTrap const & src)
 {
+	std::cout << "Assignement operator called " << std::endl;
 	this->Name = src.get_name();
 	return *this;
 }
 
 ClapTrap::~ClapTrap(void)
 {
+	std::cout << "[" <<  this->Name + "] ";
 	std::cout << "[ClapTrap] destructor called"<< std::endl;
 }
 

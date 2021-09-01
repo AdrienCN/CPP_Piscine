@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 18:32:32 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 19:51:12 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 17:25:46 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ class ScavTrap: public ClapTrap {
 
 				~ScavTrap();
 		
-		void	s_status() const;
+		void	status() const;
 		void	set_ScavTrap_val();
 		void	guardGate();
+		void	attack(std::string const & target);
 
 	private:
 

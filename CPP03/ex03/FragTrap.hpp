@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 18:32:32 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 12:05:43 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 17:26:25 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define BBLE "\033[1m\033[34m"
 # define RESET "\033[0m"
 
-class FragTrap: public virtual ClapTrap {
+class FragTrap: public ClapTrap {
 
 
 	public:
