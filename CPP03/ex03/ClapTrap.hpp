@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 10:56:22 by calao             #+#    #+#             */
-/*   Updated: 2021/09/01 17:34:28 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 19:41:40 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ class ClapTrap
 	ClapTrap &		operator=(ClapTrap const & src);
 					~ClapTrap();
 
+	void			attack(std::string const & target) const;
+	
 	std::string  	get_name() const;
-	virtual void			attack(std::string const & target) const;
 	unsigned int	get_HP() const;
 	unsigned int	get_EP() const;
 	unsigned int	get_AD() const;

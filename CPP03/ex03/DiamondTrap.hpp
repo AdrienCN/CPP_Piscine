@@ -6,7 +6,7 @@
 /*   By: calao <adconsta@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 10:47:51 by calao             #+#    #+#             */
-/*   Updated: 2021/08/30 11:46:19 by calao            ###   ########.fr       */
+/*   Updated: 2021/09/01 20:03:05 by calao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ class DiamondTrap: public FragTrap, public ScavTrap
 
 		~DiamondTrap();
 		
+		void	attack(std::string const & target);
 		std::string get_d_name() const;
 		void		whoAmI() const;
 		void		set_diamond_val();
 	
 	private:
-		std::string Name;
+		std::string _Name;
 };
 #endif
