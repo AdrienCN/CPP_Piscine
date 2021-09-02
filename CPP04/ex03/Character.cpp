@@ -17,7 +17,7 @@ Character::Character(Character const & src)
 		_inventory[i] = new AMateria(src._inventory[i]);
 }
 
-Character &  operator=(Character const & src)
+Character &  Character::operator=(Character const & src)
 {
 	this->_name = src._name;
 	this->_materia = src._materia;

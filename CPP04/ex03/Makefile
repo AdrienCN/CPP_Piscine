@@ -2,9 +2,8 @@ SRCS = 	main.cpp			\
 	   	AMateria.cpp		\
 	   	Ice.cpp				\
 		Cure.cpp			\
-	   	ICharacter.cpp		\
-	#	Character.cpp		\
-		IMateriaSource.cpp	\
+		Character.cpp		
+	#	IMateriaSource.cpp	\
 		MateriaSource.cpp
 
 OBJ = $(SRCS:.cpp=.o)
@@ -15,25 +14,26 @@ CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
 
 NAME = ff7
 
-INCLUDE = $(subst cpp,hpp, $(SRCS))	
+INCLUDE = 	ICharacter.hpp	\
+			AMateria.hpp		\
+	   		Ice.hpp			\
+			Fire.hpp		\
+			Character.hpp#		\
+			IMateriaSource.hpp	\
+			MateriaSource.hpp
 
-#		main.hpp			\
-	   	AMateria.hpp		\
-	   	Materia.hpp			\
-	   	ICharacter.hpp		\
-		Character.hpp		\
-		IMateriaSource.hpp	\
-		MateriaSource.hpp
+#$(subst cpp,hpp, $(SRCS))	
 
-%.o:%.cpp $(INCLUDE)
+%.o:%.cpp  $(INCLUDE)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 
-$(NAME): $(OBJ) $(INCLUDE)
+$(NAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 echo :
 	@echo $(SRCS)
+	@echo $(INCLUDE)
 
 all: $(NAME)
 
