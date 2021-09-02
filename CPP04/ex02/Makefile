@@ -1,10 +1,11 @@
-SRCS = 	main.cpp \
-	   	Animal.cpp \
-	   	Dog.cpp \
-	   	Cat.cpp \
-		WrongAnimal.cpp  \
-		WrongCat.cpp	\
-		Brain.cpp
+SRCS = 	main.cpp			\
+	   			Animal.cpp			\
+	   			Dog.cpp				\
+	   			Cat.cpp				\
+				WrongAnimal.cpp		\
+				WrongCat.cpp		\
+				Brain.cpp
+
 
 OBJ = $(SRCS:.cpp=.o)
 
@@ -14,18 +15,18 @@ CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
 
 NAME = zoo
 
-INCLUDE = Animal.hpp \
-	   	Dog.hpp \
-	   	Cat.hpp \
-		WrongAnimal.hpp  \
+INCLUDE = Animal.hpp	\
+	   	Dog.hpp 		\
+	   	Cat.hpp			\
+		WrongAnimal.hpp	\
 		WrongCat.hpp	\
 		Brain.hpp
 
-%.o:%.cpp 
+%.o:%.cpp $(INCLUDE)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 
-$(NAME): $(OBJ) $(INCLUDE)
+$(NAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 all: $(NAME)
