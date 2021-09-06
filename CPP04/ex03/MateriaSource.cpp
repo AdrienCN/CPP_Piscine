@@ -31,7 +31,6 @@ MateriaSource & MateriaSource::operator=(MateriaSource const & src)
 
 	for (i = 0;  i < _mCount; i++)
 		delete _inventory[i];
-
 	i = 0;
 	_mCount = 0;
 	while (i < src._mCount)
@@ -45,6 +44,7 @@ MateriaSource & MateriaSource::operator=(MateriaSource const & src)
 		_inventory[i] = NULL;
 		i++;
 	}
+	return *this;
 }
 
 MateriaSource::~MateriaSource()

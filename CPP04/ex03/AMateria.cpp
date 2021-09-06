@@ -12,6 +12,10 @@ AMateria::AMateria(AMateria const & src) : _type(src.getType())
 {
 }
 
+AMateria::~AMateria()
+{
+}
+
 AMateria & AMateria::operator=(AMateria const & src) 
 {
 	this->_type = src.getType();

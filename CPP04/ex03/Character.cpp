@@ -18,18 +18,34 @@ Character::Character(std::string const & name) : _materia(0), _name(name)
 
 Character::Character(Character const & src) 
 {
+	int i;
+
+	i = 0;
+	while (i < _materia)
+		delete  _inventory[i];
+
 	this->_name = src._name;
 	this->_materia = src._materia;
-	for (int i = 0; i < src._materia; i++)
+	for (i = 0; i < src._materia; i++)
 			_inventory[i] = src._inventory[i]->clone();
+	while (i < 4)
+		_inventory[i] = NULL;
 }
 
 Character &  Character::operator=(Character const & src)
 {
+	int i;
+	
+	i = 0;
+	while (i < _materia)
+			delete	_inventory[i];
+
 	this->_name = src._name;
 	this->_materia = src._materia;
-	for (int i = 0; i < src._materia; i++)
+	for (i = 0; i < src._materia; i++)
 		_inventory[i] = src._inventory[i]->clone();
+	while (i <  4)
+	   _inventory[i] = NULL;	
 	return *this;
 }
 

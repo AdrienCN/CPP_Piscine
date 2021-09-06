@@ -14,6 +14,10 @@ Ice & Ice::operator=(Ice const & src)
 	return *this;
 }
 
+Ice::~Ice()
+{
+}
+
 AMateria* Ice::clone() const
 {
 	return (new Ice(*this)); // return (new Ice(this));
