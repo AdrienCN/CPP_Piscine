@@ -1,5 +1,4 @@
 #include "Bureaucrat.hpp"
-#include <stdlib.h>
 
 Bureaucrat::Bureaucrat() : _name("nameless"),_grade(LOW)
 {
@@ -9,7 +8,7 @@ Bureaucrat::Bureaucrat(std::string const & name, int const & grade) : _name(name
 {
 	if (this->myTry(grade))
 	{
-		std::cout << "Custom construction failed : Lowest grade assigned" << std::endl;
+		std::cout << "Custom constructor : Error grade value : Lowest grade assigned" << std::endl;
 		_grade = LOW;
 		return ;
 	}
@@ -20,7 +19,7 @@ Bureaucrat::Bureaucrat(Bureaucrat const & src) : _name(src.getName())
 {
 	if (this->myTry(src._grade))
 	{
-		std::cout << "Copy failed : Lowest grade assigned" << std::endl;
+		std::cout << "Copy Constructor : Error grade value : Lowest grade assigned" << std::endl;
 		_grade = LOW;
 		return ;
 	}
@@ -29,12 +28,6 @@ Bureaucrat::Bureaucrat(Bureaucrat const & src) : _name(src.getName())
 
 Bureaucrat & Bureaucrat::operator=(Bureaucrat const & src)
 {
-	if (this->myTry(src._grade))
-	{
-		std::cout << "Assignation failed : Lowest grade assigned" << std::endl;
-		_grade = LOW;
-		return *this ;
-	}
 	_grade = src._grade;
 	return *this;
 }
@@ -58,9 +51,9 @@ int		Bureaucrat::myTry(int const & grade) const
 	try
 	{
 		if (grade < 1)
-			throw (ex_gth);
+			throw (Bureaucrat::GradeTooHighException());
 		else if (grade > 150)
-			throw (ex_gtl);
+			throw (Bureaucrat::GradeTooLowException());
 	}
 	catch (std::exception & e)
 	{
@@ -90,14 +83,14 @@ void	Bureaucrat::downGrade()
 	try
 	{
 		if (this->_grade == 150)
-			throw (ex_gtl);
+			throw (Bureaucrat::GradeTooLowException());
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 		return ;
 	}
-	this->_grade--;
+	this->_grade++;
 }
 
 std::ostream & operator<<(std::ostream & lhs, Bureaucrat const & rhs)

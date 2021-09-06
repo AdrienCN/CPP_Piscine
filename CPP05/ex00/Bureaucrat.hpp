@@ -8,6 +8,7 @@
 
 #define HIGH 1 
 #define LOW 150
+
 class Bureaucrat
 {
 	public:
@@ -19,16 +20,16 @@ class Bureaucrat
 				{
 					return "Exception caught : Grade Too High";
 				}
-		} ex_gth;
+		};
 		
-		class GradeTooLow : public std::exception
+		class GradeTooLowException : public std::exception
 		{
 			public:
 				virtual const char* what(void) const throw()
 				{
 					return "Exception caught : Grade Too Low";
 				}
-		} ex_gtl;
+		};
 
 		Bureaucrat();
 		Bureaucrat(std::string const & name, int const & grade);
