@@ -20,16 +20,15 @@ Character::Character(Character const & src)
 {
 	int i;
 
-	i = 0;
-	while (i < _materia)
-		delete  _inventory[i];
-
 	this->_name = src._name;
 	this->_materia = src._materia;
 	for (i = 0; i < src._materia; i++)
 			_inventory[i] = src._inventory[i]->clone();
 	while (i < 4)
+	{
 		_inventory[i] = NULL;
+		i++;
+	}
 }
 
 Character &  Character::operator=(Character const & src)
@@ -37,20 +36,33 @@ Character &  Character::operator=(Character const & src)
 	int i;
 	
 	i = 0;
-	while (i < _materia)
-			delete	_inventory[i];
-
+	while (i < _materia) // this->~Character?
+	{
+		delete	_inventory[i];
+		i++;
+	}
 	this->_name = src._name;
 	this->_materia = src._materia;
 	for (i = 0; i < src._materia; i++)
 		_inventory[i] = src._inventory[i]->clone();
 	while (i <  4)
-	   _inventory[i] = NULL;	
+	{
+	   _inventory[i] = NULL;
+	   i++;
+	}
 	return *this;
 }
 
 Character::~Character()
 {
+	int i;
+
+	i = 0;
+	while (i < _materia)
+	{
+		delete	_inventory[i];
+		i++;
+	}
 }
 
 void	Character::equip(AMateria* m)

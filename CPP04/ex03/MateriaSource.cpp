@@ -29,6 +29,7 @@ MateriaSource & MateriaSource::operator=(MateriaSource const & src)
 {
 	int i;
 
+	// this->~MateriaSource() ? ;
 	for (i = 0;  i < _mCount; i++)
 		delete _inventory[i];
 	i = 0;
