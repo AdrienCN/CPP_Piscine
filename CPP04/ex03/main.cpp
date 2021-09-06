@@ -18,5 +18,6 @@ int		main(void)
 	cloud->equip(new Ice());
 	cloud->equip(src->createMateria("fire"));
 	cloud->unequip(0);
+
 	return 0;
 }

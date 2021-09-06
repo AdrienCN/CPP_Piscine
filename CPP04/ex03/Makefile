@@ -9,7 +9,7 @@ OBJ = $(SRCS:.cpp=.o)
 
 CXX = clang++
 
-CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -g -fsanitize=address -std=c++98
 
 NAME = ff7
 
