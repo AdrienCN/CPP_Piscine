@@ -3,7 +3,6 @@ SRCS = 	main.cpp			\
 	   	Ice.cpp				\
 		Cure.cpp			\
 		Character.cpp		\
-	#	IMateriaSource.cpp	\
 		MateriaSource.cpp
 
 OBJ = $(SRCS:.cpp=.o)
@@ -16,9 +15,9 @@ NAME = ff7
 
 INCLUDE = 	ICharacter.hpp	\
 			AMateria.hpp		\
-	   		Ice.hpp			\
-			Fire.hpp		\
-			Character.hpp#		\
+	   		Cure.hpp		\
+			Ice.hpp			\
+			Character.hpp		\
 			IMateriaSource.hpp	\
 			MateriaSource.hpp
 

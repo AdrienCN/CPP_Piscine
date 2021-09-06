@@ -5,10 +5,15 @@
 
 Character::Character() : _materia(0), _name("No_name") 
 {
+	for (int i = 0; i < 4; i++)
+		_inventory[i] = NULL;
 }
 
 Character::Character(std::string const & name) : _materia(0), _name(name)
 {
+	for (int i = 0; i < 4; i++)
+		_inventory[i] = NULL;
+
 }
 
 Character::Character(Character const & src) 
@@ -34,26 +39,41 @@ Character::~Character()
 
 void	Character::equip(AMateria* m)
 {
-	if (this->_materia < 4)
+	if (m == NULL)
 	{
-		this->_inventory[_materia] = m;
-		_materia++;
+		std::cout << "Error : EQUIP : Materia does not exists" << std::endl;
+		return;
 	}
-	else
-		std::cout << "Error : Can't do that : Inventory is full" << std::endl;
+	if (_materia == 4)
+	{
+			std::cout << "Error : EQUIP : Inventory is full" << std::endl;
+			return;
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->_inventory[i] == NULL)
+		{
+			this->_inventory[i] = m;
+			std::cout << "EQUIP : materia [" << m->getType() << "] ";
+			std::cout << "succesfully equiped in slot ["<< i << "]" << std::endl;
+			break;
+		}
+	}
+	_materia++;
 }
 
 void	Character::unequip(int idx)
 {
 	if (idx < 0 || idx > 3)
 	{
-		std::cout << "Error : UNEQUIP : Slot [" << idx << "] does not exists val [0-3]" << std::endl;
+		std::cout << "Error : UNEQUIP : Slot [" << idx << "] does not exists. Enter a value between [0-3]" << std::endl;
 		return;
 	}
-	if (idx > _materia) // ou juste if (_inventory[idx == NULL] ??? 
+	if (_inventory[idx] == NULL)
 		std::cout << "Error : UNEQUIP : This materia slot [" << idx << "] is already empty" << std::endl;
 	else
 	{
+		std::cout << "succesfully unequiped [" << _inventory[idx]->getType() << "] in slot ["<< idx << "]" << std::endl;
 		_inventory[idx] = NULL;
 		_materia--;
 	}
@@ -68,11 +88,12 @@ void	Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0 || idx > 3)
 	{
-		std::cout << "Error : USE : Slot [" << idx << "] does not exists val [0-3]" << std::endl;
+		std::cout << "Error : USE : Slot [" << idx << "] does not exists. Enter a value between [0-3]" << std::endl;
+		return;
 	}
 	if (_inventory[idx] == NULL)
 	{
-		std::cout << "Error : UNEQUIP : This materia slot [" << idx << "] is already empty" << std::endl;
+		std::cout << "Error : USE : This materia slot [" << idx << "] is empty" << std::endl;
 	}
 	else
 		_inventory[idx]->use(target);
