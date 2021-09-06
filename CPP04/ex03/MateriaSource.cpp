@@ -7,8 +7,50 @@ MateriaSource::MateriaSource()
 		_inventory[i] = NULL;
 }
 
+MateriaSource::MateriaSource(MateriaSource const & src)
+{
+	int i;
+
+	i = 0;
+	while (i < src._mCount)
+	{
+		_inventory[i] = src._inventory[i]->clone();
+		_mCount++;
+		i++;
+	}
+	while (i < 4)
+	{
+		_inventory[i] = NULL;
+		i++;
+	}
+}
+
+MateriaSource & MateriaSource::operator=(MateriaSource const & src)
+{
+	int i;
+
+	for (i = 0;  i < _mCount; i++)
+		delete _inventory[i];
+
+	i = 0;
+	_mCount = 0;
+	while (i < src._mCount)
+	{
+		_inventory[i] = src._inventory[i]->clone();
+		_mCount++;
+		i++;
+	}
+	while (i < 4)
+	{
+		_inventory[i] = NULL;
+		i++;
+	}
+}
+
 MateriaSource::~MateriaSource()
 {
+	for (int i = 0; i < _mCount; i++)
+		delete _inventory[i];
 }
 
 void	MateriaSource::learnMateria(AMateria* materia)
