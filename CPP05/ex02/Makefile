@@ -1,7 +1,9 @@
 SRCS = 	main.cpp		\
 		Bureaucrat.cpp	\
 		Form.cpp		\
-		ShrubberyCreationForm.cpp
+		ShrubberyCreationForm.cpp	\
+		RobotomyRequestForm.cpp \
+		PresidentialPardonForm.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 
@@ -13,7 +15,9 @@ NAME = Vog_world
 
 INCLUDE = Bureaucrat.hpp \
 		  Form.hpp	\
-		  ShrubberyCreationForm.hpp
+		  ShrubberyCreationForm.hpp \
+		  RobotomyRequestform.hpp \
+		  PresidentialPardonForm.hpp
 
 #$(subst cpp,hpp, $(SRCS))	
 

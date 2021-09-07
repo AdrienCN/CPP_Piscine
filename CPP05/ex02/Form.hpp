@@ -2,6 +2,7 @@
 #define FORM_HPP
 
 #include <iostream>
+#include <fstream>
 #include <string>
 
 # ifndef BUREAU_LIMIT
@@ -18,6 +19,16 @@ class Bureaucrat;
 class Form
 {
 	public:
+	class  ErrorOpeningFile: public std::exception
+		{
+			public:
+				virtual const char* what(void) const throw()
+				{
+					return "(Form) Exception caught : Form Could Not Open File\n";
+				}
+		};
+
+
 	class FormUnsignedException : public std::exception
 		{
 			public:
