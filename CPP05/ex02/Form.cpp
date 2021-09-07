@@ -54,12 +54,24 @@ bool const & Form::getSignStatus()  const
 {
 	return this->_signed;
 }
+void	Form::checkBeforeExecution(Bureaucrat const & executor) const
+{
+	if (this->_signed == false)
+		throw Form::FormUnsignedException();
+	if (this->_exec_grade < executor.getGrade())
+		throw Form::GradeTooLowException();
+}
 
 void	Form::beSigned(Bureaucrat const & lenin)
 {
 	if (lenin.getGrade() > this->_sign_grade)
 		throw (Form::GradeTooLowException());
 	this->_signed = true;
+}
+
+void		Form::setSignStatus(bool const & status)
+{
+	this->_signed = status;
 }
 
 std::ostream & operator<<(std::ostream & lhs, Form const & rhs)
@@ -74,3 +86,5 @@ std::ostream & operator<<(std::ostream & lhs, Form const & rhs)
 	lhs << "Grade_to_exec : " << rhs.getExecGrade() << std::endl;
 	return lhs;
 }
+
+

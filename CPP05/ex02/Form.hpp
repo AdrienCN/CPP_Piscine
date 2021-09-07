@@ -18,6 +18,15 @@ class Bureaucrat;
 class Form
 {
 	public:
+	class FormUnsignedException : public std::exception
+		{
+			public:
+				virtual const char* what(void) const throw()
+				{
+					return "(Form) Exception caught : Form Is Not Signed\n";
+				}
+		};
+
 		class GradeTooHighException : public std::exception
 		{
 			public:
@@ -42,11 +51,14 @@ class Form
 
 		Form & operator=(Form const & src);
 
-		std::string const & getName() const;
-		int const & getSignGrade()  const;
-		int const & getExecGrade() const;
-		bool const & getSignStatus()  const;
-
+		std::string		const & getName() const;
+		int const &				getSignGrade()  const;
+		int const &				getExecGrade() const;
+		bool const &			getSignStatus()  const;
+		void	checkBeforeExecution(Bureaucrat const & executor) const;
+		virtual void					execute(Bureaucrat const & executor) const = 0;
+		
+		void	setSignStatus(bool const & status);
 		void	beSigned(Bureaucrat const & lenin);
 
 	private:
