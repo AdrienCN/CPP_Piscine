@@ -18,7 +18,7 @@ AMateria::~AMateria()
 
 AMateria & AMateria::operator=(AMateria const & src) 
 {
-	this->_type = src.getType();
+	_type = src.getType();
 	return *this;
 }
 
@@ -30,5 +30,5 @@ std::string const & AMateria::getType() const
 void	AMateria::use(ICharacter& target)
 {
 	(void)target;
-	std::cout << "Error : AMATERIA : USE : using {use} from no type materia" << std::endl;
+	std::cout << "Error : AMATERIA : USE : no type materia" << std::endl;
 }

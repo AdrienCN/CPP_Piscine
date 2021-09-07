@@ -6,33 +6,30 @@
 
 int main(void)
 {
-	Animal 	*animal = new Dog();
+	Animal 	*dog = new Dog();
+	Animal	*cat = new Cat();
 	WrongAnimal *wronganimal = new WrongCat();
 
-	animal->makeSound();
-	animal->getType();
+	std::cout << std::endl;
+	
+	dog->makeSound();
+	dog->getType();
+	
+	std::cout << std::endl;
+	
+	cat->getType();
+	cat->makeSound();
+	
+	std::cout << std::endl;
+
 	wronganimal->makeSound();
 	wronganimal->getType();
-	delete animal;
-	animal = new Cat();
-	animal->getType();
-	animal->makeSound();
-	/*Dog		dog;
-	Cat		cat;
-
-	WrongAnimal wronganimal;
-	WrongCat wrongcat;
 	
-	std::cout << animal.getType() << std::endl;
-	animal.makeSound();
-	std::cout << dog.getType() << std::endl;
-	dog.makeSound();
-	std::cout << cat.getType() << std::endl;
-	cat.makeSound();
-	std::cout << wronganimal.getType() << std::endl;
-	wronganimal.makeSound();
-	std::cout << wrongcat.getType() << std::endl;
-	wrongcat.makeSound();
-*/
+
+	std::cout << std::endl;
+	
+	delete dog;
+	delete cat;
+	delete wronganimal;
 	return (0);
 }

@@ -29,7 +29,6 @@ MateriaSource & MateriaSource::operator=(MateriaSource const & src)
 {
 	int i;
 
-	// this->~MateriaSource() ? ;
 	for (i = 0;  i < _mCount; i++)
 		delete _inventory[i];
 	i = 0;
@@ -72,10 +71,10 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 	{
 		if (type.compare(_inventory[i]->getType()) == 0)
 		{
-			std::cout << "Cloning [" << _inventory[i]->getType() << "] materia" << std::endl;
+			std::cout << "MATERIASOURCE : creating : [" << _inventory[i]->getType() << "] materia" << std::endl;
 			return (_inventory[i]->clone());
 		}
 	}
-	std::cout << "Unknown type of materia" << std::endl;
+	std::cout << "Error : MATERIASOURCE : createMateria : Unknown type of materia" << std::endl;
 	return (0);
 }
