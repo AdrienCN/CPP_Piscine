@@ -1,6 +1,7 @@
 SRCS = 	main.cpp		\
 		Bureaucrat.cpp	\
-		Form.cpp
+		Form.cpp		\
+		ShrubberyCreationForm.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 
@@ -11,7 +12,8 @@ CXXFLAGS = -Wall -Werror -Wextra -g -fsanitize=address -std=c++98
 NAME = Vog_world
 
 INCLUDE = Bureaucrat.hpp \
-		  Form.hpp
+		  Form.hpp	\
+		  ShrubberyCreationForm.hpp
 
 #$(subst cpp,hpp, $(SRCS))	
 

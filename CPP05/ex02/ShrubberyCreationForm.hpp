@@ -1,7 +1,11 @@
 #ifndef SHRUBBERYCREATIONFORM_HPP
 #define SHRUBBERYCREATIONFORM_HPP
 
+#include <string>
+#include <iostream>
+
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 class ShrubberyCreationForm : public Form
 {
@@ -13,7 +17,7 @@ class ShrubberyCreationForm : public Form
 
 		ShrubberyCreationForm & operator=(ShrubberyCreationForm const & src);
 
-		std::string & getTarget() const;
+		std::string const & getTarget() const;
 		void	execute(Bureaucrat const & executor) const;
 
 	private:

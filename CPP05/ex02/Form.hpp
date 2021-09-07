@@ -47,7 +47,7 @@ class Form
 		Form();
 		Form(Form const & src);
 		Form(std::string const & form_name, int const & sign_lvl, int const & exec_lvl);
-		~Form();
+		virtual ~Form();
 
 		Form & operator=(Form const & src);
 

@@ -4,7 +4,7 @@ ShrubberyCreationForm::ShrubberyCreationForm() : Form("shrubbery creation form",
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string & const target) : Form("shrubbery creation form", 145, 137), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const & target) : Form("shrubbery creation form", 145, 137), _target(target)
 {
 }
 
@@ -13,20 +13,24 @@ ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & src) 
 	this->setSignStatus(src.getSignStatus());
 }
 
-ShrubberyCreationForm & operator=(ShrubberyCreationForm const & src)
+ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm const & src)
 {
 	this->setSignStatus(src.getSignStatus());
 	_target = src._target;
 	return *this;
 }
 
-std::string const & getTarget() const
+ShrubberyCreationForm::~ShrubberyCreationForm()
+{
+}
+
+std::string const & ShrubberyCreationForm::getTarget() const
 {
 	return this->_target;
 }
 
-void	execute(Bureaucrat const & executor) const
+void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
-	this->CheckExecution(executor);
+	this->checkBeforeExecution(executor);
 	std::cout << "Ici il y aura un arbre " << std::endl;
 }
