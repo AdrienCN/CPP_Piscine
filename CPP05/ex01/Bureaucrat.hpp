@@ -24,7 +24,7 @@ class Bureaucrat
 			public:
 				virtual const char* what(void) const throw()
 				{
-					return "Exception caught : Grade Too High";
+					return "(Bureau) Exception caught : Grade Too High";
 				}
 		};
 		
@@ -33,7 +33,7 @@ class Bureaucrat
 			public:
 				virtual const char* what(void) const throw()
 				{
-					return "Exception caught : Grade Too Low";
+					return "(Bureau) Exception caught : Grade Too Low";
 				}
 		};
 

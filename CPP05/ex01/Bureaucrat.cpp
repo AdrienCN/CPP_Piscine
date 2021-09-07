@@ -56,7 +56,7 @@ void	Bureaucrat::upGrade()
 	}
 	catch (std::exception &e)
 	{
-		std::cout << "Error : BUREAUCRAT : Upgrade : ";
+		std::cout << "Error : BUREAUCRAT : Upgrade impossible : ";
 		std::cout << e.what() << std::endl;
 		return;
 	}
@@ -72,7 +72,7 @@ void	Bureaucrat::downGrade()
 	}
 	catch (std::exception &e)
 	{
-		std::cout << "Error : BUREAUCRAT : Downgrade : ";
+		std::cout << "Error : BUREAUCRAT : Downgrade impossible : ";
 		std::cout << e.what() << std::endl;
 		return ;
 	}
