@@ -46,10 +46,9 @@ class Bureaucrat
 
 		std::string const & getName() const;
 		int			const & getGrade() const;
-		int					myTry(int const & grade) const;
 		void				upGrade();
 		void				downGrade();
-		void				signForm(Form const & form);
+		void				signForm(Form & form);
 
 	private:
 		std::string const	_name;

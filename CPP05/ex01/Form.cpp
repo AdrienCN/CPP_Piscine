@@ -1,25 +1,31 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-Form::Form() : _name("nameless_form"), _sign_grade(HIGH), _exec_grade(HIGH), _signed(false)
+Form::Form() : _name("nameless_form"), _signed(false), _sign_grade(HIGH), _exec_grade(HIGH)
 {
 }
 
-Form::Form(std::string const & form_name, int const & sign_lvl, int const & exec_lvl) : _name(form_name), _sign_grade(sign_lvl), _exec_grade(HIGH), _signed(false)
+Form::Form(std::string const & form_name, int const & exec_lvl, int const & sign_lvl) : _name(form_name), _signed(false) , _sign_grade(sign_lvl), _exec_grade(exec_lvl)
 {
-	// implementer le try / catch;
+	if (_exec_grade > 150 || _sign_grade > 150)
+		throw (Form::GradeTooLowException());
+	else if (_exec_grade < 1 || _sign_grade < 1)
+		throw (Form::GradeTooHighException());
+	return;
 }
 
-Form::Form(Form const & src): _name(src._name), _sign_lvl(src.getSignGrade()), _exec_grade(src.getExecGrade()), _signed(src.getSignStatus())
-{
-	// try / catch ????
+Form::Form(Form const & src): _name(src._name), _signed(src.getSignStatus())
+, _sign_grade(src.getSignGrade()), _exec_grade(src.getExecGrade()){
+
+		if (_exec_grade > 150 || _sign_grade > 150)
+		throw (Form::GradeTooLowException());
+	else if (_exec_grade < 1 || _sign_grade < 1)
+		throw (Form::GradeTooHighException());
+	return;
 }
 
 Form & Form::operator=(Form const & src)
 {
-	_name = src.getName();
-	_sign_grade = src.getSignGrade();
-	_exec_grade = src.getExecGrade();
 	_signed = src.getSignStatus();
 	return *this;
 }
@@ -36,12 +42,12 @@ std::string const & Form::getName() const
 
 int const & Form::getSignGrade()  const
 {
-	this->_sign_grade;
+	return this->_sign_grade;
 }
 
 int const & Form::getExecGrade() const
 {
-	this->_sign_exec;
+	 return this->_exec_grade;
 }
 
 bool const & Form::getSignStatus()  const
@@ -49,22 +55,14 @@ bool const & Form::getSignStatus()  const
 	return this->_signed;
 }
 
-void	Form::beSigned(Bureaucrat const & lenin);
+void	Form::beSigned(Bureaucrat const & lenin)
 {
-	try
-	{
-		if (lenin.getGrade() > this->_sign_grade)
-			throw (Form::GradeTooLowException());
-	}
-	catch (std::exception &e)
-	{
-		std::cout << "Error : Cannot sign FORM : " << e.what() << std::cout;
-		return ;
-	}
+	if (lenin.getGrade() > this->_sign_grade)
+		throw (Form::GradeTooLowException());
 	this->_signed = true;
 }
 
-std::ostream & operator<<(std::ostream & lhs, Bureaucrat const & rhs)
+std::ostream & operator<<(std::ostream & lhs, Form const & rhs)
 {
 	lhs << "Form name : " << rhs.getName() <<  std::endl;
 	if (rhs.getSignStatus() == true)
@@ -72,7 +70,7 @@ std::ostream & operator<<(std::ostream & lhs, Bureaucrat const & rhs)
 	else
 		lhs << "Signed_status : Unsigned" << std::endl;
 
-	lhs << "Grade_to_sign : " << rhs.getSignGrade << std::endl;
+	lhs << "Grade_to_sign : " << rhs.getSignGrade() << std::endl;
 	lhs << "Grade_to_exec : " << rhs.getExecGrade() << std::endl;
 	return lhs;
 }

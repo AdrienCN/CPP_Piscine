@@ -1,28 +1,46 @@
 #include "Bureaucrat.hpp"
-#include <exception>
+#include "Form.hpp"
 
+#include <exception>
+#define RED   "\033[1m\033[31m"
+#define RESET "\033[0m"
 int main()
 {
-	Bureaucrat vog("vog", 151); // Error construction grade trop bas
-	std::cout << std::endl ; // ligne vide pour la clarte d'affichage	
-	
-	Bureaucrat vog_2("vog_2", 0); // Error grade trop haut
-	std::cout << std::endl ; // ligne vide pour la clarte d'affichage	
-	
-	Bureaucrat vog_default; // Construction par defautl
+	try 
+	{
+		//Bureaucrat vog("vog", 50); // Construction bonne
+		Bureaucrat vog("vog", 151); // Error construction grade trop bas tout s'arrete;
+		Form form1("F_49", 49, 49);
+		Form form100("F_100", 100, 100);
 
-	
-	std::cout << vog_default << std::endl; // Impression du status du bureaucrat
-	vog_default.downGrade(); // Pas possible grade deja au plus bas
-	vog_default.upGrade(); // Augmentation du grade
-	std::cout << vog_default << std::endl; // Impression apres modif
+		std::cout << form1 << std::endl;
+		
+		std::cout << std::endl;
 
-	std::cout << std::endl ; // ligne vide pour la clarte d'affichage	
-	Bureaucrat vog_first("premier_de_classe", 1); // Meme chose avec le grade le plus haut
-	std::cout << vog_first << std::endl;
-	vog_first.upGrade();
-	vog_first.downGrade();
-	std::cout << vog_first << std::endl;
-	
+
+		std::cout << form100 << std::endl;
+		vog.signForm(form100); // fonctionne --> suite du code 
+		vog.signForm(form1); // echoue --> catch 
+	 
+		//Re-impression des status des formulaires	
+		std::cout << form1 << std::endl;
+		
+		std::cout << std::endl;
+
+
+		std::cout << form100 << std::endl;
+
+		form100.beSigned(vog); // fonctionne --> suite du code 
+		std::cout << RED << "Ceci apparait" <<  RESET << std::endl;
+
+
+		form1.beSigned(vog); // echoue --> catch 
+		std::cout << "******PAS CELA******" << std::endl;
+		
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Error : MAIN : " << e.what() << std::endl;
+	}
 	return (0);
 }

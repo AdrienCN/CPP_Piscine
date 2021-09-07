@@ -23,7 +23,7 @@ class Form
 			public:
 				virtual const char* what(void) const throw()
 				{
-					return "(Form) Exception caught : Grade Too High";
+					return "(Form) Exception caught : Grade Too High\n";
 				}
 		};
 		
@@ -32,7 +32,7 @@ class Form
 			public:
 				virtual const char* what(void) const throw()
 				{
-					return "(Form) Exception caught : Grade Too Low";
+					return "(Form) Exception caught : Grade Too Low\n";
 				}
 		};
 		Form();
@@ -61,6 +61,6 @@ class Form
 
 };
 
-std::ostream & operator<<(std::ostream & lhs, Form const & rhs) const;
+std::ostream & operator<<(std::ostream & lhs, Form const & rhs) ;
 
 #endif
