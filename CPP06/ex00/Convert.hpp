@@ -24,11 +24,10 @@ class Convert
 
 		void		id_data(std::string const & src);
 		void		convert_data(void);
-		void		isInt();
-		void		isChar();
-		void		isFloat();
-		void		isDouble();
-		void		isNa();
+		void		isInt() const;
+		void		isChar() const;
+		void		isFloat() const;
+		void		isDouble() const;
 
 	private:
 	e_dataType 		_dataType;
