@@ -2,9 +2,12 @@
 
 int		main(int argc, char **argv)
 {
+	if (argc != 2)
+	{
+		std::cout << "Error : [Convertor] only works with one argument" << std::endl;
+		return 1;
+	}
 	Convert convertor(argv[1]);
-
-	// Identifier le type de donner de la str (char / int / float / double)
-	convertor.id_data();
 	convertor.convert_data();
+	return 0;
 }

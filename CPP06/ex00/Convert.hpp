@@ -1,13 +1,19 @@
 #ifndef CONVERT_HPP
 #define CONVERT_HPP
 
+#include <iostream>
+#include <string>
+#include <stdexcept>
+#include <cfloat>
+#include <climits>
+
 enum e_dataType
 {
-	CHAR = 0;
-	INT;
-	FLOAT;
-	DOUBLE;
-	NA;
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+	NA
 };
 
 class Convert
@@ -22,7 +28,9 @@ class Convert
 		e_dataType	const & getType() const;
 		std::string const &	getData() const;
 
-		void		id_data(std::string const & src);
+		void		id_data(void);
+		void		printChar(char const & c) const;
+
 		void		convert_data(void);
 		void		isInt() const;
 		void		isChar() const;

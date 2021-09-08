@@ -1,25 +1,15 @@
 SRCS = 	main.cpp		\
-		Bureaucrat.cpp	\
-		Form.cpp		\
-		ShrubberyCreationForm.cpp	\
-		RobotomyRequestForm.cpp \
-		PresidentialPardonForm.cpp \
-		Intern.cpp
+		Convert.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 
 CXX = clang++
 
-CXXFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -g3 -std=c++98 -fsanitize=address 
 
-NAME = Vog_world
+NAME = Convertor
 
-INCLUDE = Bureaucrat.hpp \
-		  Form.hpp	\
-		  ShrubberyCreationForm.hpp \
-		  RobotomyRequestform.hpp \
-		  PresidentialPardonForm.hpp \
-		  Intern.hpp
+INCLUDE = Convert.hpp
 
 #$(subst cpp,hpp, $(SRCS))	
 
