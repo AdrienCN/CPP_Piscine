@@ -77,6 +77,7 @@ void	Convert::id_data(void)
 		this->_dataType = FLOAT;
 		return;
 	}
+	this->_dataType = NA;
 	return; //NA
 }
 
@@ -96,6 +97,7 @@ void	Convert::convert_data(void)
 		case 3:
 			isDouble();
 			break;
+
 		default:
 			std::cout << "Error : Conversion Non Applicable" << std::endl;
 	}
@@ -147,22 +149,28 @@ void	Convert::isFloat(void) const
 {
 	try
 	{
-		//cas -inff +inff nanf
 		float f = std::stof(_data, NULL);
+
 		//Display CHAR
-		if (f < static_cast<float>(CHAR_MIN) || f > static_cast<float>(CHAR_MAX))
+		if (f < static_cast<float>(SCHAR_MIN) || f > static_cast<float>(SCHAR_MAX))
 			std::cout << "char : overflow or underflow" << std::endl;
 		else
 			this->printChar(static_cast<char>(f));
+
 		// Display INT
-		if (f > static_cast<float>(INT_MAX) || f < static_cast<float>(INT_MIN))
+		if (_data == "nanf")
+			std::cout << "int : " << "impossible" << std::endl;
+		else if (f > static_cast<float>(INT_MAX) || f < static_cast<float>(INT_MIN))
 			std::cout << "int : overflow or underflow" << std::endl;
 		else	
 			std::cout << "int : " << static_cast<int>(f) << std::endl;
-		//Display FLOAT
-		std::cout << "float : " << f << std::endl;
+		
+		//FLOAT
+		if (_data == "nanf")
+			std::cout << "float : nanf" << std::endl;
+		else	
+			std::cout << "float : " << f << std::endl;
 
-		//Display DOUBLE
 		std::cout << "double : " << static_cast<double>(f) << std::endl;
 	}
 	catch (const std::out_of_range & oor)
@@ -174,7 +182,6 @@ void	Convert::isFloat(void) const
 
 void	Convert::isDouble(void) const
 {
-	//cas -inf +inf nan
 	try
 	{
 		double d = std::stod(_data, NULL);
@@ -184,14 +191,16 @@ void	Convert::isDouble(void) const
 		else
 			this->printChar(static_cast<char>(d));
 		// Display INT
-		if (d > static_cast<double>(INT_MAX) || d < static_cast<double>(INT_MIN))
+		if (_data == "nan")
+			std::cout << "int : impossible" << std::endl;
+		else if (d > static_cast<double>(INT_MAX) || d < static_cast<double>(INT_MIN))
 			std::cout << "int : overflow or underflow" << std::endl;
 		else	
 			std::cout << "int : " << static_cast<int>(d) << std::endl;
+
 		//Display FLOAT
-		
 		if (_data == "nan" || _data == "inf" || _data == "+inf" || _data == "-inf")
-			std::cout << "float : " << static_cast<float>(d) << std::endl;
+			std::cout << "float : " << static_cast<float>(d) << "f" << std::endl;
 		else if (d > static_cast<double>(FLT_MAX) || d < static_cast<double>(-FLT_MAX)) 
 			std::cout << "float : overflow or underflow" << std::endl;
 		else

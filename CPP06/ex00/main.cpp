@@ -2,12 +2,19 @@
 
 int		main(int argc, char **argv)
 {
-	if (argc != 2)
+	try
 	{
-		std::cout << "Error : [Convertor] only works with one argument" << std::endl;
-		return 1;
+		if (argc != 2)
+		{
+			std::cout << "Error : [Convertor] only works with one argument" << std::endl;
+			return 1;
+		}
+		Convert convertor(argv[1]);
+		convertor.convert_data();
 	}
-	Convert convertor(argv[1]);
-	convertor.convert_data();
-	return 0;
+	catch(const std::invalid_argument & ia)
+	{
+		std::cout << "Error : MAIN : " << ia.what() << std::endl;
+	}
+		return 0;
 }
