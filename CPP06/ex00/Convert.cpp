@@ -137,7 +137,7 @@ void	Convert::isInt(void) const
 			std::cout << "char : overflow or underflow" << std::endl;
 		else
 			this->printChar(static_cast<char>(i));
-		
+	
 		std::cout << "int : " << i << std::endl;
 		std::cout << "float : " << static_cast<float>(i) << std::endl;
 		std::cout << "double : " << static_cast<double>(i) << std::endl;

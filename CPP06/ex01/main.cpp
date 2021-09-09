@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
+#include <stdint.h>
 
 typedef struct s_Data 
 {
-	int i = 42;
-	int j = 43;
+	int i;
+	int j;
 	std::string	str;
 } Data;
 
@@ -28,6 +29,8 @@ int		main()
 	Data		*b = NULL;
 	Data		a; // creer une struct;
 	a.str = " | panda";
+	a.i = 42;
+	a.j = 21;
 
 	std::cout << "ui_ptr = " << ui_ptr << std::endl;	
 	std::cout << "&a = " << &a << " | " << a.i << " | " << a.j << a.str << std::endl;

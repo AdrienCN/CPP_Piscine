@@ -8,7 +8,7 @@
 int main(void)
 {
 	Dog dog;
-	Animal *other = new Dog();
+	Animal *other = new Dog(dog);
 
 	std::cout << "\t***********Showing DEEP_COPY **************" << std::endl;	
 	std::cout << "(" << &dog << ")";
