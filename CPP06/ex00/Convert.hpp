@@ -6,6 +6,8 @@
 #include <stdexcept>
 #include <cfloat>
 #include <climits>
+#include <stdlib.h> 
+#include <errno.h>
 
 enum e_dataType
 {

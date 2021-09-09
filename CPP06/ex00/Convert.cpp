@@ -114,7 +114,7 @@ void	Convert::printChar(char const & c) const
 
 void	Convert::isChar(void) const
 {
-	char c = _data[0];
+	char c = (_data.c_str())[0];
 	if (c < SCHAR_MIN || c > SCHAR_MAX)
 		std::cerr << "Error : Input : [CHAR] is out of range. Conversion aborted" << std::endl;
 	this->printChar(c);
@@ -125,12 +125,15 @@ void	Convert::isChar(void) const
 
 void	Convert::isInt(void) const
 {
-	try 
-	{
-		int i = std::stoi(_data, NULL);
+		long int i = strtol(_data.c_str(), NULL, 10);
 		
+		if (errno == ERANGE)
+		{	
+			std::cerr << "Error : Input : [INT] is out of range. Conversion aborted" << std::endl;
+			return;
+		}
 		//Display CHAR
-		if (i < static_cast<int>(SCHAR_MIN)  || i > static_cast<int>(SCHAR_MAX))
+		if (i < static_cast<long int>(SCHAR_MIN)  || i > static_cast<long int>(SCHAR_MAX))
 			std::cout << "char : overflow or underflow" << std::endl;
 		else
 			this->printChar(static_cast<char>(i));
@@ -138,21 +141,21 @@ void	Convert::isInt(void) const
 		std::cout << "int : " << i << std::endl;
 		std::cout << "float : " << static_cast<float>(i) << std::endl;
 		std::cout << "double : " << static_cast<double>(i) << std::endl;
-	}
-	catch (const std::out_of_range & oor)
-	{
-		std::cerr << "Error : Input : [INT] is out of range. Conversion aborted" << std::endl;
-	}
 }
 
 void	Convert::isFloat(void) const
 {
-	try
-	{
-		float f = std::stof(_data, NULL);
+		float f = strtof(_data.c_str(), NULL);
 
+		if (errno == ERANGE)
+		{
+			std::cerr << "Error : Input : [FLOAT] is out of range. Conversion aborted" << std::endl;
+			return;
+		}
 		//Display CHAR
-		if (f < static_cast<float>(SCHAR_MIN) || f > static_cast<float>(SCHAR_MAX))
+		if (_data == "nanf")
+			std::cout << "char : " << "impossible" << std::endl;
+		else if (f < static_cast<float>(SCHAR_MIN) || f > static_cast<float>(SCHAR_MAX))
 			std::cout << "char : overflow or underflow" << std::endl;
 		else
 			this->printChar(static_cast<char>(f));
@@ -169,24 +172,24 @@ void	Convert::isFloat(void) const
 		if (_data == "nanf")
 			std::cout << "float : nanf" << std::endl;
 		else	
-			std::cout << "float : " << f << std::endl;
+			std::cout << "float : " << f <<  "f" <<std::endl;
 
 		std::cout << "double : " << static_cast<double>(f) << std::endl;
-	}
-	catch (const std::out_of_range & oor)
-	{
-		std::cerr << "Error : Input : [FLOAT] is out of range. Conversion aborted" << std::endl;
-	}
-	
 }
 
 void	Convert::isDouble(void) const
 {
-	try
-	{
-		double d = std::stod(_data, NULL);
+		double d = strtod(_data.c_str(), NULL);
+		if (errno == ERANGE)
+		{
+			std::cerr << "Error : Input : [DOUBLE] is out of range. Conversion aborted" << std::endl;
+			return ;
+		}
+
 		//Display CHAR
-		if (d < static_cast<double>(CHAR_MIN) || d > static_cast<float>(CHAR_MAX))
+		if (_data == "nan")
+			std::cout <<  "char : impossible" << std::endl;
+		else if (d < static_cast<double>(CHAR_MIN) || d > static_cast<float>(CHAR_MAX))
 			std::cout << "char : overflow or underflow" << std::endl;
 		else
 			this->printChar(static_cast<char>(d));
@@ -204,15 +207,10 @@ void	Convert::isDouble(void) const
 		else if (d > static_cast<double>(FLT_MAX) || d < static_cast<double>(-FLT_MAX)) 
 			std::cout << "float : overflow or underflow" << std::endl;
 		else
-			std::cout << "float : " << static_cast<float>(d) << std::endl;
+			std::cout << "float : " << static_cast<float>(d) << "f" << std::endl;
 
 		//Display DOUBLE
 		std::cout << "double : " << d << std::endl;
-	}
-	catch (const std::out_of_range & oor)
-	{
-		std::cerr << "Error : Input : [DOUBLE] is out of range. Conversion aborted" << std::endl;
-	}
 }
 
 e_dataType	const & Convert::getType(void) const
