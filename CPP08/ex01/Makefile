@@ -1,22 +1,23 @@
-SRCS = 	main.cpp	
+SRCS = 	main.cpp \
+		span.cpp	
 
 OBJ = $(SRCS:.cpp=.o)
 
 CXX = clang++
 
-CXXFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address 
+CXXFLAGS = -Wall -Werror -Wextra -g3 -std=c++98 -fsanitize=address 
 
-NAME = My_first_STL
+NAME = Spaaaaaan
 
-INCLUDE = easyfind.hpp
+INCLUDE = span.hpp
 
 #$(subst cpp,hpp, $(SRCS))	
 
-%.o:%.cpp  $(INCLUDE)
+%.o:%.cpp 
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(INCLUDE)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 echo :

@@ -1,22 +1,17 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
-template <typename T>
+#include <iostream>
+#include <vector>
+#include <cmath> //absolute val
+#include <climits>
+#include <algorithm>
+#include <stdexcept>
+
 class Span
 {
 
 	public :
-		T(unsigned int N);
-		T(T const & src);
-		T & operator=(T const & src);
-
-		~T();
-		
-		void	addNumber(int newNb);
-
-		unsigned int	shortestSpan() const;
-		unsigned int	longestSpan() const;
-		unsigned int	getSize() const;
 
 		class Empty_Or_Single : public std::exception
 		{
@@ -29,19 +24,33 @@ class Span
 
 		class Already_Full : public std::exception
 		{
-		public:
+			public:
 			virtual const char * what(void) const throw()
 			{
 				return "Exception : Span : Container is already FULL";
 			}
 		};
-	
+
+		Span(unsigned int N);
+		Span(Span const & src);
+		Span & operator=(Span const & src);
+
+		~Span();
+		
+		void	addNumber(int const & newNb);
+		void	addNumber(std::vector<int>::iterator start, std::vector<int>::iterator end);
+
+		unsigned int	shortestSpan();
+		unsigned int	longestSpan();
+		void			print_span();
+
+			
 
 
 	private:
-		T();
-		unsigned int _size;
-		int			*_data;
+		Span();
+		std::vector<int> _intTab;
+		unsigned int	 _max_size;
 };
 
 #endif
