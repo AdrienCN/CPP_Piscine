@@ -2,23 +2,6 @@
 #include <iostream>
 #include <array>
 #include <stdexcept>
-/*
-int		main()
-{
-	try
-	{
-		std::vector<int> intTab;
-	
-		std::cout << easyfind(intTab, 108) << std::endl;
-	}
-	catch (std::exception & e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	return (0);
-}
-*/
-
 void list_test()
 {
 	std::cout << "*** LIST ***" << std::endl;
