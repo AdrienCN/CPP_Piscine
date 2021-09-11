@@ -56,14 +56,10 @@ unsigned int Span::shortestSpan()
 	while (i != _intTab.end())
 	{
 		j = i + 1;
-		while (j != _intTab.end())
-		{
-			unsigned int tmp;
-			tmp = std::abs(*i - *j);
-			if (tmp < s_span)
-				s_span = tmp;
-			j++;
-		}
+		unsigned int tmp;
+		tmp = std::abs(*i - *j);
+		if (tmp < s_span)
+			s_span = tmp;
 		i++;
 	}
 	return (s_span);
