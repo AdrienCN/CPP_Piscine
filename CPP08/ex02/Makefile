@@ -13,7 +13,7 @@ INCLUDE = mutantstack.hpp
 
 #$(subst cpp,hpp, $(SRCS))	
 
-%.o:%.cpp
+%.o:%.cpp $(INCLUDE)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 
