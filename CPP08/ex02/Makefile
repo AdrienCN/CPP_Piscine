@@ -1,4 +1,5 @@
-SRCS = 	main.cpp	
+SRCS = 	main.cpp	\
+		mutantstack.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 
@@ -6,17 +7,17 @@ CXX = clang++
 
 CXXFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address 
 
-NAME = My_first_STL
+NAME = Mutant
 
-INCLUDE = easyfind.hpp
+INCLUDE = mutantstack.hpp
 
 #$(subst cpp,hpp, $(SRCS))	
 
-%.o:%.cpp  $(INCLUDE)
+%.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(INCLUDE)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 echo :

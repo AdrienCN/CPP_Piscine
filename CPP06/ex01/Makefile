@@ -12,11 +12,12 @@ INCLUDE =
 
 #$(subst cpp,hpp, $(SRCS))	
 
-%.o:%.cpp  $(INCLUDE)
+%.o:%.cpp  	
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(INCLUDE)
+
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 echo :
