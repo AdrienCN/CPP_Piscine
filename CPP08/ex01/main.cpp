@@ -7,12 +7,15 @@ int main ()
 {
 	try
 	{
-		int a = 1000000;
+		int a = 10;
 		Span sp(a + 1);
-		std::vector<int> b(a, 42);
+		sp.print_span();
+		std::vector<int> vector(a, 42);
 
-		sp.addNumber(b.begin(), b.end());
+		sp.addNumber(vector.begin(), vector.end()); // iterator filling
 		sp.addNumber(48);
+		//uncomment  below to see error "SPAN IS FULL"
+		//sp.addNumber(52); 
 		std::cout << "sp : " ;
 		sp.print_span();
 		std::cout << "Shortestspan " << sp.shortestSpan() << std::endl;
